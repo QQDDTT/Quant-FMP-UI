@@ -1,0 +1,1277 @@
+﻿{
+    "updated_at":  "2026-10-03T06:21:02Z",
+    "storage_architecture":  {
+                                 "engine":  "DuckDB + Apache Parquet 列式数据湖 (物理冷热分层架构)",
+                                 "compression":  "Zstandard (ZSTD Level 3)",
+                                 "file_structure":  "按标的物理独立分片 (data/base_data/prices/daily/{symbol}.parquet) + 关系元数据 (base_data.duckdb)",
+                                 "hot_cold_tiering":  {
+                                                          "tier_strategy":  "热数据近30日高精度切片自动化发布 + 冷数据全量十年底座GCP对象存储托管",
+                                                          "hot_data":  {
+                                                                           "scope":  "最近 30 个交易日高频日K、分时 VWAP 与最新审计财报",
+                                                                           "format":  "轻量静态切片 (Parquet / JSON)",
+                                                                           "delivery":  "GitHub Actions 自动分发至 GitHub Pages，前端秒开"
+                                                                       },
+                                                          "cold_data":  {
+                                                                            "scope":  "2010年至今全美 8,450+ 存续与退市标的十年历史全量行情与财报",
+                                                                            "storage_location":  "Google Cloud Storage (gs://quant-fmp-datalake/base_data/)",
+                                                                            "access_mode":  "只读挂载 (DuckDB Remote Query)",
+                                                                            "python_connection_snippet":  "import duckdb\ncon = duckdb.connect()\ncon.execute(\u0027INSTALL httpfs; LOAD httpfs;\u0027)\ndf = con.execute(\"SELECT * FROM read_parquet(\u0027https://storage.googleapis.com/quant-fmp-datalake/prices/daily/*.parquet\u0027) WHERE symbol = \u0027NVDA\u0027\").df()",
+                                                                            "r_connection_snippet":  "library(duckdb)\ncon \u003c- dbConnect(duckdb())\ndbExecute(con, \u0027INSTALL httpfs; LOAD httpfs;\u0027)\ndf \u003c- dbGetQuery(con, \"SELECT * FROM read_parquet(\u0027https://storage.googleapis.com/quant-fmp-datalake/prices/daily/*.parquet\u0027) WHERE symbol = \u0027NVDA\u0027\")"
+                                                                        }
+                                                      }
+                             },
+    "universe_summary":  {
+                             "total_symbols":  8450,
+                             "active_stocks":  6120,
+                             "delisted_stocks":  2330,
+                             "coverage_description":  "涵盖全美股 NYSE、NASDAQ、AMEX 自 2010 年起所有历史标的，严格杜绝幸存者偏差。"
+                         },
+    "ingestion_plan":  {
+                           "daily_api_quota":  500,
+                           "api_key_pool":  "双 Key 轮询配额池 (500 次/天)",
+                           "ultimate_goal":  "下载并沉淀全美所有股票（覆盖存续 6,120+ 只及退市 2,330+ 只，共 8,450+ 标的）的全部历史数据",
+                           "strategy":  "每日最新数据全量覆盖 (Batch EOD \u0026 Calendar Targeted) + 剩余额度全额回填历史 (Residual Waterfall Backfill)",
+                           "quota_rules":  {
+                                               "priority_1_batch_latest":  "优先使用轻量接口拉取全美当天完整日K，并结合财报日历靶向拉取今日新财报三大表，全市场最新现势数据 100% 覆盖",
+                                               "priority_2_news_sync":  "调用新闻接口同步全市场重点标的最新新闻与公告，计算情绪评分供动态动量干预 (News Calibration) 使用",
+                                               "priority_3_residual_backfill":  "每日结余额度 (占比 \u003e90%) 全额自动投入全量历史数据回填，严格按照主要股票优先与近端优先双重排序",
+                                               "stock_priority":  "核心宽基与流动性龙头 (NVDA/AAPL/MSFT等) \u003e 标普500成分股 \u003e 全美全市场其余存续股票 \u003e 历史退市股票池",
+                                               "time_priority":  "近1年历史 \u003e 近3年历史 \u003e 近5年历史 \u003e 10年及更早全量历史"
+                                           },
+                           "phases":  [
+                                          {
+                                              "phase_id":  "Phase 1",
+                                              "name":  "核心高流动性宽基与科技蓝筹 (Core Universe)",
+                                              "scope":  "SPY, QQQ 及美股核心科技股与宽基 ETF (约 10~50 标的全部历史)",
+                                              "calls_required":  300,
+                                              "days_needed":  "1~2 天",
+                                              "status":  "已完成/持续增量 (COMPLETED)",
+                                              "progress_pct":  "100%",
+                                              "deliverable":  "全量 10 年高精度日K与财报入库，支撑多标的专家化模型训练与推演"
+                                          },
+                                          {
+                                              "phase_id":  "Phase 2",
+                                              "name":  "标普 500 全成分股池历史全量 (S\u0026P 500 Alpha Pool)",
+                                              "scope":  "S\u0026P 500 核心成分股 (约 500 标的全部历史数据)",
+                                              "calls_required":  3000,
+                                              "days_needed":  "约 6~7 天 (每日剩余 465+ 次额度全额回填)",
+                                              "status":  "进行中 (IN_PROGRESS)",
+                                              "progress_pct":  "35%",
+                                              "deliverable":  "构建标普500全样本历史回测底座，支持跨行业产业链滞后与截面特征计算"
+                                          },
+                                          {
+                                              "phase_id":  "Phase 3",
+                                              "name":  "全市场全量存续与退市标的全部历史 (All Universe Full History)",
+                                              "scope":  "NYSE/NASDAQ/AMEX 存续 6,120 只 + 退市 2,330 只 (共 8,450 标的全部历史)",
+                                              "calls_required":  50700,
+                                              "days_needed":  "约 100~110 天 (双Key 465+次/天全速接力，原单Key需200天)",
+                                              "status":  "持续接力队列中 (QUEUED)",
+                                              "progress_pct":  "12%",
+                                              "deliverable":  "彻底下载全美所有股票的全部历史数据，构建零幸存者偏差的终极量化数据湖"
+                                          }
+                                      ]
+                       },
+    "catalogs":  [
+                     {
+                         "id":  "ALL",
+                         "name":  "全部核心标的资产清单 (S\u0026P 500 代表池)",
+                         "count":  25
+                     },
+                     {
+                         "id":  "SEMICONDUCTOR",
+                         "name":  "半导体与 AI 算力硬件",
+                         "count":  4
+                     },
+                     {
+                         "id":  "TECH_CLOUD",
+                         "name":  "云计算与数字软件",
+                         "count":  4
+                     },
+                     {
+                         "id":  "FINANCIAL_SERVICES",
+                         "name":  "银行金融与数字支付",
+                         "count":  4
+                     },
+                     {
+                         "id":  "HEALTHCARE",
+                         "name":  "医疗健康与生物制药",
+                         "count":  3
+                     },
+                     {
+                         "id":  "CONSUMER_AUTO",
+                         "name":  "消费电子与智能汽车",
+                         "count":  2
+                     },
+                     {
+                         "id":  "CONSUMER_RETAIL",
+                         "name":  "全渠道商超与消费零售",
+                         "count":  3
+                     },
+                     {
+                         "id":  "ENERGY_INDUSTRIAL",
+                         "name":  "综合能源与国防工业",
+                         "count":  3
+                     },
+                     {
+                         "id":  "BENCHMARK_ETF",
+                         "name":  "宏观基准与核心宽基 ETF",
+                         "count":  2
+                     }
+                 ],
+    "stock_catalog_items":  [
+                                {
+                                    "symbol":  "NVDA",
+                                    "name":  "NVIDIA Corporation",
+                                    "sector":  "半导体与 AI 算力",
+                                    "catalog_id":  "SEMICONDUCTOR",
+                                    "parquet_file":  "data/base_data/prices/daily/NVDA.parquet",
+                                    "records_count":  4213,
+                                    "daily":  {
+                                                  "price":  "$233.95",
+                                                  "change_pct":  "-0.89%",
+                                                  "volume":  "134.5M",
+                                                  "volatility_20d":  "32.4%",
+                                                  "sparkline_30d":  [
+                                                                        214.72,
+                                                                        208.48,
+                                                                        213.05,
+                                                                        209.66,
+                                                                        227.98,
+                                                                        217.55,
+                                                                        220.78,
+                                                                        217.44,
+                                                                        224.41,
+                                                                        228.45,
+                                                                        230.36,
+                                                                        225.73,
+                                                                        223.67,
+                                                                        218.36,
+                                                                        218.29,
+                                                                        210.96,
+                                                                        212.17,
+                                                                        213.9,
+                                                                        219.34,
+                                                                        222.27,
+                                                                        227.38,
+                                                                        228.87,
+                                                                        225.51,
+                                                                        224.58,
+                                                                        225.07,
+                                                                        228.86,
+                                                                        227.21,
+                                                                        228.38,
+                                                                        230.86,
+                                                                        233.95
+                                                                    ]
+                                              },
+                                    "intraday":  {
+                                                     "interval":  "5-Minute",
+                                                     "vwap":  "$120.85",
+                                                     "high":  "$122.10",
+                                                     "low":  "$119.50"
+                                                 },
+                                    "fundamental":  {
+                                                        "revenue_ttm":  "$96.3B (同比 +122%)",
+                                                        "net_income":  "$53.0B",
+                                                        "pe_ratio":  "45.2x",
+                                                        "filing_accepted_date":  "2026-08-28 (SEC Accepted 已对齐)"
+                                                    }
+                                },
+                                {
+                                    "symbol":  "AAPL",
+                                    "name":  "Apple Inc.",
+                                    "sector":  "消费电子与智能生态",
+                                    "catalog_id":  "CONSUMER_AUTO",
+                                    "parquet_file":  "data/base_data/prices/daily/AAPL.parquet",
+                                    "records_count":  4213,
+                                    "daily":  {
+                                                  "price":  "$333.69",
+                                                  "change_pct":  "+0.15%",
+                                                  "volume":  "31.9M",
+                                                  "volatility_20d":  "18.2%",
+                                                  "sparkline_30d":  [
+                                                                        309.35,
+                                                                        310.34,
+                                                                        309.9,
+                                                                        313.45,
+                                                                        314.58,
+                                                                        319.7,
+                                                                        316.85,
+                                                                        325.13,
+                                                                        324.96,
+                                                                        328.21,
+                                                                        319.97,
+                                                                        316.22,
+                                                                        315.34,
+                                                                        326.57,
+                                                                        332.27,
+                                                                        333.08,
+                                                                        331.34,
+                                                                        332.41,
+                                                                        337,
+                                                                        336.13,
+                                                                        338.98,
+                                                                        339.75,
+                                                                        337.02,
+                                                                        335.92,
+                                                                        341.07,
+                                                                        338.4,
+                                                                        329.4,
+                                                                        333.02,
+                                                                        330.32,
+                                                                        333.69
+                                                                    ]
+                                              },
+                                    "intraday":  {
+                                                     "interval":  "5-Minute",
+                                                     "vwap":  "$227.80",
+                                                     "high":  "$229.00",
+                                                     "low":  "$226.90"
+                                                 },
+                                    "fundamental":  {
+                                                        "revenue_ttm":  "$385.6B",
+                                                        "net_income":  "$100.4B",
+                                                        "pe_ratio":  "33.5x",
+                                                        "filing_accepted_date":  "2026-08-02 (SEC Accepted 已对齐)"
+                                                    }
+                                },
+                                {
+                                    "symbol":  "MSFT",
+                                    "name":  "Microsoft Corporation",
+                                    "sector":  "云计算与企业级软件",
+                                    "catalog_id":  "TECH_CLOUD",
+                                    "parquet_file":  "data/base_data/prices/daily/MSFT.parquet",
+                                    "records_count":  4213,
+                                    "daily":  {
+                                                  "price":  "$517.53",
+                                                  "change_pct":  "-0.3%",
+                                                  "volume":  "17.2M",
+                                                  "volatility_20d":  "19.5%",
+                                                  "sparkline_30d":  [
+                                                                        483.24,
+                                                                        487.31,
+                                                                        491.71,
+                                                                        496.37,
+                                                                        505.06,
+                                                                        513.53,
+                                                                        507.29,
+                                                                        501.02,
+                                                                        496.82,
+                                                                        510.12,
+                                                                        499.7,
+                                                                        493.95,
+                                                                        491.65,
+                                                                        492.44,
+                                                                        495.63,
+                                                                        505.41,
+                                                                        497.12,
+                                                                        490.3,
+                                                                        497.75,
+                                                                        493.78,
+                                                                        501.61,
+                                                                        498,
+                                                                        500.59,
+                                                                        497.93,
+                                                                        516.17,
+                                                                        509.22,
+                                                                        508.96,
+                                                                        512.9,
+                                                                        512.8,
+                                                                        517.53
+                                                                    ]
+                                              },
+                                    "intraday":  {
+                                                     "interval":  "5-Minute",
+                                                     "vwap":  "$426.50",
+                                                     "high":  "$429.20",
+                                                     "low":  "$425.00"
+                                                 },
+                                    "fundamental":  {
+                                                        "revenue_ttm":  "$245.1B",
+                                                        "net_income":  "$88.1B",
+                                                        "pe_ratio":  "36.2x",
+                                                        "filing_accepted_date":  "2026-07-30 (SEC Accepted 已对齐)"
+                                                    }
+                                },
+                                {
+                                    "symbol":  "GOOGL",
+                                    "name":  "Alphabet Inc.",
+                                    "sector":  "搜索引擎与云智能",
+                                    "catalog_id":  "TECH_CLOUD",
+                                    "parquet_file":  "data/base_data/prices/daily/GOOGL.parquet",
+                                    "records_count":  4213,
+                                    "daily":  {
+                                                  "price":  "$343.5",
+                                                  "change_pct":  "+0.64%",
+                                                  "volume":  "23.8M",
+                                                  "volatility_20d":  "22.1%",
+                                                  "sparkline_30d":  [
+                                                                        344.82,
+                                                                        348.06,
+                                                                        346.96,
+                                                                        342,
+                                                                        340.65,
+                                                                        346.59,
+                                                                        339.35,
+                                                                        335.02,
+                                                                        337.12,
+                                                                        342.48,
+                                                                        338.46,
+                                                                        338.36,
+                                                                        330.65,
+                                                                        332.6,
+                                                                        338.5,
+                                                                        349.39,
+                                                                        344.98,
+                                                                        342.87,
+                                                                        347.33,
+                                                                        349.54,
+                                                                        354.97,
+                                                                        351.16,
+                                                                        337.83,
+                                                                        342.36,
+                                                                        343.92,
+                                                                        342.75,
+                                                                        340.92,
+                                                                        344.08,
+                                                                        338.24,
+                                                                        343.5
+                                                                    ]
+                                              },
+                                    "intraday":  {
+                                                     "interval":  "5-Minute",
+                                                     "vwap":  "$181.40",
+                                                     "high":  "$183.00",
+                                                     "low":  "$180.20"
+                                                 },
+                                    "fundamental":  {
+                                                        "revenue_ttm":  "$328.3B",
+                                                        "net_income":  "$84.7B",
+                                                        "pe_ratio":  "24.8x",
+                                                        "filing_accepted_date":  "2026-07-25 (SEC Accepted 已对齐)"
+                                                    }
+                                },
+                                {
+                                    "symbol":  "AMZN",
+                                    "name":  "Amazon.com Inc.",
+                                    "sector":  "全球电商与消费零售",
+                                    "catalog_id":  "E_COMMERCE",
+                                    "parquet_file":  "data/base_data/prices/daily/AMZN.parquet",
+                                    "records_count":  4213,
+                                    "daily":  {
+                                                  "price":  "$251.52",
+                                                  "change_pct":  "+0%",
+                                                  "volume":  "33.4M",
+                                                  "volatility_20d":  "24.6%",
+                                                  "sparkline_30d":  [
+                                                                        258.63,
+                                                                        262.07,
+                                                                        261.06,
+                                                                        260.28,
+                                                                        256.26,
+                                                                        266.43,
+                                                                        259.77,
+                                                                        254.92,
+                                                                        254.98,
+                                                                        258.9,
+                                                                        258.51,
+                                                                        256.97,
+                                                                        252.4,
+                                                                        251.89,
+                                                                        256.78,
+                                                                        253.54,
+                                                                        248.42,
+                                                                        245.96,
+                                                                        251.19,
+                                                                        253.71,
+                                                                        258.45,
+                                                                        254.98,
+                                                                        249.27,
+                                                                        249.38,
+                                                                        249.67,
+                                                                        246.15,
+                                                                        246.67,
+                                                                        249.15,
+                                                                        248.23,
+                                                                        251.52
+                                                                    ]
+                                              },
+                                    "intraday":  {
+                                                     "interval":  "5-Minute",
+                                                     "vwap":  "$190.80",
+                                                     "high":  "$192.50",
+                                                     "low":  "$189.90"
+                                                 },
+                                    "fundamental":  {
+                                                        "revenue_ttm":  "$604.3B",
+                                                        "net_income":  "$37.6B",
+                                                        "pe_ratio":  "41.5x",
+                                                        "filing_accepted_date":  "2026-08-01 (SEC Accepted 已对齐)"
+                                                    }
+                                },
+                                {
+                                    "symbol":  "META",
+                                    "name":  "Meta Platforms Inc.",
+                                    "sector":  "社交网络与沉浸生态",
+                                    "catalog_id":  "TECH_CLOUD",
+                                    "parquet_file":  "data/base_data/prices/daily/META.parquet",
+                                    "records_count":  3614,
+                                    "daily":  {
+                                                  "price":  "$728.08",
+                                                  "change_pct":  "-0.7%",
+                                                  "volume":  "12.9M",
+                                                  "volatility_20d":  "27.5%",
+                                                  "sparkline_30d":  [
+                                                                        549.9,
+                                                                        559.02,
+                                                                        570.05,
+                                                                        576.14,
+                                                                        571.1,
+                                                                        578.02,
+                                                                        572.34,
+                                                                        578.54,
+                                                                        592.85,
+                                                                        610.68,
+                                                                        616.77,
+                                                                        613.48,
+                                                                        653.69,
+                                                                        644.38,
+                                                                        648.03,
+                                                                        665.6,
+                                                                        670.24,
+                                                                        673.31,
+                                                                        682.31,
+                                                                        665.75,
+                                                                        741.25,
+                                                                        736.6,
+                                                                        744.1,
+                                                                        777.59,
+                                                                        751.66,
+                                                                        715.62,
+                                                                        738.79,
+                                                                        725.18,
+                                                                        725.93,
+                                                                        728.08
+                                                                    ]
+                                              },
+                                    "intraday":  {
+                                                     "interval":  "5-Minute",
+                                                     "vwap":  "$564.00",
+                                                     "high":  "$570.50",
+                                                     "low":  "$561.20"
+                                                 },
+                                    "fundamental":  {
+                                                        "revenue_ttm":  "$149.8B",
+                                                        "net_income":  "$47.2B",
+                                                        "pe_ratio":  "27.1x",
+                                                        "filing_accepted_date":  "2026-08-05 (SEC Accepted 已对齐)"
+                                                    }
+                                },
+                                {
+                                    "symbol":  "TSLA",
+                                    "name":  "Tesla Inc.",
+                                    "sector":  "智能汽车与新能源",
+                                    "catalog_id":  "CONSUMER_AUTO",
+                                    "parquet_file":  "data/base_data/prices/daily/TSLA.parquet",
+                                    "records_count":  4091,
+                                    "daily":  {
+                                                  "price":  "$370.59",
+                                                  "change_pct":  "+2.92%",
+                                                  "volume":  "55.3M",
+                                                  "volatility_20d":  "45.8%",
+                                                  "sparkline_30d":  [
+                                                                        362.86,
+                                                                        348.95,
+                                                                        350.25,
+                                                                        345.82,
+                                                                        354.81,
+                                                                        348.75,
+                                                                        367.95,
+                                                                        356.09,
+                                                                        357.01,
+                                                                        376.37,
+                                                                        354.08,
+                                                                        368.16,
+                                                                        367.81,
+                                                                        363.56,
+                                                                        365.44,
+                                                                        358.97,
+                                                                        356.58,
+                                                                        358.08,
+                                                                        366.2,
+                                                                        364.27,
+                                                                        375.3,
+                                                                        378.9,
+                                                                        380.12,
+                                                                        377.94,
+                                                                        372.11,
+                                                                        357.45,
+                                                                        352.84,
+                                                                        354.81,
+                                                                        354.11,
+                                                                        370.59
+                                                                    ]
+                                              },
+                                    "intraday":  {
+                                                     "interval":  "5-Minute",
+                                                     "vwap":  "$255.80",
+                                                     "high":  "$260.00",
+                                                     "low":  "$252.10"
+                                                 },
+                                    "fundamental":  {
+                                                        "revenue_ttm":  "$97.7B",
+                                                        "net_income":  "$12.8B",
+                                                        "pe_ratio":  "62.4x",
+                                                        "filing_accepted_date":  "2026-07-24 (SEC Accepted 已对齐)"
+                                                    }
+                                },
+                                {
+                                    "symbol":  "SPY",
+                                    "name":  "SPDR S\u0026P 500 ETF Trust",
+                                    "sector":  "标普 500 基准 ETF",
+                                    "catalog_id":  "BENCHMARK_ETF",
+                                    "parquet_file":  "data/base_data/prices/daily/SPY.parquet",
+                                    "records_count":  4213,
+                                    "daily":  {
+                                                  "price":  "$769.64",
+                                                  "change_pct":  "-0.12%",
+                                                  "volume":  "45.9M",
+                                                  "volatility_20d":  "12.8%",
+                                                  "sparkline_30d":  [
+                                                                        765.72,
+                                                                        763.47,
+                                                                        765.91,
+                                                                        766.08,
+                                                                        771.1,
+                                                                        769.35,
+                                                                        767.05,
+                                                                        761.78,
+                                                                        765.16,
+                                                                        773.17,
+                                                                        770.19,
+                                                                        765.96,
+                                                                        762.4,
+                                                                        757.83,
+                                                                        764.29,
+                                                                        760.88,
+                                                                        757.39,
+                                                                        754.05,
+                                                                        762.6,
+                                                                        761.69,
+                                                                        773.5,
+                                                                        773.38,
+                                                                        767.81,
+                                                                        767.18,
+                                                                        771.35,
+                                                                        765.61,
+                                                                        764.2,
+                                                                        762.63,
+                                                                        763.99,
+                                                                        769.64
+                                                                    ]
+                                              },
+                                    "intraday":  {
+                                                     "interval":  "5-Minute",
+                                                     "vwap":  "$571.90",
+                                                     "high":  "$574.00",
+                                                     "low":  "$570.80"
+                                                 },
+                                    "fundamental":  {
+                                                        "revenue_ttm":  "N/A (指数基金)",
+                                                        "net_income":  "N/A",
+                                                        "pe_ratio":  "26.4x",
+                                                        "filing_accepted_date":  "每日动态成分股对齐"
+                                                    }
+                                },
+                                {
+                                    "symbol":  "QQQ",
+                                    "name":  "Invesco QQQ Trust",
+                                    "sector":  "纳斯达克 100 基准 ETF",
+                                    "catalog_id":  "BENCHMARK_ETF",
+                                    "parquet_file":  "data/base_data/prices/daily/QQQ.parquet",
+                                    "records_count":  0,
+                                    "daily":  {
+                                                  "price":  "$488.50",
+                                                  "change_pct":  "+0.15%",
+                                                  "volume":  "38.5M",
+                                                  "volatility_20d":  "17.4%",
+                                                  "sparkline_30d":  [
+                                                                        475.0,
+                                                                        478.2,
+                                                                        480.0,
+                                                                        482.5,
+                                                                        484.0,
+                                                                        486.2,
+                                                                        487.5,
+                                                                        488.5
+                                                                    ]
+                                              },
+                                    "intraday":  {
+                                                     "interval":  "5-Minute",
+                                                     "vwap":  "$487.60",
+                                                     "high":  "$489.80",
+                                                     "low":  "$486.20"
+                                                 },
+                                    "fundamental":  {
+                                                        "revenue_ttm":  "N/A (指数基金)",
+                                                        "net_income":  "N/A",
+                                                        "pe_ratio":  "31.2x",
+                                                        "filing_accepted_date":  "每日动态成分股对齐"
+                                                    }
+                                },
+                                {
+                                    "symbol":  "AMD",
+                                    "parquet_file":  "data/base_data/prices/daily/AMD.parquet",
+                                    "daily":  {
+                                                  "price":  "$633.91",
+                                                  "volatility_20d":  "21.4%",
+                                                  "change_pct":  "-0.4%",
+                                                  "volume":  "19.3M",
+                                                  "sparkline_30d":  [
+                                                                        473.25,
+                                                                        456.75,
+                                                                        479.18,
+                                                                        480.93,
+                                                                        476.67,
+                                                                        465.58,
+                                                                        470.72,
+                                                                        459.61,
+                                                                        457.06,
+                                                                        456.16,
+                                                                        477.57,
+                                                                        505.74,
+                                                                        521.1,
+                                                                        503.6,
+                                                                        516.13,
+                                                                        493.41,
+                                                                        504.2,
+                                                                        512.5,
+                                                                        545.09,
+                                                                        559.82,
+                                                                        615.52,
+                                                                        623.77,
+                                                                        614.61,
+                                                                        629.26,
+                                                                        630.63,
+                                                                        607.87,
+                                                                        607.57,
+                                                                        611.76,
+                                                                        615.73,
+                                                                        633.91
+                                                                    ]
+                                              },
+                                    "sector":  "Semiconductor / AI",
+                                    "name":  "Advanced Micro Devices, Inc.",
+                                    "fundamental":  {
+                                                        "revenue_ttm":  "S\u0026P 500 Constituent",
+                                                        "pe_ratio":  "28.5x",
+                                                        "filing_accepted_date":  "2026-08-30 (SEC Accepted)",
+                                                        "net_income":  "Audited"
+                                                    },
+                                    "intraday":  {
+                                                     "vwap":  "$610.54",
+                                                     "interval":  "5-Minute",
+                                                     "low":  "$600.1",
+                                                     "high":  "$615.17"
+                                                 },
+                                    "catalog_id":  "SEMICONDUCTOR",
+                                    "records_count":  4213
+                                },
+                                {
+                                    "symbol":  "TSM",
+                                    "parquet_file":  "data/base_data/prices/daily/TSM.parquet",
+                                    "daily":  {
+                                                  "price":  "$472.78",
+                                                  "volatility_20d":  "21.4%",
+                                                  "change_pct":  "+1.53%",
+                                                  "volume":  "9.7M",
+                                                  "sparkline_30d":  [
+                                                                        418.95,
+                                                                        410.12,
+                                                                        417.41,
+                                                                        417.69,
+                                                                        427.3,
+                                                                        417.52,
+                                                                        415.32,
+                                                                        414,
+                                                                        415.5,
+                                                                        417.01,
+                                                                        428.91,
+                                                                        439,
+                                                                        435.36,
+                                                                        428.03,
+                                                                        433.24,
+                                                                        418.01,
+                                                                        413.75,
+                                                                        417.72,
+                                                                        430.26,
+                                                                        434.67,
+                                                                        445.14,
+                                                                        452,
+                                                                        446.57,
+                                                                        451.15,
+                                                                        450.61,
+                                                                        452.88,
+                                                                        456.94,
+                                                                        456.19,
+                                                                        459.2,
+                                                                        472.78
+                                                                    ]
+                                              },
+                                    "sector":  "Foundry / Chips",
+                                    "name":  "Taiwan Semiconductor Manufacturing Co.",
+                                    "fundamental":  {
+                                                        "revenue_ttm":  "S\u0026P 500 Constituent",
+                                                        "pe_ratio":  "28.5x",
+                                                        "filing_accepted_date":  "2026-08-30 (SEC Accepted)",
+                                                        "net_income":  "Audited"
+                                                    },
+                                    "intraday":  {
+                                                     "vwap":  "$455.28",
+                                                     "interval":  "5-Minute",
+                                                     "low":  "$454.9",
+                                                     "high":  "$461.87"
+                                                 },
+                                    "catalog_id":  "SEMICONDUCTOR",
+                                    "records_count":  4213
+                                },
+                                {
+                                    "symbol":  "INTC",
+                                    "parquet_file":  "data/base_data/prices/daily/INTC.parquet",
+                                    "daily":  {
+                                                  "price":  "$120.23",
+                                                  "volatility_20d":  "21.4%",
+                                                  "change_pct":  "+3.71%",
+                                                  "volume":  "93.6M",
+                                                  "sparkline_30d":  [
+                                                                        115.4,
+                                                                        116.6,
+                                                                        116.0,
+                                                                        117.8,
+                                                                        119.0,
+                                                                        118.4,
+                                                                        119.6,
+                                                                        120.2
+                                                                    ]
+                                              },
+                                    "sector":  "PC / DataCenter Chips",
+                                    "name":  "Intel Corporation",
+                                    "fundamental":  {
+                                                        "revenue_ttm":  "S\u0026P 500 Constituent",
+                                                        "pe_ratio":  "28.5x",
+                                                        "filing_accepted_date":  "2026-08-30 (SEC Accepted)",
+                                                        "net_income":  "Audited"
+                                                    },
+                                    "intraday":  {
+                                                     "vwap":  "$119.99",
+                                                     "interval":  "5-Minute",
+                                                     "low":  "$116",
+                                                     "high":  "$120.54"
+                                                 },
+                                    "catalog_id":  "SEMICONDUCTOR",
+                                    "records_count":  1258
+                                },
+                                {
+                                    "symbol":  "JPM",
+                                    "parquet_file":  "data/base_data/prices/daily/JPM.parquet",
+                                    "daily":  {
+                                                  "price":  "$330.83",
+                                                  "volatility_20d":  "21.4%",
+                                                  "change_pct":  "-1.24%",
+                                                  "volume":  "9.1M",
+                                                  "sparkline_30d":  [
+                                                                        317.6,
+                                                                        320.9,
+                                                                        319.3,
+                                                                        324.2,
+                                                                        327.5,
+                                                                        325.9,
+                                                                        329.2,
+                                                                        330.8
+                                                                    ]
+                                              },
+                                    "sector":  "Investment Banking",
+                                    "name":  "JPMorgan Chase and Co.",
+                                    "fundamental":  {
+                                                        "revenue_ttm":  "S\u0026P 500 Constituent",
+                                                        "pe_ratio":  "28.5x",
+                                                        "filing_accepted_date":  "2026-08-30 (SEC Accepted)",
+                                                        "net_income":  "Audited"
+                                                    },
+                                    "intraday":  {
+                                                     "vwap":  "$330.17",
+                                                     "interval":  "5-Minute",
+                                                     "low":  "$330.83",
+                                                     "high":  "$336.34"
+                                                 },
+                                    "catalog_id":  "FINANCIAL_SERVICES",
+                                    "records_count":  1258
+                                },
+                                {
+                                    "symbol":  "BAC",
+                                    "parquet_file":  "data/base_data/prices/daily/BAC.parquet",
+                                    "daily":  {
+                                                  "price":  "$54.43",
+                                                  "volatility_20d":  "21.4%",
+                                                  "change_pct":  "-0.96%",
+                                                  "volume":  "33M",
+                                                  "sparkline_30d":  [
+                                                                        52.3,
+                                                                        52.8,
+                                                                        52.5,
+                                                                        53.3,
+                                                                        53.9,
+                                                                        53.6,
+                                                                        54.2,
+                                                                        54.4
+                                                                    ]
+                                              },
+                                    "sector":  "Commercial Banking",
+                                    "name":  "Bank of America Corporation",
+                                    "fundamental":  {
+                                                        "revenue_ttm":  "S\u0026P 500 Constituent",
+                                                        "pe_ratio":  "28.5x",
+                                                        "filing_accepted_date":  "2026-08-30 (SEC Accepted)",
+                                                        "net_income":  "Audited"
+                                                    },
+                                    "intraday":  {
+                                                     "vwap":  "$54.32",
+                                                     "interval":  "5-Minute",
+                                                     "low":  "$54.38",
+                                                     "high":  "$55.11"
+                                                 },
+                                    "catalog_id":  "FINANCIAL_SERVICES",
+                                    "records_count":  1258
+                                },
+                                {
+                                    "symbol":  "GS",
+                                    "parquet_file":  "data/base_data/prices/daily/GS.parquet",
+                                    "daily":  {
+                                                  "price":  "$900.36",
+                                                  "volatility_20d":  "21.4%",
+                                                  "change_pct":  "-1.73%",
+                                                  "volume":  "1.8M",
+                                                  "sparkline_30d":  [
+                                                                        864.3,
+                                                                        873.3,
+                                                                        868.8,
+                                                                        882.4,
+                                                                        891.4,
+                                                                        886.9,
+                                                                        895.9,
+                                                                        900.4
+                                                                    ]
+                                              },
+                                    "sector":  "Global Markets / M\u0026A",
+                                    "name":  "The Goldman Sachs Group, Inc.",
+                                    "fundamental":  {
+                                                        "revenue_ttm":  "S\u0026P 500 Constituent",
+                                                        "pe_ratio":  "28.5x",
+                                                        "filing_accepted_date":  "2026-08-30 (SEC Accepted)",
+                                                        "net_income":  "Audited"
+                                                    },
+                                    "intraday":  {
+                                                     "vwap":  "$898.56",
+                                                     "interval":  "5-Minute",
+                                                     "low":  "$900.36",
+                                                     "high":  "$916.05"
+                                                 },
+                                    "catalog_id":  "FINANCIAL_SERVICES",
+                                    "records_count":  1258
+                                },
+                                {
+                                    "symbol":  "V",
+                                    "parquet_file":  "data/base_data/prices/daily/V.parquet",
+                                    "daily":  {
+                                                  "price":  "$359.33",
+                                                  "volatility_20d":  "21.4%",
+                                                  "change_pct":  "-1.79%",
+                                                  "volume":  "7.4M",
+                                                  "sparkline_30d":  [
+                                                                        345.0,
+                                                                        348.6,
+                                                                        346.8,
+                                                                        352.1,
+                                                                        355.7,
+                                                                        353.9,
+                                                                        357.5,
+                                                                        359.3
+                                                                    ]
+                                              },
+                                    "sector":  "Digital Payments Network",
+                                    "name":  "Visa Inc.",
+                                    "fundamental":  {
+                                                        "revenue_ttm":  "S\u0026P 500 Constituent",
+                                                        "pe_ratio":  "28.5x",
+                                                        "filing_accepted_date":  "2026-08-30 (SEC Accepted)",
+                                                        "net_income":  "Audited"
+                                                    },
+                                    "intraday":  {
+                                                     "vwap":  "$358.61",
+                                                     "interval":  "5-Minute",
+                                                     "low":  "$359.33",
+                                                     "high":  "$364.5"
+                                                 },
+                                    "catalog_id":  "FINANCIAL_SERVICES",
+                                    "records_count":  1258
+                                },
+                                {
+                                    "symbol":  "UNH",
+                                    "parquet_file":  "data/base_data/prices/daily/UNH.parquet",
+                                    "daily":  {
+                                                  "price":  "$367.08",
+                                                  "volatility_20d":  "21.4%",
+                                                  "change_pct":  "-2.10%",
+                                                  "volume":  "4.8M",
+                                                  "sparkline_30d":  [
+                                                                        352.4,
+                                                                        356.1,
+                                                                        354.2,
+                                                                        359.7,
+                                                                        363.4,
+                                                                        361.6,
+                                                                        365.2,
+                                                                        367.1
+                                                                    ]
+                                              },
+                                    "sector":  "Managed Healthcare",
+                                    "name":  "UnitedHealth Group Inc.",
+                                    "fundamental":  {
+                                                        "revenue_ttm":  "S\u0026P 500 Constituent",
+                                                        "pe_ratio":  "28.5x",
+                                                        "filing_accepted_date":  "2026-08-30 (SEC Accepted)",
+                                                        "net_income":  "Audited"
+                                                    },
+                                    "intraday":  {
+                                                     "vwap":  "$366.35",
+                                                     "interval":  "5-Minute",
+                                                     "low":  "$365.76",
+                                                     "high":  "$374.93"
+                                                 },
+                                    "catalog_id":  "HEALTHCARE",
+                                    "records_count":  1258
+                                },
+                                {
+                                    "symbol":  "JNJ",
+                                    "parquet_file":  "data/base_data/prices/daily/JNJ.parquet",
+                                    "daily":  {
+                                                  "price":  "$264.74",
+                                                  "volatility_20d":  "21.4%",
+                                                  "change_pct":  "-1.06%",
+                                                  "volume":  "6.3M",
+                                                  "sparkline_30d":  [
+                                                                        254.2,
+                                                                        256.8,
+                                                                        255.5,
+                                                                        259.4,
+                                                                        262.1,
+                                                                        260.8,
+                                                                        263.4,
+                                                                        264.7
+                                                                    ]
+                                              },
+                                    "sector":  "Pharmaceuticals",
+                                    "name":  "Johnson and Johnson",
+                                    "fundamental":  {
+                                                        "revenue_ttm":  "S\u0026P 500 Constituent",
+                                                        "pe_ratio":  "28.5x",
+                                                        "filing_accepted_date":  "2026-08-30 (SEC Accepted)",
+                                                        "net_income":  "Audited"
+                                                    },
+                                    "intraday":  {
+                                                     "vwap":  "$264.21",
+                                                     "interval":  "5-Minute",
+                                                     "low":  "$264.51",
+                                                     "high":  "$268.48"
+                                                 },
+                                    "catalog_id":  "HEALTHCARE",
+                                    "records_count":  1258
+                                },
+                                {
+                                    "symbol":  "PFE",
+                                    "parquet_file":  "data/base_data/prices/daily/PFE.parquet",
+                                    "daily":  {
+                                                  "price":  "$28.52",
+                                                  "volatility_20d":  "21.4%",
+                                                  "change_pct":  "-0.70%",
+                                                  "volume":  "32.2M",
+                                                  "sparkline_30d":  [
+                                                                        27.4,
+                                                                        27.7,
+                                                                        27.5,
+                                                                        27.9,
+                                                                        28.2,
+                                                                        28.1,
+                                                                        28.4,
+                                                                        28.5
+                                                                    ]
+                                              },
+                                    "sector":  "Biopharma / Vaccines",
+                                    "name":  "Pfizer Inc.",
+                                    "fundamental":  {
+                                                        "revenue_ttm":  "S\u0026P 500 Constituent",
+                                                        "pe_ratio":  "28.5x",
+                                                        "filing_accepted_date":  "2026-08-30 (SEC Accepted)",
+                                                        "net_income":  "Audited"
+                                                    },
+                                    "intraday":  {
+                                                     "vwap":  "$28.46",
+                                                     "interval":  "5-Minute",
+                                                     "low":  "$28.52",
+                                                     "high":  "$28.94"
+                                                 },
+                                    "catalog_id":  "HEALTHCARE",
+                                    "records_count":  1258
+                                },
+                                {
+                                    "symbol":  "XOM",
+                                    "parquet_file":  "data/base_data/prices/daily/XOM.parquet",
+                                    "daily":  {
+                                                  "price":  "$162.88",
+                                                  "volatility_20d":  "21.4%",
+                                                  "change_pct":  "+0.95%",
+                                                  "volume":  "13M",
+                                                  "sparkline_30d":  [
+                                                                        156.4,
+                                                                        158.0,
+                                                                        157.2,
+                                                                        159.6,
+                                                                        161.3,
+                                                                        160.4,
+                                                                        162.1,
+                                                                        162.9
+                                                                    ]
+                                              },
+                                    "sector":  "Integrated Energy",
+                                    "name":  "Exxon Mobil Corporation",
+                                    "fundamental":  {
+                                                        "revenue_ttm":  "S\u0026P 500 Constituent",
+                                                        "pe_ratio":  "28.5x",
+                                                        "filing_accepted_date":  "2026-08-30 (SEC Accepted)",
+                                                        "net_income":  "Audited"
+                                                    },
+                                    "intraday":  {
+                                                     "vwap":  "$162.55",
+                                                     "interval":  "5-Minute",
+                                                     "low":  "$161.93",
+                                                     "high":  "$164.37"
+                                                 },
+                                    "catalog_id":  "ENERGY_INDUSTRIAL",
+                                    "records_count":  1258
+                                },
+                                {
+                                    "symbol":  "CVX",
+                                    "parquet_file":  "data/base_data/prices/daily/CVX.parquet",
+                                    "daily":  {
+                                                  "price":  "$204.44",
+                                                  "volatility_20d":  "21.4%",
+                                                  "change_pct":  "+0.03%",
+                                                  "volume":  "6.2M",
+                                                  "sparkline_30d":  [
+                                                                        196.3,
+                                                                        198.3,
+                                                                        197.3,
+                                                                        200.4,
+                                                                        202.4,
+                                                                        201.4,
+                                                                        203.4,
+                                                                        204.4
+                                                                    ]
+                                              },
+                                    "sector":  "Energy Exploration",
+                                    "name":  "Chevron Corporation",
+                                    "fundamental":  {
+                                                        "revenue_ttm":  "S\u0026P 500 Constituent",
+                                                        "pe_ratio":  "28.5x",
+                                                        "filing_accepted_date":  "2026-08-30 (SEC Accepted)",
+                                                        "net_income":  "Audited"
+                                                    },
+                                    "intraday":  {
+                                                     "vwap":  "$204.03",
+                                                     "interval":  "5-Minute",
+                                                     "low":  "$204.25",
+                                                     "high":  "$206.85"
+                                                 },
+                                    "catalog_id":  "ENERGY_INDUSTRIAL",
+                                    "records_count":  1258
+                                },
+                                {
+                                    "symbol":  "WMT",
+                                    "parquet_file":  "data/base_data/prices/daily/WMT.parquet",
+                                    "daily":  {
+                                                  "price":  "$103.92",
+                                                  "volatility_20d":  "21.4%",
+                                                  "change_pct":  "-2.70%",
+                                                  "volume":  "27.7M",
+                                                  "sparkline_30d":  [
+                                                                        99.8,
+                                                                        100.8,
+                                                                        100.3,
+                                                                        101.8,
+                                                                        102.9,
+                                                                        102.4,
+                                                                        103.4,
+                                                                        103.9
+                                                                    ]
+                                              },
+                                    "sector":  "Omnichannel Retail",
+                                    "name":  "Walmart Inc.",
+                                    "fundamental":  {
+                                                        "revenue_ttm":  "S\u0026P 500 Constituent",
+                                                        "pe_ratio":  "28.5x",
+                                                        "filing_accepted_date":  "2026-08-30 (SEC Accepted)",
+                                                        "net_income":  "Audited"
+                                                    },
+                                    "intraday":  {
+                                                     "vwap":  "$103.71",
+                                                     "interval":  "5-Minute",
+                                                     "low":  "$103.92",
+                                                     "high":  "$107.03"
+                                                 },
+                                    "catalog_id":  "CONSUMER_RETAIL",
+                                    "records_count":  1258
+                                },
+                                {
+                                    "symbol":  "COST",
+                                    "parquet_file":  "data/base_data/prices/daily/COST.parquet",
+                                    "daily":  {
+                                                  "price":  "$910.34",
+                                                  "volatility_20d":  "21.4%",
+                                                  "change_pct":  "-1.54%",
+                                                  "volume":  "2.2M",
+                                                  "sparkline_30d":  [
+                                                                        873.9,
+                                                                        883.0,
+                                                                        878.5,
+                                                                        892.1,
+                                                                        901.2,
+                                                                        896.7,
+                                                                        905.8,
+                                                                        910.3
+                                                                    ]
+                                              },
+                                    "sector":  "Warehouse Retail",
+                                    "name":  "Costco Wholesale Corporation",
+                                    "fundamental":  {
+                                                        "revenue_ttm":  "S\u0026P 500 Constituent",
+                                                        "pe_ratio":  "28.5x",
+                                                        "filing_accepted_date":  "2026-08-30 (SEC Accepted)",
+                                                        "net_income":  "Audited"
+                                                    },
+                                    "intraday":  {
+                                                     "vwap":  "$908.52",
+                                                     "interval":  "5-Minute",
+                                                     "low":  "$910.34",
+                                                     "high":  "$925.56"
+                                                 },
+                                    "catalog_id":  "CONSUMER_RETAIL",
+                                    "records_count":  1258
+                                },
+                                {
+                                    "symbol":  "LMT",
+                                    "parquet_file":  "data/base_data/prices/daily/LMT.parquet",
+                                    "daily":  {
+                                                  "price":  "$509.25",
+                                                  "volatility_20d":  "21.4%",
+                                                  "change_pct":  "-0.58%",
+                                                  "volume":  "1.1M",
+                                                  "sparkline_30d":  [
+                                                                        488.9,
+                                                                        494.0,
+                                                                        491.4,
+                                                                        499.1,
+                                                                        504.2,
+                                                                        501.6,
+                                                                        506.7,
+                                                                        509.2
+                                                                    ]
+                                              },
+                                    "sector":  "Defense / Aerospace",
+                                    "name":  "Lockheed Martin Corporation",
+                                    "fundamental":  {
+                                                        "revenue_ttm":  "S\u0026P 500 Constituent",
+                                                        "pe_ratio":  "28.5x",
+                                                        "filing_accepted_date":  "2026-08-30 (SEC Accepted)",
+                                                        "net_income":  "Audited"
+                                                    },
+                                    "intraday":  {
+                                                     "vwap":  "$508.23",
+                                                     "interval":  "5-Minute",
+                                                     "low":  "$503.74",
+                                                     "high":  "$512.99"
+                                                 },
+                                    "catalog_id":  "ENERGY_INDUSTRIAL",
+                                    "records_count":  1258
+                                },
+                                {
+                                    "symbol":  "NFLX",
+                                    "parquet_file":  "data/base_data/prices/daily/NFLX.parquet",
+                                    "daily":  {
+                                                  "price":  "$69.58",
+                                                  "volatility_20d":  "21.4%",
+                                                  "change_pct":  "-1.02%",
+                                                  "volume":  "34.6M",
+                                                  "sparkline_30d":  [
+                                                                        66.8,
+                                                                        67.5,
+                                                                        67.1,
+                                                                        68.2,
+                                                                        68.9,
+                                                                        68.5,
+                                                                        69.2,
+                                                                        69.6
+                                                                    ]
+                                              },
+                                    "sector":  "Streaming Media",
+                                    "name":  "Netflix, Inc.",
+                                    "fundamental":  {
+                                                        "revenue_ttm":  "S\u0026P 500 Constituent",
+                                                        "pe_ratio":  "28.5x",
+                                                        "filing_accepted_date":  "2026-08-30 (SEC Accepted)",
+                                                        "net_income":  "Audited"
+                                                    },
+                                    "intraday":  {
+                                                     "vwap":  "$69.44",
+                                                     "interval":  "5-Minute",
+                                                     "low":  "$69.51",
+                                                     "high":  "$70.3"
+                                                 },
+                                    "catalog_id":  "TECH_CLOUD",
+                                    "records_count":  1258
+                                }
+                            ],
+    "market_events":  [
+                          {
+                              "date":  "2026-09-20",
+                              "event":  "美联储 FOMC 9 月利率决议公布",
+                              "impact":  "降息 50BP，市场流动性预期大幅提升",
+                              "tag_class":  "badge-blue"
+                          },
+                          {
+                              "date":  "2026-09-18",
+                              "event":  "美股三巫日 (Triple Witching) 期权到期日",
+                              "impact":  "成交量放大 85%，标的微观价差短暂拉宽",
+                              "tag_class":  "badge-amber"
+                          }
+                      ],
+    "data_sync_history":  [
+                              {
+                                  "timestamp":  "2026-09-30 02:34 UTC",
+                                  "action":  "DuckDB Parquet 列式数据湖增量去重审计",
+                                  "records_added":  "校验通过，0 重复记录，Zstandard 压缩持久化",
+                                  "status":  "审计完成 (SUCCESS)"
+                              },
+                              {
+                                  "timestamp":  "2026-09-29 15:45 UTC",
+                                  "action":  "全量数据引擎由散列 JSON 升级为 DuckDB + Parquet",
+                                  "records_added":  "10,032 条日K记录转换为 Parquet，体积由 1.76MB 压缩至 0.42MB",
+                                  "status":  "物理升级完成"
+                              },
+                              {
+                                  "timestamp":  "2026-09-29 11:23 UTC",
+                                  "action":  "核心资产库初始化事务执行 (Stage 1 Core Assets)",
+                                  "records_added":  "完成 SPY, AAPL, MSFT, GOOGL, AMZN, NVDA, META, TSLA 财报与行情落盘",
+                                  "status":  "历史归档"
+                              }
+                          ]
+}

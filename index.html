@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quant-FMP Research - 美股量化研究展示平台</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261001_v1">
+  <link rel="stylesheet" href="assets/css/components.css?v=20261001_v1">
+  <link rel="stylesheet" href="assets/css/responsive.css?v=20261001_v1">
+</head>
+<body>
+  <!-- 极简毛玻璃顶栏 -->
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">Quant-FMP <span>RESEARCH</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="展开导航菜单">☰</button>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-item active">平台首页</a>
+        <a href="transactions.html" class="nav-item">事务总览与计划</a>
+        <a href="base-data-transactions.html" class="nav-item">基础事务</a>
+        <a href="model-transactions.html" class="nav-item">模型事务</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 单列长文档正文 -->
+  <main class="docs-container">
+    <article class="content-stream">
+      <!-- 平台 Hero 介绍 -->
+      <section class="article-header">
+        <h1 class="article-title" id="heroTitle">Quant-FMP: 美股全市场数据资产与时序预测平台</h1>
+        <p class="article-subtitle" id="heroSubtitle">
+          基于 FMP 权威源的工业级美股量化底座。系统依托 GCP 云端弹性算力全权承担数据工程、模型训练与推理推演，通过 GitHub Pages 长期提供极简、纯静态只读的学术与量化研究展示看板。
+        </p>
+        <div class="article-meta">
+          <span>● 静态展示快照 (STATIC SNAPSHOT)</span>
+          <span>快照归档时间: <span id="lastSynced" class="tabular-numbers">2026-09-30 02:30 UTC</span></span>
+          <span>底座版本: v2.1.0 (DuckDB + Parquet)</span>
+        </div>
+      </section>
+
+
+
+      <!-- 核心页面导航卡片 -->
+      <section>
+        <h2 style="font-size:1.3rem; margin-bottom:1rem; color:var(--text-primary);">核心模块与页面导航</h2>
+        <div class="grid-cards">
+          <a href="transactions.html" class="feature-card">
+            <div class="feature-card-title">
+              <span>事务历史与计划</span>
+              <span style="font-size:1.1rem;">→</span>
+            </div>
+            <p class="feature-card-desc">
+              查阅基础数据工程、模型训练拟合与盘前预测推演的累计执行历史、断点审计流水及静态入库建设计划。
+            </p>
+          </a>
+
+          <a href="base-data-transactions.html" class="feature-card">
+            <div class="feature-card-title">
+              <span>基础数据事务</span>
+              <span style="font-size:1.1rem;">→</span>
+            </div>
+            <p class="feature-card-desc">
+              查阅美股全量标的（涵盖存续与退市）的多精度日K、分时与基本面指标，以及宏观经济交易事件与数据入库流水。
+            </p>
+          </a>
+
+          <a href="model-transactions.html" class="feature-card">
+            <div class="feature-card-title">
+              <span>模型事务与预测</span>
+              <span style="font-size:1.1rem;">→</span>
+            </div>
+            <p class="feature-card-desc">
+              量化预测模型全生命周期看板。全面呈现多标的专家化模型训练计划矩阵、统一86维特征工程底座与前瞻多空推演。
+            </p>
+          </a>
+        </div>
+      </section>
+
+      <!-- 重大事件时间线 -->
+      <section>
+        <h2 style="font-size:1.3rem; margin-bottom:1rem; color:var(--text-primary);">重大里程碑与事件日志 (Milestones)</h2>
+        <div class="timeline" id="milestonesContainer">
+          <!-- 由原生 JS 动态加载渲染 -->
+          <div style="color:var(--text-muted); font-size:0.9rem;">加载大事记时间线...</div>
+        </div>
+      </section>
+    </article>
+
+    <footer class="site-footer">
+      <p>Quant-FMP Research Group · 基于零构建原生 Web 技术栈构建 · 仅供学术量化展示与回测验证</p>
+    </footer>
+  </main>
+
+  <script type="module">
+    import { fetchStaticData, setupMobileNav } from './assets/js/utils.js?v=20261001_v1';
+    setupMobileNav();
+
+    async function initPage() {
+      const data = await fetchStaticData('platform_meta.json');
+      if (!data) return;
+
+      if (data.hero) {
+        document.getElementById('heroTitle').innerText = data.hero.title;
+        document.getElementById('heroSubtitle').innerText = data.hero.subtitle;
+      }
+      if (data.last_synced_at) {
+        document.getElementById('lastSynced').innerText = data.last_synced_at.replace('T', ' ').replace('Z', ' UTC');
+      }
+
+      if (data.milestones && data.milestones.length > 0) {
+        const container = document.getElementById('milestonesContainer');
+        container.innerHTML = data.milestones.map(m => `
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-header">
+              <span class="timeline-date">${m.date}</span>
+              <span class="badge ${m.tag_class || 'badge-blue'}">${m.category}</span>
+              <span class="timeline-title">${m.title}</span>
+            </div>
+            <div class="timeline-body">${m.summary}</div>
+          </div>
+        `).join('');
+      }
+    }
+    initPage();
+  </script>
+</body>
+</html>

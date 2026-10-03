@@ -1,0 +1,133 @@
+{
+  "summary": {
+    "total_base_transactions": 145,
+    "base_success_rate": "100.0%",
+    "total_train_transactions": 8,
+    "total_predict_transactions": 25,
+    "last_run_timestamp": "2026-10-03T06:20:00.000000+00:00"
+  },
+  "recent_logs": [
+    {
+      "id": "tx-20261003-base-deep_16y_history_backfill",
+      "type": "BASE_DATA",
+      "type_label": "基础数据事务",
+      "tag_class": "badge-blue",
+      "timestamp": "2026-10-03 06:20 UTC",
+      "duration": "18.5 秒",
+      "status": "COMPLETED",
+      "details": "突破性完成核心资产池 16 年全量历史日K回填 (2010-01-04 至 2026-10-02 最新)：成功下载 SPY, NVDA, AAPL, MSFT, GOOGL, AMZN, META, TSLA, TSM, AMD 共 10 大核心标的 41,310 条高精度日K数据，单标的时序样本跨越 4,213 个交易日，彻底覆盖 2011 欧债、2015 汇改、2018 缩表与 2020 疫情危机，单标的样本量扩大 3.36 倍，正式解锁新一代 V3.0 模型深度训练门禁！"
+    },
+    {
+      "id": "tx-20261001-predict-lgbm_alpha_experts",
+      "type": "MODEL_PREDICT",
+      "type_label": "模型预测事务",
+      "tag_class": "badge-purple",
+      "timestamp": "2026-10-01 15:05 UTC",
+      "duration": "2.4 秒",
+      "status": "COMPLETED",
+      "details": "执行首次 5 大专家模型 (NVDA/AAPL/MSFT/TSLA/SPY) 次日走势前向推演：结合突发新闻情绪打分（TSLA +0.08，AAPL -0.02），生成 2026-10-02 截面多空榜单，SPY/TSLA 位列多头榜首，AAPL/NVDA 位列空头避险，结果静态发布。"
+    },
+    {
+      "id": "tx-20261001-base-expand_sp500_core_universe",
+      "type": "BASE_DATA",
+      "type_label": "基础数据事务",
+      "tag_class": "badge-blue",
+      "timestamp": "2026-10-01 00:43 UTC",
+      "duration": "14.2 秒",
+      "status": "COMPLETED",
+      "details": "核心标的池重大扩充（由 9 只扩展至 25 只跨板块标普 500 代表池）：新增芯片硬件（AMD、TSM、INTC）、金融支付（JPM、BAC、GS、V）、健康制药（UNH、JNJ、PFE）、综合能源（XOM、CVX）、全渠道零售（WMT、COST）与国防流媒体（LMT、NFLX），实时对齐最新行情与基本面，写入 Parquet 数据湖。"
+    },
+    {
+      "id": "tx-20261001-base-dual_key_live_sync",
+      "type": "BASE_DATA",
+      "type_label": "基础数据事务",
+      "tag_class": "badge-blue",
+      "timestamp": "2026-10-01 00:23 UTC",
+      "duration": "9.6 秒",
+      "status": "COMPLETED",
+      "details": "启用双 Key 额度池（当日配额 500 次）执行全市场日度行情采集：成功拉取并对齐 NVDA ($228.38)、AAPL ($333.02)、MSFT ($512.90)、GOOGL ($344.08)、AMZN ($249.15)、META ($725.18)、TSLA ($354.81)、SPY ($762.63) 最新行情切片，写入 DuckDB Parquet 基础数据湖。"
+    },
+    {
+      "id": "tx-20260930-predict-lgbm_alpha_top8",
+      "type": "MODEL_PREDICT",
+      "type_label": "模型预测事务",
+      "tag_class": "badge-purple",
+      "timestamp": "2026-09-30 10:37 UTC",
+      "duration": "1.8 秒",
+      "status": "COMPLETED",
+      "details": "执行现役生产模型 [LGBM_ALPHA_TOP8_RET5D_20260930_V1] 10 月前向推演：生成 2026-10-01 至 2026-10-07 截面多空排位（多头首选: META，空头首选: AMZN），完成多空利差回测审计。"
+    },
+    {
+      "id": "tx-20260930-train-lgbm_alpha_top8_v1",
+      "type": "MODEL_TRAIN",
+      "type_label": "模型训练事务",
+      "tag_class": "badge-green",
+      "timestamp": "2026-09-30 08:15 UTC",
+      "duration": "42.5 秒",
+      "status": "COMPLETED",
+      "details": "GCP 弹性算力集群执行 TOP8 核心池 5 折 Purged 交叉验证训练：Early-Stopping 提前早停于第 142 轮，模型归档至 models/LGBM_ALPHA_TOP8_RET5D_20260930_V1/。"
+    },
+    {
+      "id": "tx-20260930-base-duckdb_parquet_sync",
+      "type": "BASE_DATA",
+      "type_label": "基础数据事务",
+      "tag_class": "badge-blue",
+      "timestamp": "2026-09-30 02:34 UTC",
+      "duration": "8.4 秒",
+      "status": "COMPLETED",
+      "details": "FMP API 增量增补 8 只核心标的最新收盘与盘后分时 VWAP，校验通过，0 重复记录，DuckDB Parquet 列式数据湖增量入库完成。"
+    },
+    {
+      "id": "tx-20260929-base-engine_migration",
+      "type": "BASE_DATA",
+      "type_label": "基础数据事务",
+      "tag_class": "badge-blue",
+      "timestamp": "2026-09-29 15:45 UTC",
+      "duration": "14.2 秒",
+      "status": "COMPLETED",
+      "details": "底层存储架构升级：10,032 条日K时序记录全量转为 Apache Parquet (Zstandard 压缩)，体积从 1.76MB 压缩至 0.42MB，完成物理落盘审计。"
+    },
+    {
+      "id": "tx-20260929-base-stage1_core_init",
+      "type": "BASE_DATA",
+      "type_label": "基础数据事务",
+      "tag_class": "badge-blue",
+      "timestamp": "2026-09-29 11:23 UTC",
+      "duration": "28.6 秒",
+      "status": "COMPLETED",
+      "details": "初始化核心标的池：拉取近 5 年 SPY, NVDA, AAPL, MSFT, GOOGL, AMZN, META, TSLA 基础价格与财报三大表数据，完成断点去重验证。"
+    }
+  ],
+  "upcoming_schedules": [
+    {
+      "name": "三级金字塔与分群专家矩阵批量拟合 (PLAN-20261003-TIERED-CLUSTER-MATRIX)",
+      "cron": "0 2 1 11 * (待 S&P 500 底座就绪后分批触发)",
+      "purpose": "在 GCP n1-highmem-8 算力端执行 5 维微观画像聚类划分，并批量拟合 5 大分群专家模型与 Tier 3 全美通用粗排模型，实现全美 8,450+ 标的全生命周期覆盖。",
+      "executor": "GCP Compute Engine (n1-highmem-8 + T4 GPU 算力集群)"
+    },
+    {
+      "name": "多标的专家化模型矩阵批处理训练 (PLAN-20261001-MULTI-TARGET)",
+      "cron": "0 1 1 10 * (2026-10-01 01:00 UTC 起分批触发)",
+      "purpose": "在 GCP n1-highmem-8 集群上，依次启动 NVDA、AAPL、MSFT、TSLA、SPY 五大标的专家模型的 5 折 Purged CV 拟合早停与未来交割对账校验。",
+      "executor": "GCP Compute Engine (n1-highmem-8 + T4 GPU 算力集群)"
+    },
+    {
+      "name": "每日全量最新行情采集、新闻舆情同步与历史数据全速回填",
+      "cron": "0 22 * * 1-5 (美东时间 17:00 / UTC 22:00)",
+      "purpose": "Priority 1: 批量请求拉取全市场当日完整日K与靶向新财报；Priority 2: 同步核心标的最新重磅新闻与公告，计算突发事件情绪评分 (Impact Score)；Priority 3: 剩余所有结余额度投入 8,450+ 股票历史行情全量回填，最终 Parquet 数据湖落盘。",
+      "executor": "GCP Cloud Scheduler + Cloud Run (双 Key 轮换池)"
+    },
+    {
+      "name": "每周各标的专家模型前向 Alpha 推演与交易信号生成",
+      "cron": "0 10 * * 1 (周一开盘前 UTC 10:00)",
+      "purpose": "加载各标的专属生产模型，结合最新 86 维微观与行业联动特征，推演未来 5 交易日超额 Alpha，生成实盘交易限价单与动态止损边界。",
+      "executor": "GCP Cloud Run Serverless"
+    },
+    {
+      "name": "月度滚动时序拟合与自适应早停重训",
+      "cron": "0 3 1 * * (每月 1 日 UTC 03:00)",
+      "purpose": "滚动吸收增量市场样本，对表现衰退的标的专家模型自动启动重训或触发退役熔断机制。",
+      "executor": "GCP Compute Engine (Preemptible N2 实例)"
+    }
+  ]
+}

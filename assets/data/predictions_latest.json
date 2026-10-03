@@ -1,0 +1,64 @@
+{
+  "timestamp": "2026-10-01T15:59:51.732937+00:00",
+  "predictions": [
+    {
+      "symbol": "MSFT",
+      "name": "MSFT",
+      "sector": "系统软件 / 云基建与AI",
+      "raw_score": 0.739372105403115,
+      "predicted_alpha": 0.7693721054031151,
+      "predicted_alpha_pct": "+76.94%",
+      "confidence": "HIGH",
+      "notes": "Azure 云计算增速 (+0.03 动量干预)",
+      "rank": 1
+    },
+    {
+      "symbol": "AAPL",
+      "name": "AAPL",
+      "sector": "消费电子 / 移动终端生态",
+      "raw_score": 0.7113951175704138,
+      "predicted_alpha": 0.6913951175704138,
+      "predicted_alpha_pct": "+69.14%",
+      "confidence": "HIGH",
+      "notes": "iPhone 16 销量轻微疲软 (-0.02 动量干预)",
+      "rank": 2
+    },
+    {
+      "symbol": "TSLA",
+      "name": "TSLA",
+      "sector": "智能纯电汽车 / 储能与FSD",
+      "raw_score": 0.7102995884575576,
+      "predicted_alpha": 0.7902995884575575,
+      "predicted_alpha_pct": "+79.03%",
+      "confidence": "LOW",
+      "notes": "Robotaxi 预期 (+0.08 动量干预)",
+      "rank": 3
+    },
+    {
+      "symbol": "SPY",
+      "name": "SPY",
+      "sector": "宏观基准",
+      "raw_score": 0.594019686778628,
+      "predicted_alpha": 0.604019686778628,
+      "predicted_alpha_pct": "+60.40%",
+      "confidence": "LOW",
+      "notes": "宏观通胀降温 (+0.01 动量干预)",
+      "rank": 4
+    },
+    {
+      "symbol": "NVDA",
+      "name": "NVDA",
+      "sector": "半导体 / AI芯片龙头",
+      "raw_score": 0.5312567645934372,
+      "predicted_alpha": 0.5812567645934372,
+      "predicted_alpha_pct": "+58.13%",
+      "confidence": "LOW",
+      "notes": "Blackwell 强劲需求 (+0.05 动量干预)",
+      "rank": 5
+    }
+  ],
+  "metadata": {
+    "model_family": "LGBM_ALPHA_SINGLE_EXPERTS_MATRIX",
+    "prediction_window": "2026-10-02 截面 (未来1日)"
+  }
+}

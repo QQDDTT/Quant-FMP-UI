@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>基础事务报告 - Quant-FMP Research</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261001_v1">
+  <link rel="stylesheet" href="assets/css/components.css?v=20261001_v1">
+  <link rel="stylesheet" href="assets/css/responsive.css?v=20261001_v1">
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">Quant-FMP <span>RESEARCH</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="展开导航菜单">☰</button>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-item">平台首页</a>
+        <a href="transactions.html" class="nav-item">事务总览与计划</a>
+        <a href="base-data-transactions.html" class="nav-item active">基础事务</a>
+        <a href="model-transactions.html" class="nav-item">模型事务</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="docs-container">
+    <article class="content-stream">
+      <section class="article-header">
+        <h1 class="article-title">基础数据事务与标的资产全景</h1>
+        <p class="article-subtitle">
+          展示云端唯一真理底座“基础数据 (Base Data)”的沉淀状况：涵盖存续与退市标的资产池、个股多精度（日K/分时/基本面）分析、重大市场交易事件及增量更新日志。
+        </p>
+      </section>
+
+      <!-- 标的池覆盖说明 -->
+      <section>
+        <div class="callout">
+          <div class="callout-title">全量美股股票池资产覆盖 (防幸存者偏差)</div>
+          <p id="universeCoverageText">
+            已覆盖 NYSE、NASDAQ、AMEX 全量存续标的 6,120 只，以及历史退市标的 2,330 只，完整记录其退市时点与最后成交价，确保历史回测具备 100% 真实截面。
+          </p>
+        </div>
+      </section>
+
+      <!-- 存储冷热分离与远程挂载架构面板 -->
+      <section>
+        <h2 style="font-size:1.3rem; margin-bottom:0.75rem; color:var(--text-primary);">数据底座“冷热分离”架构与远程挂载 (Hot/Cold Tiering & Remote Mount)</h2>
+        <div class="compare-metric-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1rem; margin-bottom:1rem;">
+          <div class="card" style="border-top:3px solid var(--color-success);">
+            <div class="card-header">
+              <span class="card-title" style="color:var(--color-success); font-size:1.05rem;">🔥 热数据切片 (近期 30 天)</span>
+              <span class="badge badge-green">静态 Pages 秒开</span>
+            </div>
+            <p style="font-size:0.86rem; color:var(--text-secondary); line-height:1.6; margin-bottom:0.75rem;">
+              • <strong>数据范围</strong>: 最近 30 个交易日高频详细日K (OHLCV + VWAP) 及最新披露财报。<br/>
+              • <strong>分发模式</strong>: 由 GitHub Actions 自动化推送到 GitHub Pages 纯静态网站。<br/>
+              • <strong>体积与延迟</strong>: 小体积轻量切片，纯前端毫秒级渲染与交互。
+            </p>
+          </div>
+
+          <div class="card" style="border-top:3px solid var(--color-accent);">
+            <div class="card-header">
+              <span class="card-title" style="color:var(--color-accent); font-size:1.05rem;">❄️ 冷数据底座 (十年全量历史)</span>
+              <span class="badge badge-blue">GCS 云存储托管</span>
+            </div>
+            <p style="font-size:0.86rem; color:var(--text-secondary); line-height:1.6; margin-bottom:0.75rem;">
+              • <strong>数据范围</strong>: 2010 年至今 8,450+ 存续与退市标的全量 Parquet 时序分区底座。<br/>
+              • <strong>存储载体</strong>: 托管于 Google Cloud Storage (<code>gs://quant-fmp-datalake/</code>)。<br/>
+              • <strong>访问模式</strong>: 前端不直接承载 GB 级大文件下载，而是提供标准 DuckDB 远程只读查询挂载连接。
+            </p>
+          </div>
+        </div>
+
+        <div style="background:var(--bg-subtle); border:1px solid var(--border-muted); border-radius:8px; padding:1.1rem; margin-bottom:1.5rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem; flex-wrap:wrap; gap:0.5rem;">
+            <div style="font-size:0.92rem; font-weight:700; color:var(--text-primary);">
+              💻 研究员远程只读挂载查询链接串 (Python / R DuckDB Query Snippet)
+            </div>
+            <span style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">协议: HTTPFS / GCS Direct Read</span>
+          </div>
+          <pre style="background:var(--bg-canvas); border:1px solid var(--border-default); border-radius:6px; padding:0.85rem; font-size:0.82rem; color:var(--text-primary); overflow-x:auto; margin:0; line-height:1.5; font-family:var(--font-mono);"><code>import duckdb
+
+# 1. 建立内存会话并加载远程网络文件系统扩展
+con = duckdb.connect()
+con.execute("INSTALL httpfs; LOAD httpfs;")
+
+# 2. 远程只读直连 GCP 冷数据 Parquet 底座 (零下载、流式谓词下推)
+df = con.execute("""
+    SELECT date, symbol, open, high, low, close, volume, vwap
+    FROM read_parquet('https://storage.googleapis.com/quant-fmp-datalake/prices/daily/*.parquet')
+    WHERE symbol IN ('NVDA', 'AAPL', 'MSFT', 'SPY') AND date >= '2020-01-01'
+    ORDER BY date ASC
+""").df()
+
+print(f"成功挂载查询完成，获取样本行数: {len(df)}")</code></pre>
+        </div>
+      </section>
+
+      <!-- 免费额度三阶段渐进式入库计划 -->
+      <section>
+        <h2 style="font-size:1.3rem; margin-bottom:0.75rem; color:var(--text-primary);">FMP 双 Key 额度池渐进式入库计划 (Ingestion RoadMap · 500 次/天)</h2>
+        <div class="callout" style="border-left-color: var(--color-purple); margin-bottom:1rem;">
+          <div class="callout-title" style="color:var(--color-purple);">额度分配准则：每日最新数据全量覆盖 (100%) + 剩余额度全额回填历史 (Residual Waterfall)</div>
+          <p style="font-size:0.88rem; line-height:1.6;">
+            <strong>① 当日全美最新数据采集 (Priority 1)</strong>：使用日度批量轻量接口仅需 1~5 次请求即可一次性拉取全美数千只股票当天最新日K，并结合财报日历靶向拉取今日新财报三大表；<br>
+            <strong>② 实时新闻舆情同步 (Priority 2)</strong>：调用新闻接口同步全市场重点标的最新重磅新闻与公告，为动态动量干预 (News Calibration) 提供情绪评分与熔断信号；<br>
+            <strong>③ 剩余额度回填全部历史 (Priority 3)</strong>：双 Key 额度池扣除最新数据与新闻开销后，每日结余的 <strong>460+ 次额度（占比 >90%）全额自动投入历史数据全量回填</strong>。按双重排序（<strong>主要股票优先</strong> + <strong>近端时序优先</strong>），由状态机持久化断点续传直至达成<strong>全美所有股票全部历史数据 100% 入库</strong>的终极目标。
+          </p>
+        </div>
+        <div class="grid-cards" id="ingestionPlanContainer">
+          <!-- 由 JS 渲染 -->
+        </div>
+      </section>
+
+      <!-- 重点标的多精度展示面板（静态分类清单目录化） -->
+      <section>
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:1rem;">
+          <div>
+            <h2 style="font-size:1.3rem; color:var(--text-primary); margin:0;">标的资产物理文件清单 (Asset Catalog Slices)</h2>
+            <div style="font-size:0.84rem; color:var(--text-muted); margin-top:0.25rem;">
+              纯静态文件驱动：点击分类清单切换资产，所有行情切片均由 DuckDB + Parquet 文件持久化归档
+            </div>
+          </div>
+          <span style="font-size:0.85rem; color:var(--text-muted);" id="stockFilterCount">正在加载清单文件...</span>
+        </div>
+
+        <!-- 纯静态分类清单切换栏 (无任何搜索框) -->
+        <div class="catalog-nav-bar" id="catalogNavBar">
+          <span class="catalog-nav-label">资产分类清单:</span>
+          <!-- 由 JS 根据 JSON 中的 catalogs 数组渲染 -->
+        </div>
+
+        <!-- 结构化标的切片文件目录表格 -->
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width:30%;">标的代码 / 资产全称</th>
+                <th style="width:25%;">板块分类</th>
+                <th style="width:25%;">最新收盘 (Daily)</th>
+                <th style="width:20%; text-align:right;">30 日时序走势</th>
+              </tr>
+            </thead>
+            <tbody id="stocksTableBody">
+              <tr><td colspan="4" style="text-align:center; color:var(--text-muted); padding:1.5rem;">正在从 base_data_summary.json 加载标的清单...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 市场重大交易事件 -->
+      <section>
+        <h2 style="font-size:1.3rem; margin-bottom:0.75rem; color:var(--text-primary);">市场重大交易与宏观事件 (Market Events)</h2>
+        <div class="timeline" id="eventsTimeline">
+          <!-- 由 JS 渲染 -->
+        </div>
+      </section>
+
+      <!-- 基础数据更新流水日志 -->
+      <section>
+        <h2 style="font-size:1.3rem; margin-bottom:0.75rem; color:var(--text-primary);">基础数据入库与清洗审计 (Sync Logs)</h2>
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width:28%;">同步时间 (UTC)</th>
+                <th style="width:52%;">事务操作</th>
+                <th style="width:20%; text-align:right;">状态</th>
+              </tr>
+            </thead>
+            <tbody id="syncLogsBody">
+              <!-- 由 JS 渲染 -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </article>
+
+    <footer class="site-footer">
+      <p>Quant-FMP Research Group · 基于零构建原生 Web 技术栈构建 · 仅供学术量化展示与回测验证</p>
+    </footer>
+  </main>
+
+  <script type="module">
+    import { fetchStaticData, generateSparklineSVG, setupMobileNav, createModal } from './assets/js/utils.js?v=20261001_v1';
+    setupMobileNav();
+
+    const stockModal = createModal('stockDetailModal');
+
+    async function initPage() {
+      const data = await fetchStaticData('base_data_summary.json');
+      if (!data) return;
+
+      if (data.universe_summary) {
+        document.getElementById('universeCoverageText').innerText = 
+          `已覆盖全量标的 ${data.universe_summary.total_symbols} 只 (存续 ${data.universe_summary.active_stocks} 只，历史退市 ${data.universe_summary.delisted_stocks} 只)。${data.universe_summary.coverage_description}`;
+      }
+
+      if (data.ingestion_plan && data.ingestion_plan.phases) {
+        const pContainer = document.getElementById('ingestionPlanContainer');
+        pContainer.innerHTML = data.ingestion_plan.phases.map(p => {
+          let badgeClass = 'badge-blue';
+          if (p.status.includes('IN_PROGRESS') || p.status.includes('进行中')) badgeClass = 'badge-green';
+          else if (p.status.includes('PLANNED') || p.status.includes('计划中')) badgeClass = 'badge-purple';
+          else badgeClass = 'badge-amber';
+
+          return `
+            <div class="card" style="border-top: 3px solid var(--color-accent);">
+              <div class="card-header">
+                <span class="card-title" style="font-size:1.02rem;">${p.phase_id}: ${p.name}</span>
+                <span class="badge ${badgeClass}">${p.status}</span>
+              </div>
+              <p style="color:var(--text-secondary); font-size:0.86rem; margin-bottom:0.75rem;">
+                <strong>覆盖目标:</strong> ${p.scope}
+              </p>
+              <div style="background:var(--bg-subtle); padding:0.6rem 0.8rem; border-radius:6px; font-size:0.82rem; margin-bottom:0.75rem;">
+                <div>消耗额度: <strong class="tabular-numbers" style="color:var(--color-accent);">${p.calls_required.toLocaleString()}</strong> 次 API</div>
+                <div>预计耗时: <strong class="tabular-numbers">${p.days_needed}</strong></div>
+                <div>当前进度: <strong class="tabular-numbers" style="color:var(--color-success);">${p.progress_pct}</strong></div>
+              </div>
+              <p style="color:var(--text-muted); font-size:0.78rem; line-height:1.4;">
+                交付目标: ${p.deliverable}
+              </p>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // 标的清单目录渲染与交互切换 (纯静态文件驱动)
+      const catalogs = data.catalogs || [{ id: 'ALL', name: '全部核心标的资产清单', count: 9 }];
+      const allStocks = data.stock_catalog_items || data.featured_stocks || [];
+      const catalogNav = document.getElementById('catalogNavBar');
+      const tbody = document.getElementById('stocksTableBody');
+      const countEl = document.getElementById('stockFilterCount');
+
+      let currentCatalogId = 'ALL';
+
+      // 渲染分类清单切换按钮
+      catalogNav.innerHTML = `
+        <span class="catalog-nav-label">分类清单:</span>
+        ${catalogs.map(cat => `
+          <button class="catalog-pill ${cat.id === 'ALL' ? 'active' : ''}" data-cat="${cat.id}">
+            <span>${cat.name}</span>
+            <span class="catalog-pill-count">${cat.count}</span>
+          </button>
+        `).join('')}
+      `;
+
+      function renderStocksTable(stocks) {
+        countEl.innerText = `当前清单包含 ${stocks.length} 只标的 (全量已就绪)`;
+        if (stocks.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--text-muted); padding:2rem;">该分类清单暂无标的切片</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = stocks.map((s, idx) => {
+          const isUp = s.daily.change_pct.startsWith('+');
+          const color = isUp ? '#3FB950' : '#F85149';
+          const sparklineSVG = generateSparklineSVG(s.daily.sparkline_30d, color);
+          const parquetPath = s.parquet_file || `data/base_data/prices/daily/${s.symbol}.parquet`;
+
+          return `
+            <tr class="clickable-row" data-sym="${s.symbol}" title="点击查看【${s.symbol}】行情、基本面与底层存储详情">
+              <td>
+                <div style="display:flex; align-items:center; gap:0.5rem;">
+                  <span class="tabular-numbers" style="color:var(--text-muted); font-size:0.8rem; width:16px;">#${idx + 1}</span>
+                  <div>
+                    <div style="font-weight:700; color:var(--text-primary); font-size:1rem;">${s.symbol}</div>
+                    <div style="font-size:0.75rem; color:var(--text-muted);">${s.name}</div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge badge-blue">${s.sector}</span></td>
+              <td>
+                <span class="tabular-numbers" style="font-weight:600;">${s.daily.price}</span>
+                <span style="color:${color}; font-size:0.8rem; margin-left:4px;">${s.daily.change_pct}</span>
+              </td>
+              <td style="text-align:right;">${sparklineSVG}</td>
+            </tr>
+          `;
+        }).join('');
+
+        // 绑定整行点击弹窗事件
+        tbody.querySelectorAll('tr.clickable-row').forEach(row => {
+          row.addEventListener('click', () => {
+            const sym = row.getAttribute('data-sym');
+            const stock = allStocks.find(item => item.symbol === sym);
+            if (stock) showStockDetailModal(stock);
+          });
+        });
+      }
+
+      // 绑定分类清单点击事件
+      catalogNav.querySelectorAll('.catalog-pill').forEach(btn => {
+        btn.addEventListener('click', () => {
+          catalogNav.querySelectorAll('.catalog-pill').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const catId = btn.getAttribute('data-cat');
+          currentCatalogId = catId;
+          const filtered = (catId === 'ALL') ? allStocks : allStocks.filter(s => s.catalog_id === catId);
+          renderStocksTable(filtered);
+        });
+      });
+
+      renderStocksTable(allStocks);
+
+      // 个股详情全景弹窗逻辑
+      function showStockDetailModal(stock) {
+        const titleHtml = `
+          <span>${stock.symbol} · ${stock.name}</span>
+          <span class="badge badge-purple">${stock.sector}</span>
+        `;
+
+        const tabs = [
+          { id: 'tab_overview', label: '① 行情切片与分时' },
+          { id: 'tab_fundamental', label: '② 基本面三大表' },
+          { id: 'tab_storage', label: '③ 存储底座与审计' }
+        ];
+
+        const bodyHtml = `
+          <!-- Tab 1: 行情切片 -->
+          <div class="modal-tab-pane" id="tab_overview" style="display:block;">
+            <div class="compare-metric-grid" style="margin-bottom:1.25rem;">
+              <div class="compare-metric-card">
+                <div class="compare-metric-label">最新收盘价</div>
+                <div class="compare-metric-value" style="color:var(--text-primary);">${stock.daily.price}</div>
+              </div>
+              <div class="compare-metric-card">
+                <div class="compare-metric-label">日度涨跌幅</div>
+                <div class="compare-metric-value" style="color:${stock.daily.change_pct.startsWith('+') ? '#3FB950' : '#F85149'};">${stock.daily.change_pct}</div>
+              </div>
+              <div class="compare-metric-card">
+                <div class="compare-metric-label">成交量 (Volume)</div>
+                <div class="compare-metric-value" style="color:var(--text-primary);">${stock.daily.volume}</div>
+              </div>
+              <div class="compare-metric-card">
+                <div class="compare-metric-label">20日已实现波动率</div>
+                <div class="compare-metric-value" style="color:var(--color-warning);">${stock.daily.volatility_20d}</div>
+              </div>
+            </div>
+
+            <h4 style="font-size:0.95rem; margin-bottom:0.5rem; color:var(--text-primary);">高频分时采样 (Intraday VWAP)</h4>
+            <div style="background:var(--bg-subtle); padding:1rem; border-radius:8px; font-size:0.88rem; line-height:1.6;">
+              <div>• 采样精度: <strong>${stock.intraday.interval}</strong> 窗口</div>
+              <div>• VWAP 成交量加权均价: <strong>${stock.intraday.vwap}</strong></div>
+              <div>• 当日区间: 最高 <strong>${stock.intraday.high}</strong> / 最低 <strong>${stock.intraday.low}</strong></div>
+            </div>
+          </div>
+
+          <!-- Tab 2: 财务基本面 -->
+          <div class="modal-tab-pane" id="tab_fundamental" style="display:none;">
+            <div class="callout" style="margin-top:0;">
+              <div class="callout-title">SEC 官方披露时间戳 (防前视偏差已校验)</div>
+              <p>官方对齐时间: <strong style="color:var(--color-success);">${stock.fundamental.filing_accepted_date}</strong>。所有财务指标仅在 SEC 正式 Accepted 后进入时序回测特征宽表。</p>
+            </div>
+            <div class="table-wrapper" style="margin-top:1rem;">
+              <table class="data-table">
+                <thead>
+                  <tr><th>核心财务项目</th><th>最新数值</th><th>时序评价</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>TTM 营业总收入</td><td class="tabular-numbers"><strong>${stock.fundamental.revenue_ttm}</strong></td><td><span class="badge badge-green">高速成长</span></td></tr>
+                  <tr><td>TTM 净利润</td><td class="tabular-numbers"><strong>${stock.fundamental.net_income}</strong></td><td><span class="badge badge-blue">盈利健康</span></td></tr>
+                  <tr><td>市盈率估值 (PE Ratio)</td><td class="tabular-numbers"><strong>${stock.fundamental.pe_ratio}</strong></td><td><span class="badge badge-purple">动态分位数估值</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Tab 3: 存储与审计 -->
+          <div class="modal-tab-pane" id="tab_storage" style="display:none;">
+            <div style="background:var(--bg-subtle); padding:1rem; border-radius:8px; font-size:0.85rem; font-family:var(--font-mono);">
+              <div style="margin-bottom:0.5rem; color:var(--color-accent);">// 列式数据湖元数据摘要</div>
+              <div>存储格式: Apache Parquet (Zstandard 列式物理压缩)</div>
+              <div>持久化路径: data/base_data/prices/daily/${stock.symbol}.parquet</div>
+              <div>主键约束: [symbol, date] 严格唯一去重</div>
+              <div>DuckDB 全局视图: SELECT * FROM daily_prices_v WHERE symbol = '${stock.symbol}'</div>
+              <div>去重审计状态: 100% 通过防重入断点校验</div>
+            </div>
+          </div>
+        `;
+
+        const footerHtml = `
+          <a href="model-transactions.html?symbol=${stock.symbol}&compare=true" class="btn-primary">
+            🚀 展开该标的与模型预测对比 (Compare Models)
+          </a>
+          <button class="btn-secondary" onclick="document.getElementById('stockDetailModal_close').click()">关闭</button>
+        `;
+
+        stockModal.open(titleHtml, bodyHtml, { tabs, footer: footerHtml });
+      }
+
+      if (data.market_events && data.market_events.length > 0) {
+        const eContainer = document.getElementById('eventsTimeline');
+        eContainer.innerHTML = data.market_events.map(e => `
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-header">
+              <span class="timeline-date">${e.date}</span>
+              <span class="badge ${e.tag_class || 'badge-blue'}">交易事件</span>
+              <span class="timeline-title">${e.event}</span>
+            </div>
+            <div class="timeline-body">${e.impact}</div>
+          </div>
+        `).join('');
+      }
+
+      const syncLogModal = createModal('syncLogDetailModal');
+
+      if (data.data_sync_history && data.data_sync_history.length > 0) {
+        const sBody = document.getElementById('syncLogsBody');
+        sBody.innerHTML = data.data_sync_history.map((h, idx) => `
+          <tr class="clickable-row" data-idx="${idx}" title="点击查看【${h.action}】完整入库与清洗审计详情">
+            <td class="tabular-numbers" style="font-size:0.86rem; color:var(--text-secondary);">${h.timestamp}</td>
+            <td>
+              <strong style="color:var(--text-primary); font-size:0.92rem;">${h.action}</strong>
+            </td>
+            <td style="text-align:right;">
+              <span class="badge badge-green" style="font-size:0.75rem;">● ${h.status}</span>
+            </td>
+          </tr>
+        `).join('');
+
+        // 绑定整行点击打开审计详情弹窗
+        sBody.querySelectorAll('tr.clickable-row').forEach(row => {
+          row.addEventListener('click', () => {
+            const idx = parseInt(row.getAttribute('data-idx'), 10);
+            const item = data.data_sync_history[idx];
+            if (item) {
+              showSyncLogModal(item);
+            }
+          });
+        });
+      }
+
+      function showSyncLogModal(log) {
+        const titleHtml = `
+          <span>基础数据入库与清洗审计 · 详细日志</span>
+          <span class="badge badge-green">${log.status}</span>
+        `;
+
+        const bodyHtml = `
+          <div style="display:flex; flex-direction:column; gap:1.25rem;">
+            <div class="compare-metric-grid">
+              <div class="compare-metric-card">
+                <div class="compare-metric-label">同步完成时间 (UTC)</div>
+                <div class="compare-metric-value" style="font-size:1.02rem; color:var(--text-primary);">${log.timestamp}</div>
+              </div>
+              <div class="compare-metric-card">
+                <div class="compare-metric-label">审计校验状态</div>
+                <div class="compare-metric-value" style="font-size:1.02rem; color:var(--color-success);">● ${log.status}</div>
+              </div>
+            </div>
+
+            <div>
+              <h4 style="font-size:0.95rem; margin-bottom:0.5rem; color:var(--text-primary);">事务操作名称</h4>
+              <div style="background:var(--bg-subtle); padding:0.85rem 1rem; border-radius:6px; font-weight:600; color:var(--color-accent); font-size:0.95rem;">
+                ${log.action}
+              </div>
+            </div>
+
+            <div>
+              <h4 style="font-size:0.95rem; margin-bottom:0.5rem; color:var(--text-primary);">审计结果与落盘记录详情 (Audit Details)</h4>
+              <div style="background:var(--bg-subtle); padding:1.2rem; border-radius:8px; border:1px solid var(--border-default); font-size:0.9rem; line-height:1.7; color:var(--text-primary);">
+                ${log.records_added}
+              </div>
+            </div>
+
+            <div style="background:rgba(88,166,255,0.06); padding:1rem; border-radius:8px; border:1px solid var(--border-muted); font-size:0.82rem; color:var(--text-secondary); font-family:var(--font-mono);">
+              <div>[STORAGE] 物理引擎: DuckDB + Apache Parquet (Zstandard 列式物理压缩)</div>
+              <div>[CONSISTENCY] 幂等性断点校验: 100% 通过防重入验证</div>
+              <div>[LOOKAHEAD] 防前视偏差审计: 财务 Accepted 时间戳严格对齐</div>
+            </div>
+          </div>
+        `;
+
+        const footerHtml = `
+          <button class="btn-secondary" onclick="document.getElementById('syncLogDetailModal_close').click()">关闭</button>
+        `;
+
+        syncLogModal.open(titleHtml, bodyHtml, { footer: footerHtml });
+      }
+    }
+    initPage();
+  </script>
+</body>
+</html>

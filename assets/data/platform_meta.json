@@ -1,0 +1,68 @@
+{
+  "system_name": "Quant-FMP Research",
+  "version": "v2.0.0",
+  "last_synced_at": "2026-09-29T12:40:00Z",
+  "status": "OPERATIONAL",
+  "hero": {
+    "title": "Quant-FMP: 美股全市场数据资产与时序预测平台",
+    "subtitle": "基于 FMP 权威源的工业级美股量化底座。系统依托 GCP 云端弹性算力全权承担数据工程、模型训练与推理推演，通过 GitHub Pages 长期提供极简、纯静态只读的学术与量化研究展示看板。"
+  },
+  "milestones": [
+    {
+      "date": "2026-10-02",
+      "title": "确立全美股三级金字塔与自适应分群专家矩阵体系 (Tiered Pyramid & Cluster Experts)",
+      "category": "架构跃迁",
+      "tag_class": "badge-purple",
+      "summary": "为解决面向全美 8,450+ 股票与一股一模型 42,250 次训练拟合爆炸及小票样本匮乏矛盾，确立三级金字塔架构：Tier 3 全市场硬过滤与通用粗排、Tier 2 微观画像 5 维无监督分群专家矩阵、Tier 1 核心旗舰单票专属攻坚，模型总数精简为 14 个，全市场 100% 覆盖。"
+    },
+    {
+      "date": "2026-10-01",
+      "title": "双 Key 配额池与全美全量历史数据采集计划升级 (500 次/天)",
+      "category": "基础数据",
+      "tag_class": "badge-purple",
+      "summary": "接入第二组 FMP 权威 API Key，配额提升至 500 次/天。确立每日美东盘后批量拉取全美全市场当天最新详细日K与增量财报（仅耗 15~35 次），结余 465+ 次额度（>93%）全额投入回填全美 8,450+ 存续与退市标的全部历史数据。"
+    },
+    {
+      "date": "2026-10-01",
+      "title": "确立多标的专家化模型训练计划矩阵 (PLAN-20261001-MULTI-TARGET)",
+      "category": "模型演进",
+      "tag_class": "badge-green",
+      "summary": "判定老版混杂大锅饭模型无法满足实盘交易指导要求，正式退役。确立基于统一86维立体特征底座（含产业链传导与行业相对强弱），为 NVDA、AAPL、MSFT、TSLA、SPY 等核心标的独立拟合专家模型并排期上线。"
+    },
+    {
+      "date": "2026-09-29",
+      "title": "首期深度混合时序预测模型训练方案锁定 (Plan 01)",
+      "category": "模型蓝图",
+      "tag_class": "badge-blue",
+      "summary": "以 Phase 1 高完整度数据库为基石，确立 2026-09-30 01:00 UTC 触发 LightGBM + 双向 LSTM 自注意力双核模型训练，采用 Purged CV 5 折时序早停。"
+    },
+    {
+      "date": "2026-09-29",
+      "title": "确立额度瀑布流 (Quota Waterfall) 基础数据事务规范",
+      "category": "基础数据",
+      "tag_class": "badge-purple",
+      "summary": "重构基础数据采集优先级：每日优先保障最新现势数据（Priority 1），执行实时新闻舆情抓取（Priority 2），剩余额度全额投入历史回填（Priority 3），严格遵循主要股票优先与近端优先双重排序。"
+    },
+    {
+      "date": "2026-09-29",
+      "title": "核心标的基础数据初始化启动",
+      "category": "基础数据",
+      "tag_class": "badge-blue",
+      "summary": "启动核心美股资产池（涵盖 SPY、QQQ、科技巨头等）公司资料、日K线与财务指标基础数据入库。"
+    },
+    {
+      "date": "2026-09-28",
+      "title": "架构分工确立与博客式 UI 规范落盘",
+      "category": "架构演进",
+      "tag_class": "badge-blue",
+      "summary": "重构系统四层职责分工（Surface Pro 9 纯编辑、Google Drive 存储、GCP 计算数据库、GitHub Pages 纯静态展示），确立零构建方案 A 与四大博客式页面。"
+    },
+    {
+      "date": "2026-09-28",
+      "title": "引入聚类自适应采样与事实新闻动态调参策略",
+      "category": "模型规范",
+      "tag_class": "badge-green",
+      "summary": "确立宏观状态与微观画像聚类均衡提取切片标准，设计新闻冲击量化评估与黑天鹅熔断规范，已规范入库标准工作流。"
+    }
+  ]
+}
