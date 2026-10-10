@@ -1,0 +1,524 @@
+﻿{
+    "summary":  {
+                    "total_base_transactions":  174,
+                    "base_success_rate":  "100.0%",
+                    "total_train_transactions":  11,
+                    "total_predict_transactions":  26,
+                    "total_trading_transactions":  4,
+                    "last_run_timestamp":  "2026-10-10T17:10:09.376000+00:00"
+                },
+    "recent_logs":  [
+                        {
+                            "id":  "tx-20261011-trading-pilot_day_2",
+                            "type":  "TRADING_EXECUTION",
+                            "type_label":  "交易事务",
+                            "tag_class":  "badge-green",
+                            "timestamp":  "2026-10-10 17:10 UTC",
+                            "duration":  "1.8s",
+                            "status":  "COMPLETED",
+                            "details":  "推进 30 日零成本沙盘验证计划 (Day 2/30)：Alpaca 虚拟沙盘官方连通性审计100%达标；7 笔碎股建仓订单 (META/MSFT/NVDA/AMZN/PLTR/CAT/JPM) 完全合规入队 (ACCEPTED)；子贆本锁定 $2,000.00 USD，30% 现金缓冲 $600.00 USD，PDT 规则 0/3 零消耗；五大毕业考核红线 100% 达标，等候周一开盘撮合。"
+                        },
+                        {
+                            "id":  "tx-20261010-trading-alpaca_paper_order_dispatch",
+                            "type":  "TRADING_EXECUTION",
+                            "type_label":  "交易事务",
+                            "tag_class":  "badge-green",
+                            "timestamp":  "2026-10-10 14:52 UTC",
+                            "duration":  "3.1s",
+                            "status":  "COMPLETED",
+                            "details":  "正式接通 Alpaca Paper 官方虚拟沙箱 (Account: 1a63d717...93e5, 状态 ACTIVE)；启动 $2,000.00 USD (30W JPY) 专款子账本隔离保护；成功通过 REST API 向官方做市网关提交 7 笔碎股建仓订单 (META, MSFT, NVDA, AMZN, PLTR, CAT, JPM 各分配 $200.00 Notional，严格限制 10% 集中度上限)；当前处于周末休市排队状态 (ACCEPTED)，周一 09:30 EST 交易所开盘自动撮合执行。"
+                        },
+                        {
+                            "id":  "tx-20261010-trading-30day_paper_pilot_launch",
+                            "type":  "TRADING_EXECUTION",
+                            "type_label":  "交易事务",
+                            "tag_class":  "badge-green",
+                            "timestamp":  "2026-10-10 13:40 UTC",
+                            "duration":  "4.2s",
+                            "status":  "COMPLETED",
+                            "details":  "启动 30 日零成本沙盘验证计划 (Day 1/30)：以 30W 日元 ($2,000.00 USD) 为基准沙盘本金，完成首期 70% 碎股多头 ($1,400.00，覆盖 META/MSFT/NVDA/AMZN/PLTR/CAT/JPM 7 只核心标的，单票 10% 严格限额) 与 30% 现金缓冲 ($600.00) 换算；零真实本金消耗、零汇损、PDT 日内交易计数 0/3 严格安全隔离；沙盘切片归档。"
+                        },
+                        {
+                            "id":  "tx-20261010-base-deep_historical_backfill_complete",
+                            "type":  "BASE_DATA",
+                            "type_label":  "Base Data Transaction",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-10 03:48 UTC",
+                            "duration":  "260.6 s",
+                            "status":  "COMPLETED",
+                            "details":  "Executed deep historical data backfill transaction: Successfully backfilled 2010-2021 historical OHLCV bars for 43 symbols (114499 new bars added); total bars across 71 symbols reached 232265 (cross-cycle coverage 70.4%); Quality Gate 100/100 verified; API calls: 487 (daily quota: 0/470), dual-key watchdog 100% compliant."
+                        },
+                        {
+                            "id":  "tx-20261010-base-validation_quality_gate",
+                            "type":  "BASE_DATA",
+                            "type_label":  "基础数据事务",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-10 03:48 UTC",
+                            "duration":  "25 秒",
+                            "status":  "COMPLETED",
+                            "details":  "执行全库基础数据质量门禁与全维度校验事务：完成 71 只标的全量日K (累计 232265 根) 与 70 份财报利润表深度扫描；量价几何逻辑 100% 达标；SEC AcceptedDate 防未来函数时戳零泄露 (P0 致命错误: 0)；综合质量健康得分 100/100.0；生成质量审计报告与前端切片。"
+                        },
+                        {
+                            "id":  "tx-20261009-2241-weekly_position_sizing_execution",
+                            "type":  "TRADING_EXECUTION",
+                            "type_label":  "TRADING_EXECUTION",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-09 22:41 UTC",
+                            "duration":  "3.8s",
+                            "status":  "COMPLETED",
+                            "details":  "Executed weekly position sizing and trading order generation for 2026-10-12 to 2026-10-16 horizon: Tier 1 Macro Switch calibrated to 70% equity exposure and 30% defensive cash; allocated 13 core positions across 4 clusters (TSLA, NVDA, META, MSFT, PLTR, AMD, CAT, XOM, JPM, ABBV, WMT, GOOGL, AMZN); dynamic trailing stop-loss (2.5% to 5.0%); orders exported to ui/assets/data/trading_orders_latest.json."
+                        },
+                        {
+                            "id":  "tx-20261009-2222-weekly_position_sizing_execution",
+                            "type":  "TRADING_EXECUTION",
+                            "type_label":  "TRADING_EXECUTION",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-09 22:22 UTC",
+                            "duration":  "3.8s",
+                            "status":  "COMPLETED",
+                            "details":  "Executed weekly position sizing and trading order generation for 2026-10-12 to 2026-10-16 horizon: Tier 1 Macro Switch calibrated to 70% equity exposure and 30% defensive cash; allocated 13 core positions across 4 clusters (TSLA, NVDA, META, MSFT, PLTR, AMD, CAT, XOM, JPM, ABBV, WMT, GOOGL, AMZN); dynamic trailing stop-loss (2.5% to 5.0%); orders exported to ui/assets/data/trading_orders_latest.json."
+                        },
+                        {
+                            "id":  "tx-20261009-2222-weekly_position_sizing_execution",
+                            "type":  "TRADING_EXECUTION",
+                            "type_label":  "TRADING_EXECUTION",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-09 22:22 UTC",
+                            "duration":  "3.8s",
+                            "status":  "COMPLETED",
+                            "details":  "Executed weekly position sizing and trading order generation for 2026-10-12 to 2026-10-16 horizon: Tier 1 Macro Switch calibrated to 70% equity exposure and 30% defensive cash; allocated 13 core positions across 4 clusters (TSLA, NVDA, META, MSFT, PLTR, AMD, CAT, XOM, JPM, ABBV, WMT, GOOGL, AMZN); dynamic trailing stop-loss (2.5% to 5.0%); orders exported to ui/assets/data/trading_orders_latest.json."
+                        },
+                        {
+                            "id":  "tx-20261010-base-gcp_weekly_close_ingestion_and_validation",
+                            "type":  "BASE_DATA",
+                            "type_label":  "Base Data Transaction",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-09 22:14 UTC",
+                            "duration":  "47.0s",
+                            "status":  "COMPLETED",
+                            "details":  "Executed 2026-10-09 Friday Weekly Close Base Data Transaction via GCP worker: FMP Dual Key pool 202/470 calls used (268 safety buffer remaining); 70 symbols aligned to 2026-10-09; Macro treasury (10Y: 5.24%, 2Y: 4.80%) and corporate calendars archived; Quality Gate 100/100 passed (117,766 bars); Synced to Google Drive."
+                        },
+                        {
+                            "id":  "tx-20261009-base-gcp_daily_ingestion_and_validation",
+                            "type":  "BASE_DATA",
+                            "type_label":  "Base Data Transaction",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-09 13:35 UTC",
+                            "duration":  "75.3s",
+                            "status":  "COMPLETED",
+                            "details":  "Executed 2026-10-08 Base Data Transaction via GCP worker: FMP Dual Key pool 126/470 calls used (344 safety buffer remaining); 70 symbols aligned to 2026-10-08; Macro treasury (10Y: 5.22%) and corporate calendars archived; 50 unsupported symbols isolated; Quality Gate 100/100 passed; Synced to Google Drive."
+                        },
+                        {
+                            "id":  "tx-20261009-base-validation_quality_gate",
+                            "type":  "BASE_DATA",
+                            "type_label":  "基础数据事务",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-09 13:33 UTC",
+                            "duration":  "15.9 秒",
+                            "status":  "COMPLETED",
+                            "details":  "执行全库基础数据质量门禁与全维度校验事务：完成 71 只标的全量日K (累计 117696 根) 与 70 份财报利润表深度扫描；量价几何逻辑 100% 达标；SEC AcceptedDate 防未来函数时戳零泄露 (P0 致命错误: 0)；综合质量健康得分 100/100.0；生成质量审计报告与前端切片。"
+                        },
+                        {
+                            "id":  "tx-20261008-1048-weekly_position_sizing_execution",
+                            "type":  "TRADING_EXECUTION",
+                            "type_label":  "TRADING_EXECUTION",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-08 10:48 UTC",
+                            "duration":  "4.2s",
+                            "status":  "COMPLETED",
+                            "details":  "Executed weekly position sizing and trading order generation: aligned with Tier 1 Macro Switch 85% equity exposure and 15% defensive cash; allocated 12 core long positions across 4 clusters (TSLA, NVDA, META, MSFT, AAPL, AMD, PLTR, XOM, JPM, CAT, ABBV, WMT) with dynamic trailing stop-loss (2.5% to 5.0%); orders exported to ui/assets/data/trading_orders_latest.json."
+                        },
+                        {
+                            "id":  "tx-20261008-1941-predict_forward_tiered_matrix",
+                            "type":  "MODEL_PREDICT",
+                            "type_label":  "模型预测事务",
+                            "tag_class":  "badge-purple",
+                            "timestamp":  "2026-10-08 10:41 UTC",
+                            "duration":  "12.5 秒",
+                            "status":  "COMPLETED",
+                            "details":  "执行最新交易日全截面前向推演：加载 Tier 1 SPY 宏观总控生产模型判定大盘牛熊扩张体制并输出建议权益敞口 (85.0%)；联动四大聚类专家对 71 只标的输出未来 5 日预期超额 Alpha，结合事实新闻催化完成动态调参，多空排行榜正式发布至 ui/assets/data/predictions_latest.json。"
+                        },
+                        {
+                            "id":  "tx-20261008-1941-train_tier2_cluster_experts_matrix",
+                            "type":  "MODEL_TRAIN",
+                            "type_label":  "模型训练事务",
+                            "tag_class":  "badge-green",
+                            "timestamp":  "2026-10-08 10:41 UTC",
+                            "duration":  "209.3 秒",
+                            "status":  "COMPLETED",
+                            "details":  "派发 GCP 弹性算力集群 (e2-standard-4) 执行 Tier 2 聚类专家模型矩阵 (高Beta/防御价值/周期制造/超大盘成长) 批量拟合：汇聚全美 71 核心标的 24.6 万根时序样本，完成 5 折 Purged \u0026 Embargoed 交叉验证，自包含 Bundle 全量归档至 models/；GCP 实例自动关机归零算力成本。"
+                        },
+                        {
+                            "id":  "tx-20261008-1836-train_tier1_spy_regime_expert",
+                            "type":  "MODEL_TRAIN",
+                            "type_label":  "模型训练事务",
+                            "tag_class":  "badge-green",
+                            "timestamp":  "2026-10-08 09:36 UTC",
+                            "duration":  "341.8 秒",
+                            "status":  "COMPLETED",
+                            "details":  "派发 GCP 弹性算力实例 (e2-standard-4) 执行 Tier 1 SPY 宏观总控专家模型训练：依托 16.7 年跨周期时序 (4,000+ 样本) 与 21 维因果立体因子完成 5 折 Purged \u0026 Embargoed 交叉验证；早停收敛，样本外 OOS AUC 达标；自包含 Bundle 归档至 models/LGBM_ALPHA_SINGLE_SPY_RET5D_20261001_V1/；GCP 实例自动关机归零算力成本。"
+                        },
+                        {
+                            "id":  "tx-20261008-1829-train_tier1_spy_regime_expert",
+                            "type":  "MODEL_TRAIN",
+                            "type_label":  "模型训练事务",
+                            "tag_class":  "badge-green",
+                            "timestamp":  "2026-10-08 09:29 UTC",
+                            "duration":  "166.4 秒",
+                            "status":  "COMPLETED",
+                            "details":  "派发 GCP 弹性算力实例 (e2-standard-4) 执行 Tier 1 SPY 宏观总控专家模型训练：依托 16.7 年跨周期时序 (4,000+ 样本) 与 21 维因果立体因子完成 5 折 Purged \u0026 Embargoed 交叉验证；早停收敛，样本外 OOS AUC 达标；自包含 Bundle 归档至 models/LGBM_ALPHA_SINGLE_SPY_RET5D_20261001_V1/；GCP 实例自动关机归零算力成本。"
+                        },
+                        {
+                            "id":  "tx-20261008-0908-corporate_actions_dividends_splits_backfill",
+                            "type":  "BASE_DATA",
+                            "type_label":  "基础数据事务",
+                            "tag_class":  "badge-green",
+                            "timestamp":  "2026-10-08 00:08 UTC",
+                            "duration":  "140 秒",
+                            "status":  "COMPLETED",
+                            "details":  "执行全库公司行为（Corporate Actions）新维度数据深度回填：完成全库 62 只标的历史现金分红与 61 只标的历史拆股全量时序落盘（收录 JNJ 227期、KO 226期、PEP 218期、LMT 170期、JPM 167期分红，以及 DIS 15次、GE 12次、INTC 11次拆股等机构级全生命周期明细）；今日双 Key 配额池 470 次看门狗软上限达标，五维质量门禁 100/100 审计通过。"
+                        },
+                        {
+                            "id":  "tx-20261008-base-validation_quality_gate",
+                            "type":  "BASE_DATA",
+                            "type_label":  "基础数据事务",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-08 00:11 UTC",
+                            "duration":  "40.5 秒",
+                            "status":  "COMPLETED",
+                            "details":  "执行全库基础数据质量门禁与全维度校验事务：完成 71 只标的全量日K (累计 246575 根) 与 70 份财报利润表深度扫描；量价几何逻辑 100% 达标；SEC AcceptedDate 防未来函数时戳零泄露 (P0 致命错误: 0)；综合质量健康得分 100/100.0；生成质量审计报告与前端切片。"
+                        },
+                        {
+                            "id":  "tx-20261008-0859-feature_engineering_pipeline",
+                            "type":  "DATA_ENGINEERING",
+                            "type_label":  "数据工程事务",
+                            "tag_class":  "badge-purple",
+                            "timestamp":  "2026-10-07 23:59 UTC",
+                            "duration":  "218 秒",
+                            "status":  "COMPLETED",
+                            "details":  "启动数据工程第一阶段特征工程流水线：完成 71 只核心标的 16 年全量时序 (累计 246575 根样本) 衍生特征计算；严格融入美债 10Y-2Y 倒挂利差与 3M 基准利率；生成 5 日持有期 Target (RET5D)；无任何未来函数泄露；生成特征元数据字典与标的微观画像表。"
+                        },
+                        {
+                            "id":  "tx-20261008-0745-feature_engineering_pipeline",
+                            "type":  "DATA_ENGINEERING",
+                            "type_label":  "数据工程事务",
+                            "tag_class":  "badge-purple",
+                            "timestamp":  "2026-10-07 22:45 UTC",
+                            "duration":  "100.7 秒",
+                            "status":  "COMPLETED",
+                            "details":  "启动数据工程第一阶段特征工程流水线：完成 71 只核心标的 16 年全量时序 (累计 117626 根样本) 衍生特征计算；严格融入美债 10Y-2Y 倒挂利差与 3M 基准利率；生成 5 日持有期 Target (RET5D)；无任何未来函数泄露；生成特征元数据字典与标的微观画像表。"
+                        },
+                        {
+                            "id":  "tx-20261008-base-gcp_eod_and_macro_sync_20261007",
+                            "type":  "BASE_DATA",
+                            "type_label":  "基础数据事务",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-07 22:43 UTC",
+                            "duration":  "66.3 秒",
+                            "status":  "COMPLETED",
+                            "details":  "派发 GCP 临时实例 (quant-data-worker) 执行 2026-10-07 美股盘后全量基础数据日常事务：全美 70 只存续核心标的最新收盘日K无损增量合并入库 (新增 70 根，全库日K总样本达 117,626 根)；美债 3M-30Y 全期限收益率曲线与分红拆股日历同步；实例执行完毕自动停机 (成本归零)；数据同步回本地 Google Drive 并通过五维质量门禁 100/100 满分审计。"
+                        },
+                        {
+                            "id":  "tx-20261008-0157-feature_engineering_pipeline",
+                            "type":  "DATA_ENGINEERING",
+                            "type_label":  "数据工程事务",
+                            "tag_class":  "badge-purple",
+                            "timestamp":  "2026-10-07 16:57 UTC",
+                            "duration":  "107.4 秒",
+                            "status":  "COMPLETED",
+                            "details":  "启动数据工程第一阶段特征工程流水线：完成 71 只核心标的 16 年全量时序 (累计 117556 根样本) 衍生特征计算；严格融入美债 10Y-2Y 倒挂利差与 3M 基准利率；生成 5 日持有期 Target (RET5D)；无任何未来函数泄露；生成特征元数据字典与标的微观画像表。"
+                        },
+                        {
+                            "id":  "tx-20261008-base-gcp_dispatch_and_security_guard",
+                            "type":  "BASE_DATA",
+                            "type_label":  "基础数据事务",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-07 16:50 UTC",
+                            "duration":  "150.0 秒",
+                            "status":  "COMPLETED",
+                            "details":  "派发 GCP 临时实例 (quant-data-worker) 执行基础数据日常调度事务：双 Key 配额池看门狗防线生效，智能隔离 429 限流 Key，端点权限边界治理完成；全美全量 71 标的日K完成对齐核验；全量 117,556 根日K与 140 份三大表同步 GCS 数据湖；GCP 实例自动关机归零计算成本。"
+                        },
+                        {
+                            "id":  "tx-20261007-base-deep_historical_assets_backfilled",
+                            "type":  "BASE_DATA",
+                            "type_label":  "基础数据事务",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-07 00:22 UTC",
+                            "duration":  "9158.2 秒",
+                            "status":  "COMPLETED",
+                            "details":  "安全预算 470 次看门狗极限利用：消耗 338 次 API 调用 (今日累计 471 次软上限刹车)；成功扩充 7 只高流动性优质龙头标的 15 年全量历史日K (累积 117,556 根日K)；深度回填 58 份资产负债表与 12 份现金流量表；同步 GCS 数据湖并满分通过五维质量门禁。"
+                        },
+                        {
+                            "id":  "tx-20261007-base-validation_quality_gate",
+                            "type":  "BASE_DATA",
+                            "type_label":  "基础数据事务",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-07 00:21 UTC",
+                            "duration":  "11.9 秒",
+                            "status":  "COMPLETED",
+                            "details":  "执行全库基础数据质量门禁与全维度校验事务：完成 71 只标的全量日K (累计 117556 根) 与 70 份财报利润表深度扫描；量价几何逻辑 100% 达标；SEC AcceptedDate 防未来函数时戳零泄露 (P0 致命错误: 0)；综合质量健康得分 100/100.0；生成质量审计报告与前端切片。"
+                        },
+                        {
+                            "id":  "tx-20261007-base-gcp_eod_and_macro_sync",
+                            "type":  "BASE_DATA",
+                            "type_label":  "基础数据事务",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-06 21:37 UTC",
+                            "duration":  "74.0 秒",
+                            "status":  "COMPLETED",
+                            "details":  "派发 GCP 临时实例 (quant-data-worker) 执行 2026-10-06 美股全量基础数据日常事务：全美 64 只核心标的收盘日K增量对齐入库 (累计 108,778 根)；美债收益率曲线与分红拆股日历同步；实例执行完毕自动停机 (成本归零)；数据同步回本地 Google Drive 并通过五维质量门禁 100/100 满分审计。"
+                        },
+                        {
+                            "id":  "tx-20261006-1706-feature_engineering_pipeline",
+                            "type":  "DATA_ENGINEERING",
+                            "type_label":  "数据工程事务",
+                            "tag_class":  "badge-purple",
+                            "timestamp":  "2026-10-06 08:06 UTC",
+                            "duration":  "136.7 秒",
+                            "status":  "COMPLETED",
+                            "details":  "启动数据工程第一阶段特征工程流水线：完成 64 只核心标的 16 年全量时序 (累计 108715 根样本) 衍生特征计算；严格融入美债 10Y-2Y 倒挂利差与 3M 基准利率；生成 5 日持有期 Target (RET5D)；无任何未来函数泄露；生成特征元数据字典与标的微观画像表。"
+                        },
+                        {
+                            "id":  "tx-20261006-1654-model_governance_single_to_cluster",
+                            "type":  "MODEL_GOVERNANCE",
+                            "type_label":  "模型治理事务",
+                            "tag_class":  "badge-purple",
+                            "timestamp":  "2026-10-06 07:54 UTC",
+                            "duration":  "12.4 秒",
+                            "status":  "COMPLETED",
+                            "details":  "执行标的专用模型审计与架构精炼：归档清理 AAPL/MSFT/NVDA/TSLA 早期短数据无效权重；在模型注册表与架构规范中明确个股选股全面升维并入 Tier 2 聚类专家矩阵；Tier 1 唯一收敛为 SPY 大盘宏观总控与风险敞口开关；消除单票样本饥渴与截面排序缺失缺陷。"
+                        },
+                        {
+                            "id":  "tx-20261006-base-validation_quality_gate",
+                            "type":  "BASE_DATA",
+                            "type_label":  "基础数据事务",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-06 05:36 UTC",
+                            "duration":  "65.7 秒",
+                            "status":  "COMPLETED",
+                            "details":  "执行全库基础数据质量门禁与全维度校验事务：完成 64 只标的全量日K (累计 108715 根) 与 63 份财报利润表深度扫描；量价几何逻辑 100% 达标；SEC AcceptedDate 防未来函数时戳零泄露 (P0 致命错误: 0)；综合质量健康得分 100/100.0；生成质量审计报告与前端切片。"
+                        },
+                        {
+                            "id":  "tx-20261006-base-today_eod_bars_aligned",
+                            "type":  "BASE_DATA",
+                            "type_label":  "基础数据事务",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-06 03:48 UTC",
+                            "duration":  "61.1 秒",
+                            "status":  "COMPLETED",
+                            "details":  "执行 2026-10-05 当日收盘日K增量同步：0 只标的执行无损 Prepend 增量合并，全库 64 只标的已对齐数 63 (累计日K样本达 108715 根)；本次消耗 8 次 API 调用；前端展示切片同步发布。"
+                        },
+                        {
+                            "id":  "tx-20261006-base-today_eod_bars_aligned",
+                            "type":  "BASE_DATA",
+                            "type_label":  "基础数据事务",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-05 22:20 UTC",
+                            "duration":  "110.3 秒",
+                            "status":  "COMPLETED",
+                            "details":  "执行 2026-10-05 当日完整收盘日K增量同步：对 SPY 及 NVDA, AAPL, MSFT, GOOGL, AMZN, META, TSLA 等 26 只核心标的执行无损 Prepend 增量合并，全库 64 只标的历史日K时序 100% 完整对齐至 2026-10-05 最新交易日 (累计日K样本达 108715 根)；双 Key 配额安全看门狗零报错；前端展示切片同步发布。"
+                        },
+                        {
+                            "id":  "tx-20261006-base-growth_stars_waterfall_backfill",
+                            "type":  "BASE_DATA",
+                            "type_label":  "基础数据事务",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-05 22:06 UTC",
+                            "duration":  "59.8 秒",
+                            "status":  "COMPLETED",
+                            "details":  "执行成长龙头与赛道先锋瀑布流回填：成功回填 SHOP, ETSY, BABA, DAL, UAL, AAL, CCL, RIVN, LCID, NIO, SOFI, HOOD, COIN, RBLX, BIDU, BILI, SIRI, MRNA 共 18 只各行业核心标的全量历史日K (新增 22547 根) 与 18 份官方审计利润表；全量日K底座跨越十万大关，达到 64 只标的共 108689 根样本；本次消耗 96 次 API 调用，双 Key 配额安全看门狗 100% 达标；前端切片同步更新并发布至 GitHub Pages。"
+                        },
+                        {
+                            "id":  "tx-20261006-base-daily_quote_sync_and_core_backfill",
+                            "type":  "BASE_DATA",
+                            "type_label":  "基础数据事务",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-05 22:03 UTC",
+                            "duration":  "41.9 秒",
+                            "status":  "COMPLETED",
+                            "details":  "执行 2026-10-06 日常基础数据事务：FMP 双 Key 额度池探活正常 (500次/天无超限，当前消耗 46 次，剩余约 454 次)；成功同步 SPY, QQQ, NVDA, AAPL 等 47 只核心资产最新收盘与盘后行情；完成标普500成分股历史日K全量审计 (累计 86142 条日K样本)，前端展示切片同步发布。"
+                        },
+                        {
+                            "id":  "tx-20261006-base-sp500_giants_waterfall_backfill",
+                            "type":  "BASE_DATA",
+                            "type_label":  "基础数据事务",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-05 21:57 UTC",
+                            "duration":  "46.2 秒",
+                            "status":  "COMPLETED",
+                            "details":  "执行标普500二十强巨头瀑布流回填：成功回填 GE, BA, DIS, KO, PEP, WFC, C, CSCO, UBER, PYPL, PLTR, SQ, TGT, NKE, SBUX, FDX, GM, F, T, VZ 共 20 只各行业核心标的全量历史日K (新增 24655 根) 与 20 份官方审计利润表；全量日K底座达到 46 只标的共 86142 根样本；本次消耗 60 次 API 调用，双 Key 配额安全看门狗 100% 达标；前端切片同步更新并发布至 GitHub Pages。"
+                        },
+                        {
+                            "id":  "tx-20261006-base-daily_quote_sync_and_core_backfill",
+                            "type":  "BASE_DATA",
+                            "type_label":  "基础数据事务",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-05 15:41 UTC",
+                            "duration":  "26.2 秒",
+                            "status":  "COMPLETED",
+                            "details":  "执行 2026-10-06 日常基础数据事务：FMP 双 Key 额度池探活正常 (500次/天无超限，当前消耗 26 次，剩余约 474 次)；成功同步 SPY, QQQ, NVDA, AAPL 等 27 只核心资产最新收盘与盘后行情；完成标普500成分股历史日K全量审计 (累计 61487 条日K样本)，前端展示切片同步发布。"
+                        },
+                        {
+                            "id":  "tx-20261005-base-sp500_historical_waterfall_backfill",
+                            "type":  "BASE_DATA",
+                            "type_label":  "基础数据事务",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-05 03:43 UTC",
+                            "duration":  "57.3 秒",
+                            "status":  "COMPLETED",
+                            "details":  "执行标普 500 核心权重龙头历史瀑布流回补：基于双 Key 配额安全看门狗完成 ADBE (Adobe) 与 ABBV (AbbVie) 全量日度K线 (新增 2,508 根) 与最新 4 期季度财报利润表深度清洗入库；数据湖总日K线规模突破 61,487 根 (覆盖 26 只代表池标的，财报覆盖 25 只)。本次消耗额度 40 次，双 Key 配额充沛无 429 风险，前端看板数据切片同步更新。"
+                        },
+                        {
+                            "id":  "tx-20261005-base-daily_quote_sync_and_core_backfill",
+                            "type":  "BASE_DATA",
+                            "type_label":  "基础数据事务",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-05 02:41 UTC",
+                            "duration":  "27.8 秒",
+                            "status":  "COMPLETED",
+                            "details":  "执行 2026-10-04 日常基础数据事务：FMP 双 Key 额度池探活正常 (500次/天无超限，当前消耗 24 次，剩余约 476 次)；成功同步 SPY, QQQ, NVDA, AAPL 等 25 只核心资产最新收盘与盘后行情；完成 INTC, JPM, BAC, GS, V, UNH, JNJ, PFE, XOM, CVX, WMT, COST, LMT, NFLX 共 0 只标普500成分股历史日K全量回填 (共计新增 0 条日K记录)，前端展示切片同步发布。"
+                        },
+                        {
+                            "id":  "tx-20261004-base-deep_historical_backfill",
+                            "type":  "BASE_DATA",
+                            "type_label":  "基础数据事务",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-04 01:07 UTC",
+                            "duration":  "94.7 秒",
+                            "status":  "COMPLETED",
+                            "details":  "执行深度历史数据全量回填事务：成功下载 JPM, BAC, GS, V, UNH, JNJ, PFE, XOM, CVX, WMT, COST, LMT, NFLX 共 13 只标普500龙头全部历史日K (16315 根K线)，全库累计日K时序样本达 58979 根；同步回填 16 只股票共 64 期官方财报利润表，核心股票基本面覆盖率达 100%；本次调用 API 58 次，双 Key 配额充沛无超限。"
+                        },
+                        {
+                            "id":  "tx-20261004-base-daily_quote_sync_and_core_backfill",
+                            "type":  "BASE_DATA",
+                            "type_label":  "基础数据事务",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-04 00:39 UTC",
+                            "duration":  "31.9 秒",
+                            "status":  "COMPLETED",
+                            "details":  "执行 2026-10-04 日常基础数据事务：FMP 双 Key 额度池探活正常 (500次/天无超限，当前消耗 37 次，剩余约 463 次)；成功同步 SPY, QQQ, NVDA, AAPL 等 25 只核心资产最新收盘与盘后行情；完成 INTC, JPM, BAC, GS, V, UNH, JNJ, PFE, XOM, CVX, WMT, COST, LMT, NFLX 共 0 只标普500成分股历史日K全量回填 (共计新增 0 条日K记录)，前端展示切片同步发布。"
+                        },
+                        {
+                            "id":  "tx-20261003-base-deep_16y_history_backfill",
+                            "type":  "BASE_DATA",
+                            "type_label":  "基础数据事务",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-03 06:20 UTC",
+                            "duration":  "18.5 秒",
+                            "status":  "COMPLETED",
+                            "details":  "突破性完成核心资产池 16 年全量历史日K回填 (2010-01-04 至 2026-10-02 最新)：成功下载 SPY, NVDA, AAPL, MSFT, GOOGL, AMZN, META, TSLA, TSM, AMD 共 10 大核心标的 41,310 条高精度日K数据，单标的时序样本跨越 4,213 个交易日，彻底覆盖 2011 欧债、2015 汇改、2018 缩表与 2020 疫情危机，单标的样本量扩大 3.36 倍，正式解锁新一代 V3.0 模型深度训练门禁！"
+                        },
+                        {
+                            "id":  "tx-20261001-predict-lgbm_alpha_experts",
+                            "type":  "MODEL_PREDICT",
+                            "type_label":  "模型预测事务",
+                            "tag_class":  "badge-purple",
+                            "timestamp":  "2026-10-01 15:05 UTC",
+                            "duration":  "2.4 秒",
+                            "status":  "COMPLETED",
+                            "details":  "执行首次 5 大专家模型 (NVDA/AAPL/MSFT/TSLA/SPY) 次日走势前向推演：结合突发新闻情绪打分（TSLA +0.08，AAPL -0.02），生成 2026-10-02 截面多空榜单，SPY/TSLA 位列多头榜首，AAPL/NVDA 位列空头避险，结果静态发布。"
+                        },
+                        {
+                            "id":  "tx-20261001-base-expand_sp500_core_universe",
+                            "type":  "BASE_DATA",
+                            "type_label":  "基础数据事务",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-01 00:43 UTC",
+                            "duration":  "14.2 秒",
+                            "status":  "COMPLETED",
+                            "details":  "核心标的池重大扩充（由 9 只扩展至 25 只跨板块标普 500 代表池）：新增芯片硬件（AMD、TSM、INTC）、金融支付（JPM、BAC、GS、V）、健康制药（UNH、JNJ、PFE）、综合能源（XOM、CVX）、全渠道零售（WMT、COST）与国防流媒体（LMT、NFLX），实时对齐最新行情与基本面，写入 Parquet 数据湖。"
+                        },
+                        {
+                            "id":  "tx-20261001-base-dual_key_live_sync",
+                            "type":  "BASE_DATA",
+                            "type_label":  "基础数据事务",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-10-01 00:23 UTC",
+                            "duration":  "9.6 秒",
+                            "status":  "COMPLETED",
+                            "details":  "启用双 Key 额度池（当日配额 500 次）执行全市场日度行情采集：成功拉取并对齐 NVDA ($228.38)、AAPL ($333.02)、MSFT ($512.90)、GOOGL ($344.08)、AMZN ($249.15)、META ($725.18)、TSLA ($354.81)、SPY ($762.63) 最新行情切片，写入 DuckDB Parquet 基础数据湖。"
+                        },
+                        {
+                            "id":  "tx-20260930-predict-lgbm_alpha_top8",
+                            "type":  "MODEL_PREDICT",
+                            "type_label":  "模型预测事务",
+                            "tag_class":  "badge-purple",
+                            "timestamp":  "2026-09-30 10:37 UTC",
+                            "duration":  "1.8 秒",
+                            "status":  "COMPLETED",
+                            "details":  "执行现役生产模型 [LGBM_ALPHA_TOP8_RET5D_20260930_V1] 10 月前向推演：生成 2026-10-01 至 2026-10-07 截面多空排位（多头首选: META，空头首选: AMZN），完成多空利差回测审计。"
+                        },
+                        {
+                            "id":  "tx-20260930-train-lgbm_alpha_top8_v1",
+                            "type":  "MODEL_TRAIN",
+                            "type_label":  "模型训练事务",
+                            "tag_class":  "badge-green",
+                            "timestamp":  "2026-09-30 08:15 UTC",
+                            "duration":  "42.5 秒",
+                            "status":  "COMPLETED",
+                            "details":  "GCP 弹性算力集群执行 TOP8 核心池 5 折 Purged 交叉验证训练：Early-Stopping 提前早停于第 142 轮，模型归档至 models/LGBM_ALPHA_TOP8_RET5D_20260930_V1/。"
+                        },
+                        {
+                            "id":  "tx-20260930-base-duckdb_parquet_sync",
+                            "type":  "BASE_DATA",
+                            "type_label":  "基础数据事务",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-09-30 02:34 UTC",
+                            "duration":  "8.4 秒",
+                            "status":  "COMPLETED",
+                            "details":  "FMP API 增量增补 8 只核心标的最新收盘与盘后分时 VWAP，校验通过，0 重复记录，DuckDB Parquet 列式数据湖增量入库完成。"
+                        },
+                        {
+                            "id":  "tx-20260929-base-engine_migration",
+                            "type":  "BASE_DATA",
+                            "type_label":  "基础数据事务",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-09-29 15:45 UTC",
+                            "duration":  "14.2 秒",
+                            "status":  "COMPLETED",
+                            "details":  "底层存储架构升级：10,032 条日K时序记录全量转为 Apache Parquet (Zstandard 压缩)，体积从 1.76MB 压缩至 0.42MB，完成物理落盘审计。"
+                        },
+                        {
+                            "id":  "tx-20260929-base-stage1_core_init",
+                            "type":  "BASE_DATA",
+                            "type_label":  "基础数据事务",
+                            "tag_class":  "badge-blue",
+                            "timestamp":  "2026-09-29 11:23 UTC",
+                            "duration":  "28.6 秒",
+                            "status":  "COMPLETED",
+                            "details":  "初始化核心标的池：拉取近 5 年 SPY, NVDA, AAPL, MSFT, GOOGL, AMZN, META, TSLA 基础价格与财报三大表数据，完成断点去重验证。"
+                        }
+                    ],
+    "upcoming_schedules":  [
+                               {
+                                   "name":  "三级金字塔与分群专家矩阵批量拟合 (PLAN-20261003-TIERED-CLUSTER-MATRIX)",
+                                   "cron":  "0 2 1 11 * (待 S\u0026P 500 底座就绪后分批触发)",
+                                   "purpose":  "在 GCP n1-highmem-8 算力端执行 5 维微观画像聚类划分，并批量拟合 5 大分群专家模型与 Tier 3 全美通用粗排模型，实现全美 8,450+ 标的全生命周期覆盖。",
+                                   "executor":  "GCP Compute Engine (n1-highmem-8 + T4 GPU 算力集群)"
+                               },
+                               {
+                                   "name":  "多标的专家化模型矩阵批处理训练 (PLAN-20261001-MULTI-TARGET)",
+                                   "cron":  "0 1 1 10 * (2026-10-01 01:00 UTC 起分批触发)",
+                                   "purpose":  "在 GCP n1-highmem-8 集群上，依次启动 NVDA、AAPL、MSFT、TSLA、SPY 五大标的专家模型的 5 折 Purged CV 拟合早停与未来交割对账校验。",
+                                   "executor":  "GCP Compute Engine (n1-highmem-8 + T4 GPU 算力集群)"
+                               },
+                               {
+                                   "name":  "每日全量最新行情采集、新闻舆情同步与历史数据全速回填",
+                                   "cron":  "0 22 * * 1-5 (美东时间 17:00 / UTC 22:00)",
+                                   "purpose":  "Priority 1: 批量请求拉取全市场当日完整日K与靶向新财报；Priority 2: 同步核心标的最新重磅新闻与公告，计算突发事件情绪评分 (Impact Score)；Priority 3: 剩余所有结余额度投入 8,450+ 股票历史行情全量回填，最终 Parquet 数据湖落盘。",
+                                   "executor":  "GCP Cloud Scheduler + Cloud Run (双 Key 轮换池)"
+                               },
+                               {
+                                   "name":  "每周各标的专家模型前向 Alpha 推演与交易信号生成",
+                                   "cron":  "0 10 * * 1 (周一开盘前 UTC 10:00)",
+                                   "purpose":  "加载金字塔各专家生产模型，结合最新 86 维微观与行业联动特征，推演未来 5 交易日超额 Alpha，生成实盘交易限价单与动态止损边界。",
+                                   "executor":  "GCP Cloud Run Serverless"
+                               },
+                               {
+                                   "name":  "月度滚动时序拟合与自适应早停重训",
+                                   "cron":  "0 3 1 * * (每月 1 日 UTC 03:00)",
+                                   "purpose":  "滚动吸收增量市场样本，对表现衰退的标的专家模型自动启动重训或触发退役熔断机制。",
+                                   "executor":  "GCP Compute Engine (Preemptible N2 实例)"
+                               }
+                           ]
+}

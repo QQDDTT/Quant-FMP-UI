@@ -1,0 +1,24 @@
+﻿{
+    "updated_at":  "2026-10-10T03:48:55Z",
+    "overall_quality_score":  100,
+    "quality_grade":  "AAA (极佳)",
+    "gate_status":  "PASSED",
+    "audit_scope":  {
+                        "symbols_covered":  71,
+                        "total_daily_bars":  232265,
+                        "financial_statements":  70,
+                        "lookahead_bias_clean":  true
+                    },
+    "error_breakdown":  {
+                            "p0_fatal":  0,
+                            "p1_warning":  0,
+                            "p2_notice":  1
+                        },
+    "dimension_scores":  {
+                             "price_volume_sanity":  100,
+                             "splits_continuity":  100,
+                             "accounting_consistency":  100,
+                             "anti_lookahead_timing":  100,
+                             "temporal_continuity":  99.2
+                         }
+}
