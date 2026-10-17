@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>事务列表与计划 - Quant-FMP Research</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261001_v1">
+  <link rel="stylesheet" href="assets/css/components.css?v=20261001_v1">
+  <link rel="stylesheet" href="assets/css/responsive.css?v=20261001_v1">
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">Quant-FMP <span>RESEARCH</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="展开导航菜单">☰</button>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-item">平台首页</a>
+        <a href="transactions.html" class="nav-item active">事务总览与计划</a>
+        <a href="base-data-transactions.html" class="nav-item">基础事务</a>
+        <a href="model-transactions.html" class="nav-item">模型事务</a>
+        <a href="trading-transactions.html" class="nav-item">交易事务</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="docs-container">
+    <article class="content-stream">
+      <section class="article-header">
+        <h1 class="article-title">量化系统事务注册表与执行历史</h1>
+        <p class="article-subtitle">
+          集中汇总 GCP 计算集群执行的基础数据工程、模型训练早停与模型预测推演的累计执行指标、历史断点审计流水及既定入库建设计划。
+        </p>
+      </section>
+
+      <!-- 事务指标卡片 -->
+      <section>
+        <div class="grid-cards" id="summaryCounters" style="grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">基础数据事务</span>
+              <span class="badge badge-purple">全量与增量</span>
+            </div>
+            <div style="font-size:1.8rem; font-weight:700;" class="tabular-numbers" id="totalBase">--</div>
+            <p style="color:var(--text-muted); font-size:0.85rem; margin-top:0.25rem;">累计执行 / 成功率 <span id="baseRate">--</span></p>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">模型训练事务</span>
+              <span class="badge badge-green">GCP 弹性算力</span>
+            </div>
+            <div style="font-size:1.8rem; font-weight:700;" class="tabular-numbers" id="totalTrain">--</div>
+            <p style="color:var(--text-muted); font-size:0.85rem; margin-top:0.25rem;">滚动拟合早停 Checkpoints</p>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">模型预测事务</span>
+              <span class="badge badge-blue">日度与周度</span>
+            </div>
+            <div style="font-size:1.8rem; font-weight:700;" class="tabular-numbers" id="totalPredict">--</div>
+            <p style="color:var(--text-muted); font-size:0.85rem; margin-top:0.25rem;">截面多空 Alpha 推演期数</p>
+          </div>
+
+          <a href="trading-transactions.html" class="card" style="text-decoration:none; color:inherit; border-top:3px solid var(--color-success);">
+            <div class="card-header">
+              <span class="card-title" style="color:var(--color-success);">交易与沙盘事务</span>
+              <span class="badge badge-green">30日沙盘进行中</span>
+            </div>
+            <div style="font-size:1.8rem; font-weight:700;" class="tabular-numbers" id="totalTrading">2</div>
+            <p style="color:var(--text-muted); font-size:0.85rem; margin-top:0.25rem;">$2,000 美元沙盘 / 碎股调仓 →</p>
+          </a>
+        </div>
+      </section>
+
+      <!-- 近期事务执行流水 -->
+      <section>
+        <h2 style="font-size:1.3rem; margin-bottom:0.75rem; color:var(--text-primary);">最近事务执行流水 (Execution Logs)</h2>
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width:30%;">事务 ID</th>
+                <th style="width:20%;">类型</th>
+                <th style="width:26%;">触发时间 (UTC)</th>
+                <th style="width:12%;">耗时</th>
+                <th style="width:12%; text-align:right;">状态</th>
+              </tr>
+            </thead>
+            <tbody id="logsTableBody">
+              <tr><td colspan="5" style="color:var(--text-muted); text-align:center;">正在拉取最新执行日志...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 既定计划清单 -->
+      <section>
+        <h2 style="font-size:1.3rem; margin-bottom:0.75rem; color:var(--text-primary);">数据工程与模型训练建设计划 (Architecture Roadmap)</h2>
+        <div class="grid-cards" id="schedulesContainer">
+          <!-- 由 JS 渲染 -->
+        </div>
+      </section>
+    </article>
+
+    <footer class="site-footer">
+      <p>Quant-FMP Research Group · 基于零构建原生 Web 技术栈构建 · 仅供学术量化展示与回测验证</p>
+    </footer>
+  </main>
+
+  <script type="module">
+    import { fetchStaticData, setupMobileNav, createModal } from './assets/js/utils.js?v=20261001_v1';
+    setupMobileNav();
+
+    const logModal = createModal('transactionLogModal');
+
+    async function initPage() {
+      const data = await fetchStaticData('transaction_registry.json');
+      if (!data) return;
+
+      if (data.summary) {
+        document.getElementById('totalBase').innerText = (data.summary.total_base_transactions || 12).toLocaleString();
+        document.getElementById('baseRate').innerText = data.summary.base_success_rate || '100%';
+        document.getElementById('totalTrain').innerText = data.summary.total_train_transactions || 6;
+        document.getElementById('totalPredict').innerText = data.summary.total_predict_transactions || 1;
+        const tradingCount = (data.recent_logs || []).filter(l => l.type === 'TRADING_EXECUTION').length || 1;
+        document.getElementById('totalTrading').innerText = tradingCount;
+      }
+
+      if (data.recent_logs && data.recent_logs.length > 0) {
+        const tbody = document.getElementById('logsTableBody');
+        tbody.innerHTML = data.recent_logs.map(log => {
+          const typeLabel = log.type === 'TRADING_EXECUTION' ? '交易调仓事务' : (log.type_label || log.type);
+          return `
+            <tr class="clickable-row" data-id="${log.id}" title="点击查看【${log.id}】完整执行摘要与审计详情">
+              <td><code style="font-size:0.84rem; color:var(--color-accent); word-break:break-all;">${log.id}</code></td>
+              <td><span class="badge ${log.tag_class || 'badge-blue'}">${typeLabel}</span></td>
+              <td class="tabular-numbers" style="font-size:0.84rem; color:var(--text-secondary);">${log.timestamp.replace('T', ' ').replace('Z', '')}</td>
+              <td class="tabular-numbers" style="font-size:0.84rem;">${log.duration}</td>
+              <td style="text-align:right;"><span style="color:var(--color-success); font-weight:600; font-size:0.82rem;">● ${log.status}</span></td>
+            </tr>
+          `;
+        }).join('');
+
+        // 绑定整行点击打开详情弹窗事件
+        tbody.querySelectorAll('tr.clickable-row').forEach(row => {
+          row.addEventListener('click', () => {
+            const logId = row.getAttribute('data-id');
+            const targetLog = data.recent_logs.find(x => x.id === logId);
+            if (targetLog) {
+              showTransactionLogModal(targetLog);
+            }
+          });
+        });
+      } else {
+        document.getElementById('logsTableBody').innerHTML = `<tr><td colspan="6" style="color:var(--text-muted); text-align:center; padding:1.5rem;">暂无执行日志记录</td></tr>`;
+      }
+
+      function showTransactionLogModal(log) {
+        const titleHtml = `
+          <span>事务流水详情 · ${log.id}</span>
+          <span class="badge ${log.tag_class || 'badge-blue'}">${log.type_label}</span>
+        `;
+
+        const bodyHtml = `
+          <div style="display:flex; flex-direction:column; gap:1.25rem;">
+            <div class="compare-metric-grid">
+              <div class="compare-metric-card">
+                <div class="compare-metric-label">触发时间 (UTC)</div>
+                <div class="compare-metric-value" style="font-size:1.05rem; color:var(--text-primary);">${log.timestamp.replace('T', ' ').replace('Z', '')}</div>
+              </div>
+              <div class="compare-metric-card">
+                <div class="compare-metric-label">执行耗时</div>
+                <div class="compare-metric-value" style="font-size:1.05rem; color:var(--color-accent);">${log.duration}</div>
+              </div>
+              <div class="compare-metric-card">
+                <div class="compare-metric-label">执行状态</div>
+                <div class="compare-metric-value" style="font-size:1.05rem; color:var(--color-success);">● ${log.status}</div>
+              </div>
+              <div class="compare-metric-card">
+                <div class="compare-metric-label">事务归属模块</div>
+                <div class="compare-metric-value" style="font-size:1.05rem; color:var(--color-purple);">${log.type}</div>
+              </div>
+            </div>
+
+            <div>
+              <h4 style="font-size:0.95rem; margin-bottom:0.5rem; color:var(--text-primary);">执行摘要与过程审计 (Execution Summary)</h4>
+              <div style="background:var(--bg-subtle); padding:1.2rem; border-radius:8px; border:1px solid var(--border-default); font-size:0.9rem; line-height:1.7; color:var(--text-primary);">
+                ${log.details}
+              </div>
+            </div>
+
+            <div style="background:rgba(88,166,255,0.06); padding:1rem; border-radius:8px; border:1px solid var(--border-muted); font-size:0.82rem; color:var(--text-secondary); font-family:var(--font-mono);">
+              <div>[AUDIT] 事务唯一指纹: ${log.id}</div>
+              <div>[HOST] 执行宿主环境: Google Cloud Platform (弹性算力 / Serverless)</div>
+              <div>[STORAGE] 数据一致性断点: 已完成防重入与去重校验</div>
+            </div>
+          </div>
+        `;
+
+        const footerHtml = `
+          <button class="btn-secondary" onclick="document.getElementById('transactionLogModal_close').click()">关闭</button>
+        `;
+
+        logModal.open(titleHtml, bodyHtml, { footer: footerHtml });
+      }
+
+      if (data.upcoming_schedules && data.upcoming_schedules.length > 0) {
+        const sContainer = document.getElementById('schedulesContainer');
+        sContainer.innerHTML = data.upcoming_schedules.map(s => `
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title" style="font-size:1rem;">${s.name}</span>
+            </div>
+            <p style="color:var(--color-accent); font-family:var(--font-mono); font-size:0.85rem; margin-bottom:0.5rem;">${s.cron}</p>
+            <p style="color:var(--text-secondary); font-size:0.88rem; line-height:1.5;">${s.purpose}</p>
+            <p style="color:var(--text-muted); font-size:0.78rem; margin-top:0.75rem; border-top:1px solid var(--border-muted); padding-top:0.5rem;">
+              执行宿主: <code>${s.executor}</code>
+            </p>
+          </div>
+        `).join('');
+      }
+    }
+    initPage();
+  </script>
+</body>
+</html>

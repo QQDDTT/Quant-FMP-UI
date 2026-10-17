@@ -1,0 +1,570 @@
+﻿[
+    {
+        "symbol":  "AAL",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_CYCLICAL_ENERGY_V1",
+        "cluster_name":  "周期制造能源金融专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  1034179112,
+        "trend_momentum_60d":  -0.1779
+    },
+    {
+        "symbol":  "AAPL",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_MEGA_GROWTH_V1",
+        "cluster_name":  "Mega Growth and Big Tech",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  14775575715,
+        "trend_momentum_60d":  0.028
+    },
+    {
+        "symbol":  "ABBV",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_DEFENSIVE_VALUE_V1",
+        "cluster_name":  "稳健防御高股息底仓专家",
+        "total_bars":  3477,
+        "avg_daily_turnover_usd":  1238258366,
+        "trend_momentum_60d":  0.1116
+    },
+    {
+        "symbol":  "ADBE",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  1288725791,
+        "trend_momentum_60d":  0.0366
+    },
+    {
+        "symbol":  "AMD",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_MEGA_GROWTH_V1",
+        "cluster_name":  "Mega Growth and Big Tech",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  12126890090,
+        "trend_momentum_60d":  0.2206
+    },
+    {
+        "symbol":  "AMZN",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_MEGA_GROWTH_V1",
+        "cluster_name":  "Mega Growth and Big Tech",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  10078455685,
+        "trend_momentum_60d":  0.0195
+    },
+    {
+        "symbol":  "BA",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_CYCLICAL_ENERGY_V1",
+        "cluster_name":  "周期制造能源金融专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  1412116565,
+        "trend_momentum_60d":  -0.1366
+    },
+    {
+        "symbol":  "BABA",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  3030,
+        "avg_daily_turnover_usd":  1205650000,
+        "trend_momentum_60d":  -0.0908
+    },
+    {
+        "symbol":  "BAC",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_CYCLICAL_ENERGY_V1",
+        "cluster_name":  "周期制造能源金融专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  2025578311,
+        "trend_momentum_60d":  -0.131
+    },
+    {
+        "symbol":  "BIDU",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  255142291,
+        "trend_momentum_60d":  -0.2348
+    },
+    {
+        "symbol":  "BILI",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  2144,
+        "avg_daily_turnover_usd":  47690361,
+        "trend_momentum_60d":  -0.1838
+    },
+    {
+        "symbol":  "C",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_CYCLICAL_ENERGY_V1",
+        "cluster_name":  "周期制造能源金融专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  1305555447,
+        "trend_momentum_60d":  -0.0561
+    },
+    {
+        "symbol":  "CCL",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_CYCLICAL_ENERGY_V1",
+        "cluster_name":  "周期制造能源金融专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  545731944,
+        "trend_momentum_60d":  -0.0165
+    },
+    {
+        "symbol":  "COIN",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  1378,
+        "avg_daily_turnover_usd":  1570485604,
+        "trend_momentum_60d":  0.0672
+    },
+    {
+        "symbol":  "COST",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_DEFENSIVE_VALUE_V1",
+        "cluster_name":  "稳健防御高股息底仓专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  1924147505,
+        "trend_momentum_60d":  0.0281
+    },
+    {
+        "symbol":  "CSCO",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_DEFENSIVE_VALUE_V1",
+        "cluster_name":  "稳健防御高股息底仓专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  2175128031,
+        "trend_momentum_60d":  0.0503
+    },
+    {
+        "symbol":  "CVX",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_CYCLICAL_ENERGY_V1",
+        "cluster_name":  "周期制造能源金融专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  1679656878,
+        "trend_momentum_60d":  0.1297
+    },
+    {
+        "symbol":  "DAL",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_CYCLICAL_ENERGY_V1",
+        "cluster_name":  "周期制造能源金融专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  509505165,
+        "trend_momentum_60d":  -0.0348
+    },
+    {
+        "symbol":  "DIS",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  968877687,
+        "trend_momentum_60d":  0.0782
+    },
+    {
+        "symbol":  "DOCU",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  2123,
+        "avg_daily_turnover_usd":  199825324,
+        "trend_momentum_60d":  0.3468
+    },
+    {
+        "symbol":  "ETSY",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  2887,
+        "avg_daily_turnover_usd":  241400574,
+        "trend_momentum_60d":  -0.1662
+    },
+    {
+        "symbol":  "F",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_CYCLICAL_ENERGY_V1",
+        "cluster_name":  "周期制造能源金融专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  656280107,
+        "trend_momentum_60d":  -0.1453
+    },
+    {
+        "symbol":  "FDX",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_CYCLICAL_ENERGY_V1",
+        "cluster_name":  "周期制造能源金融专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  485252769,
+        "trend_momentum_60d":  -0.0778
+    },
+    {
+        "symbol":  "FUBO",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  2421,
+        "avg_daily_turnover_usd":  13779498,
+        "trend_momentum_60d":  -0.0993
+    },
+    {
+        "symbol":  "GE",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_CYCLICAL_ENERGY_V1",
+        "cluster_name":  "周期制造能源金融专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  1360081571,
+        "trend_momentum_60d":  -0.1574
+    },
+    {
+        "symbol":  "GM",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_CYCLICAL_ENERGY_V1",
+        "cluster_name":  "周期制造能源金融专家",
+        "total_bars":  3994,
+        "avg_daily_turnover_usd":  577180537,
+        "trend_momentum_60d":  0.0431
+    },
+    {
+        "symbol":  "GOOGL",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_MEGA_GROWTH_V1",
+        "cluster_name":  "Mega Growth and Big Tech",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  9468036794,
+        "trend_momentum_60d":  -0.0551
+    },
+    {
+        "symbol":  "GS",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_CYCLICAL_ENERGY_V1",
+        "cluster_name":  "周期制造能源金融专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  2022788363,
+        "trend_momentum_60d":  -0.2299
+    },
+    {
+        "symbol":  "HOOD",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  1304,
+        "avg_daily_turnover_usd":  2221684325,
+        "trend_momentum_60d":  -0.0522
+    },
+    {
+        "symbol":  "INTC",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  10931959304,
+        "trend_momentum_60d":  0.0984
+    },
+    {
+        "symbol":  "JNJ",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_DEFENSIVE_VALUE_V1",
+        "cluster_name":  "稳健防御高股息底仓专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  1850174958,
+        "trend_momentum_60d":  0.0463
+    },
+    {
+        "symbol":  "JPM",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_CYCLICAL_ENERGY_V1",
+        "cluster_name":  "周期制造能源金融专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  2512511224,
+        "trend_momentum_60d":  -0.05
+    },
+    {
+        "symbol":  "KO",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_DEFENSIVE_VALUE_V1",
+        "cluster_name":  "稳健防御高股息底仓专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  1390345633,
+        "trend_momentum_60d":  0.0409
+    },
+    {
+        "symbol":  "LCID",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  1520,
+        "avg_daily_turnover_usd":  74211542,
+        "trend_momentum_60d":  -0.3462
+    },
+    {
+        "symbol":  "LMT",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_CYCLICAL_ENERGY_V1",
+        "cluster_name":  "周期制造能源金融专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  636168707,
+        "trend_momentum_60d":  -0.0296
+    },
+    {
+        "symbol":  "META",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_MEGA_GROWTH_V1",
+        "cluster_name":  "Mega Growth and Big Tech",
+        "total_bars":  3617,
+        "avg_daily_turnover_usd":  11858415909,
+        "trend_momentum_60d":  0.0587
+    },
+    {
+        "symbol":  "MRNA",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  1968,
+        "avg_daily_turnover_usd":  2173825092,
+        "trend_momentum_60d":  1.8776
+    },
+    {
+        "symbol":  "MSFT",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_MEGA_GROWTH_V1",
+        "cluster_name":  "Mega Growth and Big Tech",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  13306809600,
+        "trend_momentum_60d":  0.339
+    },
+    {
+        "symbol":  "NFLX",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  2751622810,
+        "trend_momentum_60d":  -0.054
+    },
+    {
+        "symbol":  "NIO",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  2028,
+        "avg_daily_turnover_usd":  130180843,
+        "trend_momentum_60d":  -0.2962
+    },
+    {
+        "symbol":  "NKE",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_DEFENSIVE_VALUE_V1",
+        "cluster_name":  "稳健防御高股息底仓专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  1245972048,
+        "trend_momentum_60d":  -0.1966
+    },
+    {
+        "symbol":  "NVDA",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_MEGA_GROWTH_V1",
+        "cluster_name":  "Mega Growth and Big Tech",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  26331459507,
+        "trend_momentum_60d":  0.1175
+    },
+    {
+        "symbol":  "PEP",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_DEFENSIVE_VALUE_V1",
+        "cluster_name":  "稳健防御高股息底仓专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  1098445808,
+        "trend_momentum_60d":  -0.0862
+    },
+    {
+        "symbol":  "PFE",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_DEFENSIVE_VALUE_V1",
+        "cluster_name":  "稳健防御高股息底仓专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  973341081,
+        "trend_momentum_60d":  0.1281
+    },
+    {
+        "symbol":  "PINS",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  1878,
+        "avg_daily_turnover_usd":  272389989,
+        "trend_momentum_60d":  -0.1423
+    },
+    {
+        "symbol":  "PLTR",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  1512,
+        "avg_daily_turnover_usd":  5478068391,
+        "trend_momentum_60d":  0.4513
+    },
+    {
+        "symbol":  "PYPL",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  2832,
+        "avg_daily_turnover_usd":  798793967,
+        "trend_momentum_60d":  -0.0103
+    },
+    {
+        "symbol":  "RBLX",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  1402,
+        "avg_daily_turnover_usd":  545225316,
+        "trend_momentum_60d":  -0.1868
+    },
+    {
+        "symbol":  "RIOT",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  2646,
+        "avg_daily_turnover_usd":  389941592,
+        "trend_momentum_60d":  -0.0776
+    },
+    {
+        "symbol":  "RIVN",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  1231,
+        "avg_daily_turnover_usd":  374603811,
+        "trend_momentum_60d":  -0.1944
+    },
+    {
+        "symbol":  "ROKU",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  2268,
+        "avg_daily_turnover_usd":  345825260,
+        "trend_momentum_60d":  0.0657
+    },
+    {
+        "symbol":  "SBUX",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_DEFENSIVE_VALUE_V1",
+        "cluster_name":  "稳健防御高股息底仓专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  713600505,
+        "trend_momentum_60d":  -0.1097
+    },
+    {
+        "symbol":  "SHOP",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  2863,
+        "avg_daily_turnover_usd":  1351277687,
+        "trend_momentum_60d":  0.3438
+    },
+    {
+        "symbol":  "SIRI",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  117913474,
+        "trend_momentum_60d":  -0.1533
+    },
+    {
+        "symbol":  "SNAP",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  2414,
+        "avg_daily_turnover_usd":  193622377,
+        "trend_momentum_60d":  0.2206
+    },
+    {
+        "symbol":  "SOFI",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  1470,
+        "avg_daily_turnover_usd":  947361351,
+        "trend_momentum_60d":  -0.1237
+    },
+    {
+        "symbol":  "SPY",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  33516233532,
+        "trend_momentum_60d":  0.0297
+    },
+    {
+        "symbol":  "SQ",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  829,
+        "avg_daily_turnover_usd":  721176412,
+        "trend_momentum_60d":  0.1905
+    },
+    {
+        "symbol":  "T",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_DEFENSIVE_VALUE_V1",
+        "cluster_name":  "稳健防御高股息底仓专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  1178563847,
+        "trend_momentum_60d":  0.1419
+    },
+    {
+        "symbol":  "TGT",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_DEFENSIVE_VALUE_V1",
+        "cluster_name":  "稳健防御高股息底仓专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  615296592,
+        "trend_momentum_60d":  0.0913
+    },
+    {
+        "symbol":  "TSLA",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_MEGA_GROWTH_V1",
+        "cluster_name":  "Mega Growth and Big Tech",
+        "total_bars":  4094,
+        "avg_daily_turnover_usd":  13387304029,
+        "trend_momentum_60d":  -0.0422
+    },
+    {
+        "symbol":  "TSM",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  4787722438,
+        "trend_momentum_60d":  0.1257
+    },
+    {
+        "symbol":  "UAL",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_CYCLICAL_ENERGY_V1",
+        "cluster_name":  "周期制造能源金融专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  441646038,
+        "trend_momentum_60d":  -0.0893
+    },
+    {
+        "symbol":  "UBER",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  1863,
+        "avg_daily_turnover_usd":  1329926806,
+        "trend_momentum_60d":  -0.0581
+    },
+    {
+        "symbol":  "UNH",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_DEFENSIVE_VALUE_V1",
+        "cluster_name":  "稳健防御高股息底仓专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  1951187734,
+        "trend_momentum_60d":  -0.1016
+    },
+    {
+        "symbol":  "V",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  2385716741,
+        "trend_momentum_60d":  0.0478
+    },
+    {
+        "symbol":  "VZ",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_DEFENSIVE_VALUE_V1",
+        "cluster_name":  "稳健防御高股息底仓专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  1034119511,
+        "trend_momentum_60d":  0.0686
+    },
+    {
+        "symbol":  "WFC",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_CYCLICAL_ENERGY_V1",
+        "cluster_name":  "周期制造能源金融专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  1191829131,
+        "trend_momentum_60d":  -0.0828
+    },
+    {
+        "symbol":  "WMT",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_DEFENSIVE_VALUE_V1",
+        "cluster_name":  "稳健防御高股息底仓专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  2624741619,
+        "trend_momentum_60d":  -0.0388
+    },
+    {
+        "symbol":  "XOM",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_CYCLICAL_ENERGY_V1",
+        "cluster_name":  "周期制造能源金融专家",
+        "total_bars":  4216,
+        "avg_daily_turnover_usd":  2221881086,
+        "trend_momentum_60d":  0.1352
+    },
+    {
+        "symbol":  "ZM",
+        "cluster_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+        "cluster_name":  "高Beta弹性进攻专家",
+        "total_bars":  1878,
+        "avg_daily_turnover_usd":  297175131,
+        "trend_momentum_60d":  0.0234
+    }
+]

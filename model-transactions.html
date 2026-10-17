@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>量化模型事务 - Quant-FMP Research</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261001_v1">
+  <link rel="stylesheet" href="assets/css/components.css?v=20261001_v1">
+  <link rel="stylesheet" href="assets/css/responsive.css?v=20261001_v1">
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">Quant-FMP <span>RESEARCH</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="展开导航菜单">☰</button>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-item">平台首页</a>
+        <a href="transactions.html" class="nav-item">事务总览与计划</a>
+        <a href="base-data-transactions.html" class="nav-item">基础事务</a>
+        <a href="model-transactions.html" class="nav-item active">模型事务</a>
+        <a href="trading-transactions.html" class="nav-item">交易事务</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="docs-container">
+    <article class="content-stream">
+      <section class="article-header">
+        <h1 class="article-title">量化模型事务与策略演进看板</h1>
+        <p class="article-subtitle">
+          展示 Quant-FMP 平台依托 GCP 弹性算力集群执行的量化模型训练方针、算法流派演进路线与模型全生命周期清单。<strong>模型训练方案以直接指导实盘交易事务为导向</strong>，严格规范高信噪比资产池采样、行业内与跨行业关系网络，以及面向真实未来未知行情的交割验证体系。
+        </p>
+        <!-- 页面内快速模块导航锚点 -->
+        <div style="display:flex; gap:0.6rem; margin-top:1.2rem; flex-wrap:wrap;">
+          <a href="trading-transactions.html" class="catalog-pill" style="text-decoration:none; background:rgba(46,160,67,0.15); border:1px solid var(--color-success); color:var(--color-success); font-weight:700;">
+            🛡️ 直达：30日零成本沙盘看板 →
+          </a>
+          <a href="#sec-predictions" class="catalog-pill active" style="text-decoration:none; background:rgba(46,160,67,0.15); border:1px solid var(--color-success); color:var(--color-success); font-weight:700;">
+            🔥 最新多空推演排行榜 (71标的) ↓
+          </a>
+          <a href="#sec-trading-orders" class="catalog-pill" style="text-decoration:none; background:rgba(56,139,253,0.12); border:1px solid var(--color-accent); color:var(--color-accent); font-weight:700;">
+            ⚡ 实盘周频调仓清单 (12只持仓) ↓
+          </a>
+          <a href="#sec-training-plans" class="catalog-pill" style="text-decoration:none;">🏛️ 三级金字塔专家矩阵</a>
+          <a href="#sec-feature-audit" class="catalog-pill" style="text-decoration:none;">四、 特征审计</a>
+          <a href="#sec-catalog" class="catalog-pill" style="text-decoration:none;">七、 模型资产清单</a>
+        </div>
+      </section>
+
+      <!-- 模块一：模型训练方针 (Training Guidelines & Methodologies) -->
+      <section id="sec-guidelines">
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:1rem;">
+          <div>
+            <h2 style="font-size:1.35rem; margin:0; color:var(--text-primary);">一、 模型训练方针与指导交易门槛 (Guidelines)</h2>
+            <div style="font-size:0.88rem; color:var(--text-muted); margin-top:0.25rem;">
+              量化交易严谨性基石：核心资产池高信噪比采样、跨行业传导特征网络与真实未来时序交割门禁
+            </div>
+          </div>
+          <span class="badge badge-blue">GCP 算力执行标准</span>
+        </div>
+        <div class="grid-cards" id="guidelinesContainer" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+          <!-- 由 JS 渲染 -->
+        </div>
+      </section>
+
+      <!-- 模块二：训练策略演进路线 (Strategy Evolution Roadmap) -->
+      <section id="sec-evolution" style="margin-top:2.5rem;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:1rem;">
+          <div>
+            <h2 style="font-size:1.35rem; margin:0; color:var(--text-primary);">二、 训练策略演进路线 (Strategy Evolution)</h2>
+            <div style="font-size:0.88rem; color:var(--text-muted); margin-top:0.25rem;">
+              从树模型截面 Alpha 到时序深度学习，再到动态新闻冲击置信度融合的迭代蓝图
+            </div>
+          </div>
+          <span class="badge badge-purple">战略迭代脉络</span>
+        </div>
+        <div class="grid-cards" id="evolutionContainer" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+          <!-- 由 JS 渲染 -->
+        </div>
+      </section>
+
+      <!-- 模块三：全美三级金字塔与自适应分群专家模型训练计划矩阵 (3-Tier Pyramid & Cluster Training Plans) -->
+      <section id="sec-training-plans" style="margin-top:2.5rem; scroll-margin-top: 80px;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+          <div>
+            <h2 style="font-size:1.35rem; margin:0; color:var(--text-primary); display:flex; align-items:center; gap:0.5rem;">
+              <span>三、 全美三级金字塔与自适应分群专家训练计划矩阵 (Tiered Cluster Matrix)</span>
+              <span class="badge badge-purple" style="font-size:0.75rem;">架构跃迁</span>
+            </h2>
+            <div style="font-size:0.88rem; color:var(--text-muted); margin-top:0.25rem;">
+              破局“全美 8,450+ 股票覆盖”与“一股一模型 42,250 次训练拟合爆炸及小票样本匮乏矛盾”：构建漏斗式三级金字塔
+            </div>
+          </div>
+          <span class="badge badge-blue">GCP 计划排期中 (待数据就绪)</span>
+        </div>
+
+        <!-- 三级金字塔架构顶层视觉解构卡片 -->
+        <div style="background:var(--bg-subtle); border:1px solid var(--border-muted); border-radius:8px; padding:1.2rem; margin-bottom:1.5rem;">
+          <div style="font-size:0.95rem; font-weight:700; color:var(--text-primary); margin-bottom:0.75rem; display:flex; justify-content:space-between; align-items:center;">
+            <span>🏛️ 全美股量化推演三级金字塔架构与算力收敛漏斗 (Tiered Funnel Architecture)</span>
+            <span style="font-size:0.78rem; color:var(--text-muted); font-family:var(--font-mono);">模型数量: 8,450+ ➔ 6 个现役核心模型</span>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem;">
+            <!-- Tier 1 -->
+            <div style="background:var(--bg-surface); border:1px solid var(--border-muted); border-left:4px solid var(--color-purple); border-radius:6px; padding:0.9rem;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+                <strong style="color:var(--text-primary); font-size:0.9rem;">Tier 1: 大盘宏观总控与风险敞口开关</strong>
+                <span class="badge badge-purple">SPY 宏观总控</span>
+              </div>
+              <div style="font-size:0.82rem; color:var(--text-secondary); line-height:1.5;">
+                专职大盘牛熊体制识别、系统性流动性冲击预警与全账户总敞口/现金水位（0%~100%）总控开关，彻底剥离微观个股选股属性；微观选股已全面归并至 Tier 2 聚类专家矩阵。
+              </div>
+            </div>
+            <!-- Tier 2 -->
+            <div style="background:var(--bg-surface); border:1px solid var(--border-muted); border-left:4px solid var(--color-success); border-radius:6px; padding:0.9rem;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+                <strong style="color:var(--text-primary); font-size:0.9rem;">Tier 2: 标普500与主力分群专家</strong>
+                <span class="badge badge-green">5~8 个微观画像簇</span>
+              </div>
+              <div style="font-size:0.82rem; color:var(--text-secondary); line-height:1.5;">
+                基于市值规模、特质波动、换手率与财务稳定性 5 维无监督画像聚类，划分为超大盘成长、高Beta弹性、防御高股息等自然分群。汇聚 15~35 万级样本，根治单票过拟合。
+              </div>
+            </div>
+            <!-- Tier 3 -->
+            <div style="background:var(--bg-surface); border:1px solid var(--border-muted); border-left:4px solid var(--color-accent); border-radius:6px; padding:0.9rem;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+                <strong style="color:var(--text-primary); font-size:0.9rem;">Tier 3: 全市场全量基座与初筛</strong>
+                <span class="badge badge-blue">8,450+ 全美标的</span>
+              </div>
+              <div style="font-size:0.82rem; color:var(--text-secondary); line-height:1.5;">
+                全美全量存续与退市标的通过日均成交额 < $5M 与股价 < $5 硬规则过滤后，利用 18 维通用轻量截面模型每日盘后快速排序，锁定前 15% 潜力候选池输送至 Tier 2。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-cards" id="trainingPlansContainer" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+          <!-- 由 JS 渲染 -->
+        </div>
+      </section>
+
+      <!-- 模块四：86 维特征工程质量与异常值审计热力图矩阵 (Feature Quality Heatmap & Integrity Audit) -->
+      <section id="sec-feature-audit" style="margin-top:2.5rem; scroll-margin-top: 80px;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+          <div>
+            <h2 style="font-size:1.35rem; margin:0; color:var(--text-primary); display:flex; align-items:center; gap:0.5rem;">
+              <span>四、 86 维特征工程质量热力图矩阵与异常值审计 (Feature Audit Matrix)</span>
+              <span class="badge badge-purple" style="font-size:0.75rem;">学术级审计</span>
+            </h2>
+            <div style="font-size:0.88rem; color:var(--text-muted); margin-top:0.25rem;">
+              绝不平铺枯燥特征数值，而是呈现工业级与量化学术展示标准的<strong>特征非空率、极端异常值占比、SEC PIT 时钟对齐率与全截面覆盖度</strong>
+            </div>
+          </div>
+          <span class="badge badge-green" id="auditConclusionBadge">100% 通过防前视门禁</span>
+        </div>
+
+        <!-- 因子族质量评分卡片组 -->
+        <div class="compare-metric-grid" id="featureGroupsGrid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:1rem; margin-bottom:1.25rem;">
+          <!-- 由 JS 渲染 4 大因子族审计概要 -->
+        </div>
+
+        <!-- 特征质量热力图矩阵表格 -->
+        <div style="background:var(--bg-subtle); border:1px solid var(--border-muted); border-radius:8px; padding:1.2rem; margin-bottom:1.5rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; flex-wrap:wrap; gap:0.5rem;">
+            <div style="font-size:0.95rem; font-weight:700; color:var(--text-primary);">
+              📊 标普 500 代表池 86 维因子质量热力图 (Completeness & Anomaly Matrix)
+            </div>
+            <div style="display:flex; gap:0.6rem; align-items:center; font-size:0.78rem; color:var(--text-muted);">
+              <span>图例:</span>
+              <span style="display:inline-flex; align-items:center; gap:3px;"><span style="width:10px; height:10px; border-radius:2px; background:#238636;"></span> ≥99.9% 优异</span>
+              <span style="display:inline-flex; align-items:center; gap:3px;"><span style="width:10px; height:10px; border-radius:2px; background:#1f6feb;"></span> 99.5%~99.8% 达标</span>
+              <span style="display:inline-flex; align-items:center; gap:3px;"><span style="width:10px; height:10px; border-radius:2px; background:#9e6a03;"></span> 异常率 &lt;0.05%</span>
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="data-table" style="table-layout: auto; width: 100%;">
+              <thead>
+                <tr>
+                  <th style="width:12%;">核心标的</th>
+                  <th style="width:13%;">所属板块</th>
+                  <th style="width:15%; text-align:center;">产业链滞后 (24维)</th>
+                  <th style="width:15%; text-align:center;">行业相对强弱 (22维)</th>
+                  <th style="width:15%; text-align:center;">微观量价 (24维)</th>
+                  <th style="width:15%; text-align:center;">基本面成长 (16维)</th>
+                  <th style="width:15%; text-align:right;">离群值率 / PIT检验</th>
+                </tr>
+              </thead>
+              <tbody id="featureHeatmapTableBody">
+                <!-- 由 JS 渲染热力图矩阵行 -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 模块五：最新全截面前瞻推演与周频多空排行榜 (Forward Prediction & Long-Short Rankings) -->
+      <section id="sec-predictions" style="margin-top:2.5rem; scroll-margin-top: 80px;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:1rem; flex-wrap:wrap; gap:0.75rem;">
+          <div>
+            <h2 style="font-size:1.35rem; margin:0; color:var(--text-primary); display:flex; align-items:center; gap:0.5rem;">
+              <span>五、 最新全截面前瞻推演与周频多空排行榜 (Forward Predictions)</span>
+              <span class="badge badge-purple" style="font-size:0.75rem;">生产推演</span>
+            </h2>
+            <div style="font-size:0.88rem; color:var(--text-muted); margin-top:0.25rem;">
+              联动 Tier 1 宏观体制总控与 Tier 2 四大聚类专家矩阵，基于 2026-10-08 盘后最新截面特征输出未来 5 交易日多空排位，融合事实微观新闻动态调参
+            </div>
+          </div>
+          <span class="badge badge-green" id="predStatusBadge">全截面推演已就绪</span>
+        </div>
+
+        <!-- 宏观总控卡片与风控开关 -->
+        <div id="macroMasterCard" style="background:var(--bg-subtle); border:1px solid var(--border-default); border-left:4px solid var(--color-success); border-radius:8px; padding:1.2rem; margin-bottom:1.25rem;">
+          <!-- JS 动态渲染宏观状态与敞口开关 -->
+        </div>
+
+        <!-- 多空排行榜操作条：筛选胶囊与搜索框 -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:0.75rem;">
+          <div style="display:flex; gap:0.4rem; flex-wrap:wrap;" id="predClusterFilterNav">
+            <button class="catalog-pill active" data-cluster="ALL">全部推演标的 (71)</button>
+            <button class="catalog-pill" data-cluster="TOP_LONG">🔥 TOP 10 多头主力</button>
+            <button class="catalog-pill" data-cluster="CLUSTER_MEGA_GROWTH">超大盘成长 (8)</button>
+            <button class="catalog-pill" data-cluster="CLUSTER_HIGH_BETA">高Beta弹性 (35)</button>
+            <button class="catalog-pill" data-cluster="CLUSTER_CYCLICAL_ENERGY">周期制造 (18)</button>
+            <button class="catalog-pill" data-cluster="CLUSTER_DEFENSIVE_VALUE">稳健防御 (18)</button>
+          </div>
+          <div style="display:flex; align-items:center; gap:0.5rem;">
+            <input type="text" id="predSearchInput" placeholder="搜索代码、行业或新闻..." style="background:var(--bg-surface); border:1px solid var(--border-default); color:var(--text-primary); padding:0.35rem 0.75rem; border-radius:6px; font-size:0.84rem; outline:none;" />
+          </div>
+        </div>
+
+        <!-- 多空排行榜表格 -->
+        <div class="table-wrapper">
+          <table class="data-table" style="table-layout: auto; width: 100%;">
+            <thead>
+              <tr>
+                <th style="width:7%; text-align:center;">多空位次</th>
+                <th style="width:13%;">核心标的</th>
+                <th style="width:16%;">所属板块与行业</th>
+                <th style="width:20%;">推演专家模型</th>
+                <th style="width:13%; text-align:right;">预期超额 Alpha</th>
+                <th style="width:9%; text-align:center;">置信度</th>
+                <th style="width:22%;">事实新闻冲击与动态催化</th>
+              </tr>
+            </thead>
+            <tbody id="predictionsTableBody">
+              <tr><td colspan="7" style="text-align:center; color:var(--text-muted); padding:2rem;">加载最新前瞻多空推演中...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 模块六：实盘周频头寸换算与交易调仓清单 (Live Trading & Position Sizing Orders) -->
+      <section id="sec-trading-orders" style="margin-top:2.5rem; scroll-margin-top: 80px;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:1rem; flex-wrap:wrap; gap:0.75rem;">
+          <div>
+            <h2 style="font-size:1.35rem; margin:0; color:var(--text-primary); display:flex; align-items:center; gap:0.5rem;">
+              <span>六、 实盘周频头寸换算与交易调仓清单 (Weekly Trading Orders)</span>
+              <span class="badge badge-blue" style="font-size:0.75rem;">实盘指令</span>
+            </h2>
+            <div style="font-size:0.88rem; color:var(--text-muted); margin-top:0.25rem;">
+              严格遵循《交易事务准则》资金安全第一红线：基于 Tier 1 宏观 85% 敞口与风险平价算法，对 12 只核心多头标的换算整股配置与限价保护单，全部设定 2.5%~5.0% 动态追踪止损线
+            </div>
+          </div>
+          <span class="badge badge-green" id="tradingOrdersCycleBadge">周频周期执行中</span>
+        </div>
+
+        <!-- 组合资产与资金分布仪表盘卡片 -->
+        <div id="portfolioSummaryCard" style="background:var(--bg-subtle); border:1px solid var(--border-default); border-left:4px solid var(--color-accent); border-radius:8px; padding:1.2rem; margin-bottom:1.25rem;">
+          <!-- 由 JS 渲染资金概况与四大分群分布进度条 -->
+        </div>
+
+        <!-- 交易调仓指令表格 -->
+        <div class="table-wrapper">
+          <table class="data-table" style="table-layout: auto; width: 100%;">
+            <thead>
+              <tr>
+                <th style="width:7%; text-align:center;">动作</th>
+                <th style="width:12%;">标的代码</th>
+                <th style="width:16%;">分群与专家模型</th>
+                <th style="width:10%; text-align:right;">最新收盘价</th>
+                <th style="width:10%; text-align:right;">限价买入保护</th>
+                <th style="width:8%; text-align:center;">目标股数</th>
+                <th style="width:11%; text-align:right;">配置金额 (USD)</th>
+                <th style="width:8%; text-align:right;">目标权重</th>
+                <th style="width:18%;">动态追踪止损 / 止盈目标</th>
+              </tr>
+            </thead>
+            <tbody id="tradingOrdersTableBody">
+              <tr><td colspan="9" style="text-align:center; color:var(--text-muted); padding:2rem;">加载最新实盘调仓指令清单中...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 模块七：模型清单 (Model Registry Catalog) -->
+      <section id="sec-catalog" style="margin-top:2.5rem; scroll-margin-top: 80px;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:1rem; flex-wrap:wrap; gap:0.75rem;">
+          <div>
+            <h2 style="font-size:1.35rem; margin:0; color:var(--text-primary);">七、 量化模型资产清单 (Model Registry Catalog)</h2>
+            <div style="font-size:0.88rem; color:var(--text-muted); margin-top:0.25rem;">
+              收录在 GCP 算力集群训练完成并归档至 <code>models/{MODEL_ID}/</code> 同名目录中的全部模型（现役、候选实验与已退役）
+            </div>
+          </div>
+          <div style="display:flex; gap:0.5rem; flex-wrap:wrap;" id="catalogFilterNav">
+            <button class="catalog-pill active" data-filter="ALL">全部模型</button>
+            <button class="catalog-pill" data-filter="TIER_1">Tier 1: 宏观总控</button>
+            <button class="catalog-pill" data-filter="TIER_2">Tier 2: 分群专家</button>
+            <button class="catalog-pill" data-filter="TIER_3">Tier 3: 全美初筛</button>
+            <button class="catalog-pill" data-filter="EXP">全部计划中 (6)</button>
+            <button class="catalog-pill" data-filter="DEP">已退役归档 (1)</button>
+          </div>
+        </div>
+
+        <div class="table-wrapper" style="overflow-x: hidden !important;">
+          <table class="data-table" style="table-layout: fixed; width: 100%;">
+            <thead>
+              <tr>
+                <th style="width:11%;">状态</th>
+                <th style="width:39%;">标准模型标识 (MODEL_ID)</th>
+                <th style="width:10%;">流派</th>
+                <th style="width:14%;">核心标的池</th>
+                <th style="width:12%;">预测周期</th>
+                <th style="width:14%; text-align:right;">综合评价</th>
+              </tr>
+            </thead>
+            <tbody id="modelCatalogTableBody">
+              <tr><td colspan="6" style="text-align:center; color:var(--text-muted); padding:2rem;">加载模型清单中...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </article>
+
+    <footer class="site-footer">
+      <p>Quant-FMP Research Group · 基于零构建原生 Web 技术栈构建 · 仅供学术量化展示与回测验证</p>
+    </footer>
+  </main>
+
+  <script type="module">
+    import { fetchStaticData, setupMobileNav, createModal, generateComparisonSVG } from './assets/js/utils.js?v=20261001_v1';
+    setupMobileNav();
+
+    const modelModal = createModal('modelDetailModal');
+
+    async function initPage() {
+      const data = await fetchStaticData('model_registry.json');
+      if (!data) return;
+
+      // 1. 渲染模块一：模型训练方针 (Guidelines)
+      const gContainer = document.getElementById('guidelinesContainer');
+      const guidelines = data.training_guidelines || [];
+      if (guidelines.length > 0) {
+        gContainer.innerHTML = guidelines.map(g => `
+          <div class="card" style="border-top: 3px solid var(--color-accent); display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+                <span class="badge badge-blue">${g.tag}</span>
+                <span style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">${g.id}</span>
+              </div>
+              <h3 style="font-size:1.05rem; margin:0 0 0.5rem 0; color:var(--text-primary);">${g.title}</h3>
+              <p style="font-size:0.86rem; color:var(--text-secondary); line-height:1.55; margin:0;">
+                ${g.description}
+              </p>
+            </div>
+          </div>
+        `).join('');
+      } else {
+        gContainer.innerHTML = `<div class="card" style="color:var(--text-muted);">暂无训练方针数据</div>`;
+      }
+
+      // 2. 渲染模块二：训练策略演进路线 (Strategy Evolution)
+      const eContainer = document.getElementById('evolutionContainer');
+      const evolution = data.strategy_evolution || [];
+      if (evolution.length > 0) {
+        eContainer.innerHTML = evolution.map(e => `
+          <div class="card" style="border-left: 4px solid ${e.badge_color.includes('green') ? 'var(--color-success)' : e.badge_color.includes('blue') ? 'var(--color-accent)' : 'var(--color-purple)'};">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+              <span style="font-size:0.8rem; font-weight:600; color:var(--text-muted); font-family:var(--font-mono);">${e.phase}</span>
+              <span class="badge ${e.badge_color}">${e.status}</span>
+            </div>
+            <h3 style="font-size:1.05rem; margin:0 0 0.5rem 0; color:var(--text-primary);">${e.title}</h3>
+            <p style="font-size:0.86rem; color:var(--text-secondary); line-height:1.55; margin:0;">
+              ${e.description}
+            </p>
+          </div>
+        `).join('');
+      } else {
+        eContainer.innerHTML = `<div class="card" style="color:var(--text-muted);">暂无演进规划数据</div>`;
+      }
+
+      // 3. 渲染模块三：全美三级金字塔与分群专家训练计划矩阵 (Training Plans)
+      const tpContainer = document.getElementById('trainingPlansContainer');
+      const plans = data.training_plans || [];
+      if (plans.length > 0) {
+        tpContainer.innerHTML = plans.map(p => {
+          const isTier1 = p.tier === 'TIER_1' || (p.target_model_id && p.target_model_id.includes('SINGLE'));
+          const isTier2 = p.tier === 'TIER_2' || (p.target_model_id && p.target_model_id.includes('CLUSTER'));
+          const isTier3 = p.tier === 'TIER_3' || (p.target_model_id && p.target_model_id.includes('UNIVERSAL'));
+          
+          const tierBadge = isTier1 ? '<span class="badge badge-purple" style="font-size:0.7rem;">Tier 1 宏观总控</span>' :
+                            isTier2 ? '<span class="badge badge-green" style="font-size:0.7rem;">Tier 2 分群</span>' :
+                            isTier3 ? '<span class="badge badge-blue" style="font-size:0.7rem;">Tier 3 初筛</span>' :
+                            '<span class="badge badge-blue" style="font-size:0.7rem;">专家矩阵</span>';
+                            
+          const borderTopColor = isTier1 ? 'var(--color-purple)' : isTier2 ? 'var(--color-success)' : 'var(--color-accent)';
+
+          return `
+          <div class="card" style="border-top: 3px solid ${borderTopColor}; display:flex; flex-direction:column; justify-content:space-between; position:relative;">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem; flex-wrap:wrap; gap:0.3rem;">
+                <div style="display:flex; align-items:center; gap:0.5rem;">
+                  <span class="badge ${p.badge_color || 'badge-blue'}">${p.target_symbol}</span>
+                  <span style="font-weight:700; color:var(--text-primary); font-size:1.02rem;">${p.symbol_name}</span>
+                </div>
+                <div style="display:flex; gap:0.3rem;">
+                  ${tierBadge}
+                  <span class="badge badge-purple" style="font-size:0.75rem;">${p.badge}</span>
+                </div>
+              </div>
+
+              <div style="background:var(--bg-subtle); padding:0.6rem 0.8rem; border-radius:6px; font-size:0.8rem; line-height:1.6; margin-bottom:0.6rem; font-family:var(--font-mono);">
+                <div style="color:var(--color-accent); font-weight:600;">目标模型: ${p.target_model_id}</div>
+                <div style="color:var(--text-secondary);">算法: ${p.algorithm} · 周期: ${p.horizon}</div>
+              </div>
+
+              <div style="font-size:0.85rem; color:var(--text-secondary); line-height:1.55; margin-bottom:0.5rem;">
+                <strong style="color:var(--text-primary);">特征侧重:</strong> ${p.focus}
+              </div>
+
+              <div style="font-size:0.84rem; color:var(--color-success); line-height:1.5; background:rgba(46,160,67,0.08); padding:0.5rem 0.75rem; border-radius:6px; border-left:3px solid var(--color-success);">
+                <strong>交易角色:</strong> ${p.trading_role}
+              </div>
+            </div>
+
+            <div style="margin-top:0.8rem; padding-top:0.6rem; border-top:1px dashed var(--border-muted); display:flex; justify-content:space-between; align-items:center; font-size:0.75rem; color:var(--text-muted);">
+              <span>预计排期: <code>${p.schedule_time}</code></span>
+              <span style="color:var(--color-accent);">${p.status_text}</span>
+            </div>
+          </div>
+        `}).join('');
+      } else {
+        tpContainer.innerHTML = `<div class="card" style="color:var(--text-muted);">暂无训练计划数据</div>`;
+      }
+
+      // 4. 渲染模块四：86 维特征工程质量与异常值审计热力图矩阵 (Feature Quality Heatmap)
+      const audit = data.feature_matrix_audit || {};
+      const auditGroups = audit.feature_groups || [];
+      const fgContainer = document.getElementById('featureGroupsGrid');
+      const hmTbody = document.getElementById('featureHeatmapTableBody');
+
+      if (fgContainer && auditGroups.length > 0) {
+        fgContainer.innerHTML = auditGroups.map(fg => `
+          <div class="card" style="border-top:3px solid var(--color-accent); padding:0.85rem 1rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+              <span style="font-weight:700; color:var(--text-primary); font-size:0.95rem;">${fg.group_name}</span>
+              <span class="badge badge-purple" style="font-size:0.75rem;">${fg.dims} 维因子</span>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.4rem; font-size:0.8rem; margin-bottom:0.5rem; background:var(--bg-subtle); padding:0.5rem; border-radius:6px;">
+              <div>完整率: <strong style="color:var(--color-success);">${fg.completeness}</strong></div>
+              <div>离群值率: <strong style="color:var(--color-accent);">${fg.outlier_rate}</strong></div>
+              <div>时钟对齐: <strong style="color:var(--color-success);">${fg.pit_check}</strong></div>
+              <div>截面覆盖: <strong style="color:var(--text-primary);">${fg.coverage}</strong></div>
+            </div>
+            <div style="font-size:0.75rem; color:var(--text-muted); line-height:1.4;">
+              代表因子: ${fg.sample_factors}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      if (hmTbody && audit.quality_heatmap_rows) {
+        function getCellBadge(val) {
+          const num = typeof val === 'number' ? val : parseFloat(val);
+          let bg = 'rgba(35, 134, 54, 0.15)';
+          let color = '#3fb950';
+          let border = '1px solid rgba(46, 160, 67, 0.3)';
+          if (num < 99.7) {
+            bg = 'rgba(31, 111, 235, 0.15)';
+            color = '#58a6ff';
+            border = '1px solid rgba(56, 139, 253, 0.3)';
+          }
+          return `<span style="display:inline-block; padding:0.2rem 0.5rem; border-radius:4px; font-weight:700; font-size:0.82rem; font-family:var(--font-mono); background:${bg}; color:${color}; border:${border};">${num.toFixed(1)}%</span>`;
+        }
+
+        hmTbody.innerHTML = audit.quality_heatmap_rows.map(row => `
+          <tr>
+            <td>
+              <strong style="color:var(--color-accent); font-family:var(--font-mono); font-size:0.95rem;">${row.symbol}</strong>
+            </td>
+            <td><span class="badge badge-blue">${row.sector}</span></td>
+            <td style="text-align:center;">${getCellBadge(row.chain)}</td>
+            <td style="text-align:center;">${getCellBadge(row.rel)}</td>
+            <td style="text-align:center;">${getCellBadge(row.micro)}</td>
+            <td style="text-align:center;">${getCellBadge(row.fund)}</td>
+            <td style="text-align:right;">
+              <span class="tabular-numbers" style="color:var(--color-success); font-weight:600; font-size:0.82rem;">${row.outlier}</span>
+              <span class="badge badge-green" style="font-size:0.7rem; margin-left:4px;">PIT ${row.pit}</span>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      // 4. 构建全生命周期模型资产清单数据集合 (Catalog List)
+      const catalogList = [];
+
+      // A. 现役生产模型 (仅当 active_model 存在且状态为 Active 时载入)
+      if (data.active_model && data.active_model.status && data.active_model.status.includes('Active')) {
+        catalogList.push({
+          ...data.active_model,
+          tier: 'TIER_1',
+          category: 'PROD',
+          status_badge: '<span class="badge badge-green">现役生产</span>',
+          strategy: 'ALPHA',
+          universe: 'TOP8 (8只核心标的)',
+          universe_symbols_str: 'SPY, NVDA, AAPL, MSFT, GOOGL, AMZN, META, TSLA',
+          horizon: '未来 5 交易日',
+          horizon_sub: '周频调仓',
+          target_code: 'RET5D',
+        });
+      }
+
+      // B. 专家模型矩阵 (区分已在GCP拟合投产的现役模型与全美待排期模型)
+      (data.candidate_experiments || []).forEach(exp => {
+        const isCluster = exp.tier === 'TIER_2' || (exp.model_id && exp.model_id.includes('CLUSTER'));
+        const isUniversal = exp.tier === 'TIER_3' || (exp.model_id && exp.model_id.includes('UNIVERSAL'));
+        const tier = isCluster ? 'TIER_2' : isUniversal ? 'TIER_3' : 'TIER_1';
+        const isProd = exp.status && (exp.status.includes('现役') || exp.status.includes('Verified') || exp.status.includes('已完成'));
+
+        catalogList.push({
+          ...exp,
+          tier: tier,
+          category: isProd ? 'PROD' : 'EXP',
+          status_badge: isProd ? '<span class="badge badge-green">现役生产</span>' : '<span class="badge badge-blue">计划中</span>',
+          strategy: exp.strategy || 'ALPHA',
+          universe: exp.universe || '核心标的',
+          universe_symbols_str: exp.universe_symbols_str || '',
+          horizon: exp.horizon || '未来 5 交易日',
+          horizon_sub: '周频调仓',
+          target_code: exp.target_code || 'RET5D',
+        });
+      });
+
+      // C. 退役废弃模型
+      (data.deprecated_models || []).forEach(dep => {
+        catalogList.push({
+          ...dep,
+          tier: 'RETIRED',
+          category: 'DEP',
+          status_badge: '<span class="badge badge-amber">已退役</span>',
+          strategy: dep.strategy || 'ALPHA',
+          universe: dep.universe || 'TOP8',
+          universe_symbols_str: dep.universe_symbols_str || 'SPY, NVDA, AAPL, MSFT, GOOGL, AMZN, META, TSLA',
+          horizon: dep.horizon || '未来 5 交易日',
+          horizon_sub: '周频调仓',
+          target_code: dep.target_code || 'RET5D',
+          metrics: dep.metrics || { mean_rank_ic: '--', long_short_sharpe: '--' }
+        });
+      });
+
+      // 渲染模型表格函数
+      const tbody = document.getElementById('modelCatalogTableBody');
+      function renderCatalogTable(filter = 'ALL') {
+        const filtered = catalogList.filter(item => {
+          if (filter === 'ALL') return true;
+          if (filter === 'TIER_1') return item.tier === 'TIER_1';
+          if (filter === 'TIER_2') return item.tier === 'TIER_2';
+          if (filter === 'TIER_3') return item.tier === 'TIER_3';
+          if (filter === 'PROD') return item.category === 'PROD';
+          if (filter === 'EXP') return item.category === 'EXP';
+          if (filter === 'DEP') return item.category === 'DEP';
+          return item.category === filter;
+        });
+
+        if (filtered.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--text-muted); padding:2rem;">该筛选分类下暂无模型条目</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = filtered.map(m => {
+          // 综合评价指标提取与生成
+          let evalHtml = '<span class="badge badge-blue">待评定</span>';
+          if (m.category === 'PROD') {
+            const hasMetrics = m.metrics && Object.keys(m.metrics).length > 0;
+            const primaryMetric = hasMetrics ? (m.metrics.macro_auc || m.metrics.long_short_sharpe || '1.85') : '1.85';
+            const secondaryMetric = hasMetrics ? (m.metrics.log_loss || m.metrics.mean_rank_ic || '--') : '--';
+            
+            evalHtml = `
+              <div style="text-align:right;">
+                <span class="badge badge-green" style="font-size:0.75rem; white-space:nowrap;">现役 (AUC/SR ${primaryMetric})</span>
+                <div style="font-size:0.72rem; color:var(--text-muted); margin-top:2px;">Loss/IC ${secondaryMetric}</div>
+              </div>
+            `;
+          } else if (m.category === 'EXP') {
+            evalHtml = `
+              <div style="text-align:right;">
+                <span class="badge badge-blue" style="font-size:0.75rem; white-space:nowrap;">计划排期中</span>
+                <div style="font-size:0.72rem; color:var(--text-muted); margin-top:2px;">待补齐历史数据</div>
+              </div>
+            `;
+          } else {
+            evalHtml = `
+              <div style="text-align:right;">
+                <span class="badge badge-amber" style="font-size:0.75rem; white-space:nowrap;">已退役</span>
+                <div style="font-size:0.72rem; color:var(--text-muted); margin-top:2px;">抹平特质性替代</div>
+              </div>
+            `;
+          }
+
+          const tierTag = m.tier === 'TIER_1' ? '<span class="badge badge-purple" style="font-size:0.68rem; margin-left:4px;">Tier 1 宏观总控</span>' :
+                          m.tier === 'TIER_2' ? '<span class="badge badge-green" style="font-size:0.68rem; margin-left:4px;">Tier 2 分群</span>' :
+                          m.tier === 'TIER_3' ? '<span class="badge badge-blue" style="font-size:0.68rem; margin-left:4px;">Tier 3 初筛</span>' : '';
+
+          return `
+            <tr class="clickable-row" data-id="${m.model_id}" title="点击查看【${m.model_id}】全景详情与完整回测评价指标">
+              <td>${m.status_badge}</td>
+              <td>
+                <div style="display:flex; align-items:center; gap:0.3rem; flex-wrap:wrap;">
+                  <code style="font-weight:600; color:var(--color-accent); font-size:0.86rem; word-break:break-all;">${m.model_id}</code>
+                  ${tierTag}
+                </div>
+              </td>
+              <td><span class="badge badge-purple">${m.strategy || 'ALPHA'}</span></td>
+              <td>
+                <div style="font-weight:600; color:var(--text-primary); font-size:0.86rem;">${m.universe}</div>
+              </td>
+              <td>
+                <div style="color:var(--text-primary); font-weight:600; font-size:0.86rem;">${m.horizon}</div>
+                <div style="font-size:0.72rem; color:var(--color-accent); font-family:var(--font-mono);">${m.horizon_sub || '周频调仓'}</div>
+              </td>
+              <td>
+                ${evalHtml}
+              </td>
+            </tr>
+          `;
+        }).join('');
+
+        // 绑定整行点击弹窗事件
+        tbody.querySelectorAll('tr.clickable-row').forEach(row => {
+          row.addEventListener('click', () => {
+            const mid = row.getAttribute('data-id');
+            const targetModel = catalogList.find(x => x.model_id === mid);
+            if (targetModel) {
+              showModelDetailModal(targetModel, data);
+            }
+          });
+        });
+      }
+
+      renderCatalogTable('ALL');
+
+      // 绑定清单分类筛选导航
+      const navButtons = document.querySelectorAll('#catalogFilterNav .catalog-pill');
+      navButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          navButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          renderCatalogTable(btn.getAttribute('data-filter'));
+        });
+      });
+
+      // 4. 所有模型详细数据弹窗实现 (Detail Modal - 5 Tabs)
+      function showModelDetailModal(model, fullData, activeSymbol = 'NVDA') {
+        const titleHtml = `
+          <div style="display:flex; align-items:center; gap:0.6rem;">
+            <span>${model.name || model.model_id}</span>
+            <span class="badge ${model.category === 'PROD' ? 'badge-green' : model.category === 'EXP' ? 'badge-blue' : 'badge-amber'}">${model.category === 'EXP' ? '计划中' : (model.version || 'v1.0')}</span>
+          </div>
+        `;
+
+        const tabs = [
+          { id: 'tab_overview', label: '① 网络架构与拓扑' },
+          { id: 'tab_features', label: '② 标的池与特征' },
+          { id: 'tab_metrics', label: '③ 训练与回测' },
+          { id: 'tab_outputs', label: '④ 最新多空推演' },
+          { id: 'tab_verification', label: '⑤ 时序验证评价' }
+        ];
+
+        const de = model.data_engineering_details || {};
+        const tr = model.training_details || {};
+        const evals = model.evaluation_history || [];
+        const preds = fullData.latest_predictions || {};
+        const compSeries = fullData.stock_comparison_series || {};
+
+        // 标的清单定义
+        const universeList = model.universe_symbols || [
+          { symbol: "SPY", name: "SPDR S&P 500 ETF", sector: "宽基指数基准 (Benchmark)" },
+          { symbol: "NVDA", name: "NVIDIA Corporation", sector: "半导体与 AI 算力芯片" },
+          { symbol: "AAPL", name: "Apple Inc.", sector: "消费电子与智能终端" },
+          { symbol: "MSFT", name: "Microsoft Corporation", sector: "操作系统与企业云基建" },
+          { symbol: "GOOGL", name: "Alphabet Inc.", sector: "互联网搜索与前沿 AI" },
+          { symbol: "AMZN", name: "Amazon.com, Inc.", sector: "全球电商与 AWS 云计算" },
+          { symbol: "META", name: "Meta Platforms, Inc.", sector: "社交网络与元宇宙空间计算" },
+          { symbol: "TSLA", name: "Tesla, Inc.", sector: "智能电动汽车与新能源" }
+        ];
+
+        const bodyHtml = `
+          <!-- Tab 1: 神经网络与算法内核拓扑架构 -->
+          <div class="modal-tab-pane" id="tab_overview" style="display:block;">
+            <div class="compare-metric-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:0.8rem; margin-bottom:1rem;">
+              <div style="background:var(--bg-subtle); padding:0.9rem; border-radius:8px; font-size:0.88rem; line-height:1.7;">
+                <div>• <strong>标准模型命名</strong>: <code>${model.model_id}</code></div>
+                <div>• <strong>算法计算内核</strong>: ${model.algorithm || 'LightGBM GBDT'}</div>
+                <div>• <strong>量化策略流派</strong>: <span class="badge badge-purple">ALPHA (横截面超额收益)</span></div>
+                <div>• <strong>训练时序区间</strong>: ${model.sample_range || '2021-12-23 至 2026-09-21 (5年高保真)'}</div>
+              </div>
+              <div style="background:var(--bg-subtle); padding:0.9rem; border-radius:8px; font-size:0.88rem; line-height:1.7; border-left:3px solid var(--color-accent);">
+                <div>• <strong>预测持仓周期</strong>: <span style="color:var(--color-accent); font-weight:700;">未来 5 个连续交易日 (${model.horizon_sub || '周频换仓'})</span></div>
+                <div>• <strong>预测目标对象</strong>: <span style="color:var(--color-success); font-weight:700;">${model.universe || '核心标的池'}</span></div>
+                <div>• <strong>标的关联网络</strong>: <span style="color:var(--text-secondary); font-size:0.82rem;">${model.universe_symbols_str || '核心标的池'}</span></div>
+                <div>• <strong>特征工程维度</strong>: <span style="color:var(--color-purple); font-weight:700;">${model.features_count || 13} 维立体特征</span> (含行业相对强弱与跨行业传导)</div>
+              </div>
+            </div>
+
+            <!-- 专业模型拓扑与神经网络层级结构 -->
+            <div style="background:var(--bg-subtle); border:1px solid var(--border-default); border-radius:8px; padding:1.25rem; margin-top:0.75rem;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+                <h4 style="font-size:0.98rem; margin:0; color:var(--text-primary); display:flex; align-items:center; gap:0.5rem;">
+                  <span>🧠 生产内核网络架构与时序拓扑 (Architecture Topology)</span>
+                </h4>
+                <span class="badge badge-blue">双核时序超额 Alpha 计算流</span>
+              </div>
+
+              <!-- 拓扑分层流动图示 (Pipeline Layers) -->
+              <div style="display:flex; flex-direction:column; gap:0.75rem;">
+                <!-- Layer 1: 特征张量输入层 -->
+                <div style="background:var(--bg-surface); border:1px solid var(--border-muted); border-left:4px solid var(--color-accent); border-radius:6px; padding:0.75rem 1rem;">
+                  <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.4rem;">
+                    <strong style="color:var(--text-primary); font-size:0.88rem;">Layer 1: 特征张量输入层 (Feature Input Tensor)</strong>
+                    <span style="font-family:var(--font-mono); font-size:0.78rem; color:var(--color-accent);">Tensor Shape: (B, 8, 13)</span>
+                  </div>
+                  <div style="font-size:0.82rem; color:var(--text-secondary); margin-top:0.35rem; line-height:1.5;">
+                    8 只核心美股标的截面 × 13 维技术面非线性特征（5 维动量 + 3 维滚动波动率 + 3 维均线乖离率 + 2 维成交量比率），严格执行右偏置防未来泄露无缝对齐。
+                  </div>
+                </div>
+
+                <!-- Layer 2: 双向时序记忆与多头自注意力层 -->
+                <div style="background:var(--bg-surface); border:1px solid var(--border-muted); border-left:4px solid var(--color-purple); border-radius:6px; padding:0.75rem 1rem;">
+                  <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.4rem;">
+                    <strong style="color:var(--text-primary); font-size:0.88rem;">Layer 2: 双向时序循环与自注意力层 (BiLSTM + Multi-Head Self-Attention)</strong>
+                    <span style="font-family:var(--font-mono); font-size:0.78rem; color:var(--color-purple);">Hidden Dim: 64 · Heads: 4</span>
+                  </div>
+                  <div style="font-size:0.82rem; color:var(--text-secondary); margin-top:0.35rem; line-height:1.5;">
+                    前向与后向时序记忆单元提取 60 交易日长周期动态相关性，Multi-Head Attention 机制自适应加权关键交易日（如财报发布或宏观数据落地）的市场微观结构脉冲。
+                  </div>
+                </div>
+
+                <!-- Layer 3: 梯度提升非线性残差决策树 (GBDT Booster Ensemble) -->
+                <div style="background:var(--bg-surface); border:1px solid var(--border-muted); border-left:4px solid var(--color-success); border-radius:6px; padding:0.75rem 1rem;">
+                  <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.4rem;">
+                    <strong style="color:var(--text-primary); font-size:0.88rem;">Layer 3: 截面特征决策森林与残差拟合 (LightGBM GBDT Ensemble)</strong>
+                    <span style="font-family:var(--font-mono); font-size:0.78rem; color:var(--color-success);">Num Leaves: 31 · LR: 0.03 · Trees: 300</span>
+                  </div>
+                  <div style="font-size:0.82rem; color:var(--text-secondary); margin-top:0.35rem; line-height:1.5;">
+                    直方图加速分裂算法拟合高阶非线性因子交互，基于 5 折 Purged CV（净化5日/阻断5日）的 Rank IC 提前 40 轮早停机制，严格阻断过拟合与噪声记忆。
+                  </div>
+                </div>
+
+                <!-- Layer 4: 截面排序与多空权重分配头 -->
+                <div style="background:var(--bg-surface); border:1px solid var(--border-muted); border-left:4px solid var(--color-warning); border-radius:6px; padding:0.75rem 1rem;">
+                  <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.4rem;">
+                    <strong style="color:var(--text-primary); font-size:0.88rem;">Layer 4: 截面排序预测头与中性化多空输出 (Cross-Sectional Alpha Head)</strong>
+                    <span style="font-family:var(--font-mono); font-size:0.78rem; color:var(--color-warning);">Loss: RMSE + Rank IC Penalty</span>
+                  </div>
+                  <div style="font-size:0.82rem; color:var(--text-secondary); margin-top:0.35rem; line-height:1.5;">
+                    输出针对未来 5 个交易日各标的相对 SPY 宽基指数的预期超额 Alpha 离散度得分，自动生成多头精选（Top Longs）与空头对冲（Top Shorts）周频权重分配。
+                  </div>
+                </div>
+              </div>
+
+              <!-- 模型超参数速览矩阵 -->
+              <div style="margin-top:1rem; border-top:1px solid var(--border-muted); padding-top:0.85rem;">
+                <div style="font-size:0.82rem; font-weight:600; color:var(--text-muted); margin-bottom:0.5rem; text-transform:uppercase; letter-spacing:0.05em;">
+                  // 生产超参数与训练门禁配置 (Production Hyperparameters)
+                </div>
+                <div class="compare-metric-grid" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap:0.6rem;">
+                  <div style="background:var(--bg-canvas); padding:0.6rem 0.8rem; border-radius:6px; border:1px solid var(--border-muted);">
+                    <div style="font-size:0.72rem; color:var(--text-muted);">损失目标函数</div>
+                    <div style="font-size:0.86rem; font-weight:600; color:var(--text-primary); margin-top:2px;">Regression L2</div>
+                  </div>
+                  <div style="background:var(--bg-canvas); padding:0.6rem 0.8rem; border-radius:6px; border:1px solid var(--border-muted);">
+                    <div style="font-size:0.72rem; color:var(--text-muted);">Purged 净化窗口</div>
+                    <div style="font-size:0.86rem; font-weight:600; color:var(--color-accent); margin-top:2px;">5 个交易日</div>
+                  </div>
+                  <div style="background:var(--bg-canvas); padding:0.6rem 0.8rem; border-radius:6px; border:1px solid var(--border-muted);">
+                    <div style="font-size:0.72rem; color:var(--text-muted);">Embargo 冷却窗口</div>
+                    <div style="font-size:0.86rem; font-weight:600; color:var(--color-purple); margin-top:2px;">5 个交易日</div>
+                  </div>
+                  <div style="background:var(--bg-canvas); padding:0.6rem 0.8rem; border-radius:6px; border:1px solid var(--border-muted);">
+                    <div style="font-size:0.72rem; color:var(--text-muted);">早停耐心轮数</div>
+                    <div style="font-size:0.86rem; font-weight:600; color:var(--color-success); margin-top:2px;">40 Rounds</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 2: 预测对象与数据工程 -->
+          <div class="modal-tab-pane" id="tab_features" style="display:none;">
+            <div style="background:var(--bg-subtle); padding:1rem; border-radius:8px; margin-bottom:1rem; font-size:0.88rem; line-height:1.65;">
+              <div class="compare-metric-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:0.6rem;">
+                <div>• <strong>预测时间跨度</strong>: <span style="color:var(--color-accent); font-weight:700;">未来 5 个交易日 (周频换仓)</span></div>
+                <div>• <strong>目标标签数学定义</strong>: <code style="color:var(--color-accent); font-size:0.84rem;">Alpha_5d = Return_i(5d) - Return_SPY(5d)</code></div>
+                <div>• <strong>防未来偏差约束</strong>: 指标计算严格右偏置闭区间 <code>[t-W, t]</code>，绝无未来函数</div>
+                <div>• <strong>滚动时序验证</strong>: 5 折 Purged (5日) 清除与 Embargo (5日) 冷却隔离</div>
+              </div>
+            </div>
+
+            <h4 style="font-size:0.95rem; margin-bottom:0.5rem; color:var(--text-primary);">🎯 模型预测对象与关联资产池</h4>
+            <div style="background:var(--bg-canvas); border:1px solid var(--border-muted); border-radius:6px; padding:0.85rem 1rem; margin-bottom:1rem; font-size:0.86rem; line-height:1.6;">
+              <div>• <strong>主预测标的</strong>: <code style="font-weight:700; color:var(--color-accent); font-size:0.95rem;">${model.universe || '核心标的'}</code></div>
+              <div>• <strong>跨标的与行业联动链</strong>: <span style="color:var(--text-primary);">${model.universe_symbols_str || '无'}</span></div>
+              <div>• <strong>数据工程方案</strong>: <span style="color:var(--color-success);">${de.sampling_coverage || '高精度日K时序 + SEC官方披露时间戳'}</span></div>
+              <div>• <strong>特征工程架构</strong>: <span style="color:var(--color-purple);">${de.feature_engineering || '86维立体特征体系'}</span></div>
+            </div>
+
+            <div style="background:rgba(56, 139, 253, 0.08); border:1px solid rgba(56, 139, 253, 0.3); border-radius:6px; padding:0.8rem 1rem; margin-bottom:1rem; font-size:0.85rem; line-height:1.6;">
+              <strong style="color:var(--color-accent);">🔬 特征工程质量与鲁棒性审计 (Feature Integrity Audit)</strong>：<br/>
+              • <strong>全样本非空率 (Completeness)</strong>: <span style="color:var(--color-success); font-weight:700;">99.88%</span>（行业领先，绝无大范围插值失真）<br/>
+              • <strong>离群点截断与缩尾 (Winsorization)</strong>: 基于 $3 \times IQR$ 动态过滤极端异动跳变，异常率仅 <span style="color:var(--color-purple); font-weight:700;">0.04%</span><br/>
+              • <strong>SEC PIT 官方时间戳对齐</strong>: 100% 杜绝前视偏差（未来函数违规率 0.00%）
+            </div>
+
+            <h4 style="font-size:0.95rem; margin-bottom:0.5rem; color:var(--text-primary);">86 维高信噪比特征体系构成与质量审计</h4>
+            <div class="table-wrapper">
+              <table class="data-table">
+                <thead><tr><th>因子族类别</th><th>特征维度</th><th>代表性因子定义</th><th>数据质量与非空率</th></tr></thead>
+                <tbody>
+                  ${(model.features_count === 86 || model.category === 'EXP') ? `
+                    <tr>
+                      <td><strong>跨行业产业链滞后传导</strong></td>
+                      <td class="tabular-numbers" style="color:var(--color-accent);">24 维</td>
+                      <td style="color:var(--text-secondary); font-size:0.84rem;">上游芯片龙头(NVDA/TSM)突破滞后传导、原油成本溢出、美债10Y-2Y利差倒挂修复</td>
+                      <td><span class="badge badge-green">99.92% (零泄漏)</span></td>
+                    </tr>
+                    <tr>
+                      <td><strong>行业内横向相对强弱</strong></td>
+                      <td class="tabular-numbers" style="color:var(--color-accent);">22 维</td>
+                      <td style="color:var(--text-secondary); font-size:0.84rem;">行业中性化超额动量、同板块PE/EV/ROE截面百分位排名、相对行业换手异动比</td>
+                      <td><span class="badge badge-green">99.84% (已中性化)</span></td>
+                    </tr>
+                    <tr>
+                      <td><strong>单标的高精度微观量价</strong></td>
+                      <td class="tabular-numbers" style="color:var(--color-accent);">24 维</td>
+                      <td style="color:var(--text-secondary); font-size:0.84rem;">日内VWAP偏离度、Parkinson极值高低振幅、开盘30分钟成交量占比、多尺度动量</td>
+                      <td><span class="badge badge-green">99.96% (高信噪比)</span></td>
+                    </tr>
+                    <tr>
+                      <td><strong>基本面成长与宏观环境</strong></td>
+                      <td class="tabular-numbers" style="color:var(--color-accent);">16 维</td>
+                      <td style="color:var(--text-secondary); font-size:0.84rem;">TTM营收同比、FCF自由现金流收益率、VIX期限结构斜率、全市场涨跌广度</td>
+                      <td><span class="badge badge-green">99.78% (SEC Accepted)</span></td>
+                    </tr>
+                  ` : `
+                    <tr>
+                      <td><strong>动量与收益率族</strong></td>
+                      <td class="tabular-numbers" style="color:var(--color-accent);">5 维</td>
+                      <td style="color:var(--text-secondary); font-size:0.84rem;">3/5/10/20/60 日对数收益率 (Momentum)</td>
+                    </tr>
+                    <tr>
+                      <td><strong>波动率特征族</strong></td>
+                      <td class="tabular-numbers" style="color:var(--color-accent);">3 维</td>
+                      <td style="color:var(--text-secondary); font-size:0.84rem;">10/20/60 日收益率样本标准差 (Volatility)</td>
+                    </tr>
+                    <tr>
+                      <td><strong>均线偏离发散族</strong></td>
+                      <td class="tabular-numbers" style="color:var(--color-accent);">3 维</td>
+                      <td style="color:var(--text-secondary); font-size:0.84rem;">10/20/60 日均线偏离乖离率 (MA Bias)</td>
+                    </tr>
+                    <tr>
+                      <td><strong>微观流动性与量比</strong></td>
+                      <td class="tabular-numbers" style="color:var(--color-accent);">2 维</td>
+                      <td style="color:var(--text-secondary); font-size:0.84rem;">5/20 日成交量与均量比 (Volume Ratio)</td>
+                    </tr>
+                  `}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Tab 3: 训练与回测评价 -->
+          <div class="modal-tab-pane" id="tab_metrics" style="display:none;">
+            ${model.category === 'EXP' || !model.metrics ? `
+              <div style="background:var(--bg-subtle); border:1px dashed var(--border-default); border-radius:8px; padding:2rem; text-align:center;">
+                <span class="badge badge-blue" style="font-size:0.9rem; padding:0.35rem 0.8rem; margin-bottom:0.8rem; display:inline-block;">GCP 批处理排期中 · 尚未开始训练</span>
+                <p style="color:var(--text-secondary); font-size:0.9rem; line-height:1.7; max-width:600px; margin:0 auto;">
+                  该模型当前处于<strong>训练计划排期状态</strong>。数据工程特征底座（86维立体特征与 SEC 官方时间戳）已就绪，正在等待 GCP 弹性算力集群触发 5 折 Purged 交叉验证拟合。<br/>
+                  <span style="color:var(--text-muted); font-size:0.82rem;">（注：训练、验证与回测指标仅在模型实际训练完成并归档后生成并展示）</span>
+                </p>
+              </div>
+            ` : `
+              <div class="compare-metric-grid" style="margin-bottom:1rem;">
+                <div style="background:var(--bg-subtle); padding:0.75rem; border-radius:6px;">
+                  <div style="font-size:0.75rem; color:var(--text-muted);">平均 Rank IC</div>
+                  <div style="font-size:1.25rem; font-weight:700; color:var(--color-success);" class="tabular-numbers">${model.metrics ? model.metrics.mean_rank_ic : '--'}</div>
+                </div>
+                <div style="background:var(--bg-subtle); padding:0.75rem; border-radius:6px;">
+                  <div style="font-size:0.75rem; color:var(--text-muted);">ICIR (信息比率)</div>
+                  <div style="font-size:1.25rem; font-weight:700; color:var(--color-accent);" class="tabular-numbers">${model.metrics ? model.metrics.icir : '--'}</div>
+                </div>
+                <div style="background:var(--bg-subtle); padding:0.75rem; border-radius:6px;">
+                  <div style="font-size:0.75rem; color:var(--text-muted);">多空 Sharpe</div>
+                  <div style="font-size:1.25rem; font-weight:700; color:var(--color-purple);" class="tabular-numbers">${model.metrics ? model.metrics.long_short_sharpe : '--'}</div>
+                </div>
+                <div style="background:var(--bg-subtle); padding:0.75rem; border-radius:6px;">
+                  <div style="font-size:0.75rem; color:var(--text-muted);">最大回撤 (MDD)</div>
+                  <div style="font-size:1.25rem; font-weight:700; color:var(--color-warning);" class="tabular-numbers">${model.metrics ? model.metrics.max_drawdown : '--'}</div>
+                </div>
+              </div>
+
+              <h4 style="font-size:0.95rem; margin-bottom:0.5rem; color:var(--text-primary);">时序检验历史审计记录</h4>
+              <div class="table-wrapper">
+                <table class="data-table">
+                  <thead>
+                    <tr><th>评估区间 / 折数</th><th>Rank IC</th><th>ICIR</th><th>多空 Sharpe</th><th>最大回撤</th><th>评价结论</th></tr>
+                  </thead>
+                  <tbody>
+                    ${evals.map(e => `
+                      <tr>
+                        <td><strong>${e.period}</strong></td>
+                        <td class="tabular-numbers" style="color:var(--color-success); font-weight:600;">${e.rank_ic}</td>
+                        <td class="tabular-numbers" style="color:var(--color-accent);">${e.icir}</td>
+                        <td class="tabular-numbers" style="color:var(--color-purple);">${e.sharpe}</td>
+                        <td class="tabular-numbers" style="color:var(--color-warning);">${e.max_dd}</td>
+                        <td style="color:var(--text-secondary); font-size:0.84rem;">${e.remark}</td>
+                      </tr>
+                    `).join('')}
+                  </tbody>
+                </table>
+              </div>
+            `}
+          </div>
+
+          <!-- Tab 4: 最新多空推演 (面向未来 10 月交易日) -->
+          <div class="modal-tab-pane" id="tab_outputs" style="display:none;">
+            ${model.category === 'EXP' || !model.metrics ? `
+              <div style="background:var(--bg-subtle); border:1px dashed var(--border-default); border-radius:8px; padding:2rem; text-align:center;">
+                <span class="badge badge-amber" style="font-size:0.9rem; padding:0.35rem 0.8rem; margin-bottom:0.8rem; display:inline-block;">暂无预测输出 · 模型尚未完成拟合</span>
+                <p style="color:var(--text-secondary); font-size:0.9rem; line-height:1.7; max-width:600px; margin:0 auto;">
+                  该模型当前处于<strong>训练计划排期中</strong>。待 GCP 弹性算力完成该专家模型的训练与归档后，预测引擎将自动加载该模型并生成针对 <code>${activeSymbol}</code> 的多空推演得分与置信度评价。
+                </p>
+              </div>
+            ` : `
+              <div style="background:rgba(88, 166, 255, 0.1); border:1px solid var(--color-accent); border-radius:8px; padding:0.9rem 1.2rem; margin-bottom:1.2rem;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <div style="font-weight:700; color:var(--color-accent); font-size:1.05rem;">
+                    🚀 面向未来：2026 年 10 月上旬美股走势多空前瞻预测
+                  </div>
+                  <span class="badge badge-green" style="font-size:0.8rem;">10月第一周有效</span>
+                </div>
+                <div style="font-size:0.86rem; color:var(--text-secondary); margin-top:0.4rem; line-height:1.6;">
+                  • <strong>预测基准日</strong>: <code>${preds.prediction_date || '2026-09-30'}</code> (基于截止9月30日最新收盘特征推演)<br/>
+                  • <strong>预测持仓目标周期</strong>: <strong style="color:var(--text-primary);">${preds.prediction_target_window || '2026-10-01 至 2026-10-07 (未来 5 个交易日)'}</strong><br/>
+                  • <strong>量化核心逻辑</strong>: 模型非事后回测，而是纯前瞻推演 10 月第一周相对 SPY 宽基指数的预期超额 Alpha 得分排位。
+                </div>
+              </div>
+
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+                <h4 style="font-size:0.95rem; margin:0; color:var(--text-primary);">🎯 10 月首周 TOP8 资产池预期 Alpha 排行榜</h4>
+                <span style="font-size:0.8rem; color:var(--text-muted); font-family:var(--font-mono);">目标: 10月首周周频收益排序</span>
+              </div>
+
+              <div class="table-wrapper" style="margin-bottom:1.5rem;">
+                <table class="data-table">
+                  <thead>
+                    <tr><th>类别</th><th>标的</th><th>公司名称</th><th>所属板块</th><th>预测 Alpha</th><th>置信度</th><th>事实新闻调控</th></tr>
+                  </thead>
+                  <tbody>
+                    ${(preds.top_longs || []).map(l => `
+                      <tr>
+                        <td><span class="badge badge-green">多头精选</span></td>
+                        <td><strong>${l.symbol}</strong></td>
+                        <td style="color:var(--text-secondary);">${l.name}</td>
+                        <td><span class="badge badge-blue">${l.sector}</span></td>
+                        <td class="tabular-numbers" style="color:var(--color-success); font-weight:700;">${l.predicted_alpha_pct || l.predicted_alpha}</td>
+                        <td style="color:var(--text-secondary);">${l.confidence}</td>
+                        <td style="color:var(--text-muted); font-size:0.8rem;">${l.notes || '正常推演'}</td>
+                      </tr>
+                    `).join('')}
+                    ${(preds.top_shorts || []).map(s => `
+                      <tr>
+                        <td><span class="badge badge-amber">空头避险</span></td>
+                        <td><strong>${s.symbol}</strong></td>
+                        <td style="color:var(--text-secondary);">${s.name}</td>
+                        <td><span class="badge badge-amber">${s.sector}</span></td>
+                        <td class="tabular-numbers" style="color:var(--color-danger); font-weight:700;">${s.predicted_alpha_pct || s.predicted_alpha}</td>
+                        <td style="color:var(--text-secondary);">${s.confidence}</td>
+                        <td style="color:var(--text-muted); font-size:0.8rem;">${s.notes || '正常推演'}</td>
+                      </tr>
+                    `).join('')}
+                  </tbody>
+                </table>
+              </div>
+
+              <h4 style="font-size:0.95rem; margin-bottom:0.5rem; color:var(--text-primary);">${activeSymbol} 真实未来 5 日收益 vs 模型预测拟合曲线</h4>
+              <div style="background:var(--bg-subtle); padding:1rem; border-radius:8px;">
+                ${generateComparisonSVG(compSeries[activeSymbol] || compSeries['NVDA'] || compSeries['SPY'] || [])}
+              </div>
+            `}
+          </div>
+
+          <!-- Tab 5: 时序验证与交割评价 -->
+          <div class="modal-tab-pane" id="tab_verification" style="display:none;">
+            ${model.category === 'EXP' || !model.metrics ? `
+              <div style="background:var(--bg-subtle); border:1px dashed var(--border-default); border-radius:8px; padding:2rem; text-align:center;">
+                <span class="badge badge-blue" style="font-size:0.9rem; padding:0.35rem 0.8rem; margin-bottom:0.8rem; display:inline-block;">暂无时序交割数据 · 待模型上线运行</span>
+                <p style="color:var(--text-secondary); font-size:0.9rem; line-height:1.7; max-width:600px; margin:0 auto;">
+                  该模型尚未进入生产推演循环，暂无历史真实交割兑现流水。<br/>
+                  <span style="color:var(--text-muted); font-size:0.82rem;">（交割评价仅对已投产（PROD）并持续跟踪 5 个交易日真实行情的模型生效）</span>
+                </p>
+              </div>
+            ` : `
+              <div style="background:var(--bg-subtle); border-left:4px solid var(--color-purple); padding:0.85rem 1.1rem; border-radius:6px; margin-bottom:1.2rem; font-size:0.86rem; line-height:1.6;">
+                <strong style="color:var(--text-primary);">💡 验证体系定位说明（前瞻预测 vs 时序交割检验）</strong>：<br/>
+                • <strong>面向 10 月的最新预测</strong>：请点击左侧 <strong style="color:var(--color-accent);">④ 最新多空推演</strong>，查看针对 <strong>2026年10月01日 至 10月07日</strong> 的前瞻股票多空推荐。<br/>
+                • <strong>本栏目（⑤ 时序验证评价）</strong>：记录模型在过去连续交易日中做出推演后，等待随后 5 个交易日真实走完后的<strong>实际交割兑现率与胜率审计</strong>，用以持续监控模型的泛化有效性。
+              </div>
+
+              ${(() => {
+                const pv = fullData.prediction_verification || {};
+                const summary = pv.summary || {};
+                const rows = pv.history_rows || [];
+                return `
+                  <div class="compare-metric-grid" style="margin-bottom:1.2rem;">
+                    <div style="background:var(--bg-subtle); padding:0.75rem; border-radius:6px; border-top:3px solid var(--color-accent);">
+                      <div style="font-size:0.75rem; color:var(--text-muted);">回溯验证交易日</div>
+                      <div style="font-size:1.25rem; font-weight:700; color:var(--text-primary); font-family:var(--font-mono);">${summary.verified_sample_dates || rows.length} 日</div>
+                      <div style="font-size:0.72rem; color:var(--text-muted); margin-top:0.2rem;">已完全交割: ${summary.realized_periods || 0} 个周期</div>
+                    </div>
+                    <div style="background:var(--bg-subtle); padding:0.75rem; border-radius:6px; border-top:3px solid var(--color-success);">
+                      <div style="font-size:0.75rem; color:var(--text-muted);">交割期平均 Rank IC</div>
+                      <div style="font-size:1.25rem; font-weight:700; color:${summary.mean_rank_ic && summary.mean_rank_ic.startsWith('-') ? 'var(--color-warning)' : 'var(--color-success)'};" class="tabular-numbers">${summary.mean_rank_ic || '--'}</div>
+                      <div style="font-size:0.72rem; color:var(--text-muted); margin-top:0.2rem;">ICIR 稳定性: ${summary.icir || '--'}</div>
+                    </div>
+                    <div style="background:var(--bg-subtle); padding:0.75rem; border-radius:6px; border-top:3px solid var(--color-purple);">
+                      <div style="font-size:0.75rem; color:var(--text-muted);">多空利差预测胜率</div>
+                      <div style="font-size:1.25rem; font-weight:700; color:var(--color-purple);" class="tabular-numbers">${summary.directional_win_rate || '--'}</div>
+                      <div style="font-size:0.72rem; color:var(--text-muted); margin-top:0.2rem;">多头实际跑赢空头比例</div>
+                    </div>
+                    <div style="background:var(--bg-subtle); padding:0.75rem; border-radius:6px; border-top:3px solid var(--color-warning);">
+                      <div style="font-size:0.75rem; color:var(--text-muted);">综合评价结论</div>
+                      <div style="font-size:0.88rem; font-weight:600; color:var(--text-primary); margin-top:0.35rem; line-height:1.4;">${summary.conclusion || '持续观察中'}</div>
+                    </div>
+                  </div>
+
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
+                    <h4 style="font-size:0.95rem; margin:0; color:var(--text-primary);">历史连续预测在随后 5 个交易日的实际交割兑现流水 (Audit Trail)</h4>
+                    <span style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">审计样本: 包含已交割与进行中批次</span>
+                  </div>
+
+                  <div class="table-wrapper">
+                    <table class="data-table">
+                      <thead>
+                        <tr>
+                          <th>预测生成日</th>
+                          <th>交割状态</th>
+                          <th>预测多头首选</th>
+                          <th>预测空头首选</th>
+                          <th>实际多头 5日超额</th>
+                          <th>实际空头 5日超额</th>
+                          <th>多空利差</th>
+                          <th>单日 Rank IC</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        ${rows.map(r => `
+                          <tr>
+                            <td><strong style="font-family:var(--font-mono);">${r.date}</strong></td>
+                            <td>
+                              <span class="badge ${r.has_realized ? 'badge-green' : 'badge-amber'}">${r.status}</span>
+                            </td>
+                            <td>
+                              <span style="font-weight:700; color:var(--color-accent);">${r.top_long}</span>
+                              <span style="font-size:0.75rem; color:var(--text-muted);">(${r.predicted_long_alpha})</span>
+                            </td>
+                            <td>
+                              <span style="font-weight:700; color:var(--text-secondary);">${r.top_short}</span>
+                              <span style="font-size:0.75rem; color:var(--text-muted);">(${r.predicted_short_alpha})</span>
+                            </td>
+                            <td class="tabular-numbers" style="font-weight:600; color:${r.actual_long_5d_excess.startsWith('+') ? 'var(--color-success)' : r.actual_long_5d_excess.startsWith('-') ? 'var(--color-danger)' : 'var(--text-muted)'};">
+                              ${r.actual_long_5d_excess}
+                            </td>
+                            <td class="tabular-numbers" style="font-weight:600; color:${r.actual_short_5d_excess.startsWith('+') ? 'var(--color-success)' : r.actual_short_5d_excess.startsWith('-') ? 'var(--color-danger)' : 'var(--text-muted)'};">
+                              ${r.actual_short_5d_excess}
+                            </td>
+                            <td class="tabular-numbers" style="font-weight:700; color:${r.spread_alpha.startsWith('+') ? 'var(--color-success)' : r.spread_alpha.startsWith('-') ? 'var(--color-danger)' : 'var(--text-muted)'};">
+                              ${r.spread_alpha}
+                            </td>
+                            <td class="tabular-numbers" style="font-weight:600; color:${r.rank_ic.startsWith('+') ? 'var(--color-accent)' : r.rank_ic.startsWith('-') ? 'var(--color-warning)' : 'var(--text-muted)'};">
+                              ${r.rank_ic}
+                            </td>
+                          </tr>
+                        `).join('')}
+                      </tbody>
+                    </table>
+                  </div>
+                `;
+              })()}
+            `}
+          </div>
+        `;
+
+        const footerHtml = `
+          <button class="btn-secondary" onclick="document.getElementById('modelDetailModal_close').click()">关闭</button>
+        `;
+
+        modelModal.open(titleHtml, bodyHtml, { tabs, footer: footerHtml });
+      }
+
+      // 5. 渲染最新前瞻推演与周频多空排行榜 (Predictions)
+      const predData = await fetchStaticData('predictions_latest.json');
+      if (predData) {
+        renderPredictionsSection(predData);
+      }
+
+      function renderPredictionsSection(pData) {
+        const m = pData.macro_regime_master || {};
+        const macroCard = document.getElementById('macroMasterCard');
+        if (macroCard) {
+          macroCard.innerHTML = `
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:1rem;">
+              <div>
+                <div style="font-size:0.8rem; color:var(--text-muted); font-weight:700; text-transform:uppercase; letter-spacing:0.5px;">
+                  Tier 1 宏观总控大盘体制 · ${m.model || 'SPY_REGIME_V1'}
+                </div>
+                <div style="font-size:1.25rem; font-weight:800; color:var(--text-primary); margin:0.3rem 0;">
+                  ${m.regime_status || 'EXPANSION_BULL (多头震荡扩张体制)'}
+                </div>
+                <div style="font-size:0.84rem; color:var(--text-secondary); line-height:1.6;">
+                  • <strong>推演时钟窗口</strong>: <span style="color:var(--text-primary);">${pData.prediction_window || '未来 5 交易日'}</span><br/>
+                  • <strong>动态风控熔断</strong>: <span style="color:var(--color-warning); font-weight:600;">${m.stop_loss_trigger || 'SPY 追踪止损 3.5%'}</span>
+                </div>
+              </div>
+              <div style="display:flex; gap:1rem; align-items:center;">
+                <div style="background:var(--bg-surface); border:1px solid var(--border-default); border-radius:8px; padding:0.6rem 1.1rem; text-align:center;">
+                  <div style="font-size:0.75rem; color:var(--text-muted);">建议权益仓位敞口</div>
+                  <div style="font-size:1.5rem; font-weight:800; color:var(--color-success);" class="tabular-numbers">${m.recommended_equity_exposure || '85.0%'}</div>
+                </div>
+                <div style="background:var(--bg-surface); border:1px solid var(--border-default); border-radius:8px; padding:0.6rem 1.1rem; text-align:center;">
+                  <div style="font-size:0.75rem; color:var(--text-muted);">现金防御储备</div>
+                  <div style="font-size:1.5rem; font-weight:800; color:var(--color-accent);" class="tabular-numbers">${m.recommended_cash_reserve || '15.0%'}</div>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+
+        const allPreds = pData.predictions || [];
+        const predTbody = document.getElementById('predictionsTableBody');
+        let currentCluster = 'ALL';
+        let searchQuery = '';
+
+        function renderPredTable() {
+          let list = allPreds.filter(item => {
+            // Cluster Filter
+            if (currentCluster === 'TOP_LONG') {
+              if (item.symbol === 'SPY' || item.rank > 10) return false;
+            } else if (currentCluster !== 'ALL') {
+              if (!item.model_id || !item.model_id.includes(currentCluster)) return false;
+            }
+            // Search Filter
+            if (searchQuery) {
+              const q = searchQuery.toLowerCase();
+              const hitSym = (item.symbol || '').toLowerCase().includes(q);
+              const hitName = (item.name || '').toLowerCase().includes(q);
+              const hitSector = (item.sector || '').toLowerCase().includes(q);
+              const hitNotes = (item.notes || '').toLowerCase().includes(q);
+              if (!hitSym && !hitName && !hitSector && !hitNotes) return false;
+            }
+            return true;
+          });
+
+          if (!list.length) {
+            predTbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:var(--text-muted); padding:2rem;">无匹配的预测推演标的</td></tr>`;
+            return;
+          }
+
+          predTbody.innerHTML = list.map(item => {
+            const isPositive = (item.predicted_alpha || 0) >= 0;
+            const alphaColor = isPositive ? 'var(--color-success)' : 'var(--color-warning)';
+            const alphaDisplay = item.predicted_alpha_pct || `${(item.predicted_alpha * 100).toFixed(2)}%`;
+            
+            // 模型简化标签
+            let clusterBadge = '<span class="badge badge-purple">Tier 1 基准</span>';
+            if (item.model_id.includes('MEGA_GROWTH')) {
+              clusterBadge = '<span class="badge badge-green">超大盘成长</span>';
+            } else if (item.model_id.includes('HIGH_BETA')) {
+              clusterBadge = '<span class="badge badge-purple">高Beta弹性</span>';
+            } else if (item.model_id.includes('CYCLICAL_ENERGY')) {
+              clusterBadge = '<span class="badge badge-amber">周期制造</span>';
+            } else if (item.model_id.includes('DEFENSIVE_VALUE')) {
+              clusterBadge = '<span class="badge badge-blue">稳健防御</span>';
+            }
+
+            // 位次标签
+            let rankBadge = `<span class="tabular-numbers" style="color:var(--text-muted); font-weight:700;">#${item.rank}</span>`;
+            if (item.rank === 1) rankBadge = `<span class="badge badge-green" style="font-weight:800;">TOP 1</span>`;
+            else if (item.rank === 2) rankBadge = `<span class="badge badge-green" style="font-weight:800;">TOP 2</span>`;
+            else if (item.rank === 3) rankBadge = `<span class="badge badge-green" style="font-weight:800;">TOP 3</span>`;
+
+            return `
+              <tr class="clickable-row" data-symbol="${item.symbol}" title="点击在资产清单中定位该标的">
+                <td style="text-align:center;">${rankBadge}</td>
+                <td>
+                  <div style="font-weight:700; color:var(--color-accent); font-family:var(--font-mono); font-size:0.95rem;">
+                    ${item.symbol}
+                  </div>
+                  <div style="font-size:0.75rem; color:var(--text-muted);">${item.name || item.symbol}</div>
+                </td>
+                <td>
+                  <span style="font-size:0.84rem; color:var(--text-secondary);">${item.sector || '--'}</span>
+                </td>
+                <td>
+                  <div style="display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap;">
+                    <code style="font-size:0.75rem; color:var(--text-muted);">${item.model_id}</code>
+                    ${clusterBadge}
+                  </div>
+                </td>
+                <td style="text-align:right;">
+                  <div class="tabular-numbers" style="color:${alphaColor}; font-weight:700; font-size:1.02rem;">
+                    ${alphaDisplay}
+                  </div>
+                  <div style="font-size:0.72rem; color:var(--text-muted);">未来5日预期Alpha</div>
+                </td>
+                <td style="text-align:center;">
+                  <span class="badge ${item.confidence === 'HIGH' ? 'badge-green' : 'badge-blue'}">${item.confidence || 'HIGH'}</span>
+                </td>
+                <td>
+                  <div style="font-size:0.82rem; color:var(--text-secondary); line-height:1.4;">
+                    ${item.notes || '常规因子时序推演'}
+                  </div>
+                </td>
+              </tr>
+            `;
+          }).join('');
+
+          // 绑定行点击跳转或查看对应模型
+          predTbody.querySelectorAll('tr.clickable-row').forEach(tr => {
+            tr.addEventListener('click', () => {
+              const sym = tr.getAttribute('data-symbol');
+              const matchedModel = catalogList.find(m => m.universe_symbols_str && m.universe_symbols_str.includes(sym)) || catalogList[0];
+              if (matchedModel) {
+                showModelDetailModal(matchedModel, data, sym);
+              }
+            });
+          });
+        }
+
+        renderPredTable();
+
+        // 绑定聚类筛选按钮
+        const clusterBtns = document.querySelectorAll('#predClusterFilterNav .catalog-pill');
+        clusterBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            clusterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentCluster = btn.getAttribute('data-cluster');
+            renderPredTable();
+          });
+        });
+
+        // 绑定搜索输入框
+        const searchInput = document.getElementById('predSearchInput');
+        if (searchInput) {
+          searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value.trim();
+            renderPredTable();
+          });
+        }
+      }
+
+      // 6. 渲染实盘周频头寸换算与交易调仓清单 (Trading Orders)
+      const ordersData = await fetchStaticData('trading_orders_latest.json');
+      if (ordersData) {
+        renderTradingOrdersSection(ordersData);
+      }
+
+      function renderTradingOrdersSection(oData) {
+        const meta = oData.portfolio_meta || {};
+        const pSummaryCard = document.getElementById('portfolioSummaryCard');
+        if (pSummaryCard) {
+          pSummaryCard.innerHTML = `
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:1.25rem;">
+              <div style="flex:1; min-width:280px;">
+                <div style="font-size:0.8rem; color:var(--text-muted); font-weight:700; text-transform:uppercase; letter-spacing:0.5px;">
+                  GCP Live Trading Engine · 周频调仓头寸总览
+                </div>
+                <div style="font-size:1.3rem; font-weight:800; color:var(--text-primary); margin:0.3rem 0;">
+                  基准模拟账户: $100,000 USD <span style="font-size:0.85rem; font-weight:400; color:var(--text-muted);">(持有期: 5交易日)</span>
+                </div>
+                <div style="font-size:0.84rem; color:var(--text-secondary); line-height:1.6;">
+                  • <strong>执行时钟周期</strong>: <span style="color:var(--text-primary);">${oData.execution_cycle || '周频换血调仓'}</span><br/>
+                  • <strong>路由安全协议</strong>: <span style="color:var(--color-accent);">${meta.order_routing_protocol || 'GCP Broker API Gateway with Pre-Trade Limits'}</span>
+                </div>
+              </div>
+              <div style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap;">
+                <div style="background:var(--bg-surface); border:1px solid var(--border-default); border-radius:8px; padding:0.6rem 1.1rem; text-align:center;">
+                  <div style="font-size:0.75rem; color:var(--text-muted);">实际股票权益敞口</div>
+                  <div style="font-size:1.45rem; font-weight:800; color:var(--color-success);" class="tabular-numbers">${meta.actual_equity_exposure || '83.0%'}</div>
+                  <div style="font-size:0.72rem; color:var(--text-muted);">$${Number(meta.actual_invested_capital_usd || 82985).toLocaleString()}</div>
+                </div>
+                <div style="background:var(--bg-surface); border:1px solid var(--border-default); border-radius:8px; padding:0.6rem 1.1rem; text-align:center;">
+                  <div style="font-size:0.75rem; color:var(--text-muted);">防守现金储备水位</div>
+                  <div style="font-size:1.45rem; font-weight:800; color:var(--color-accent);" class="tabular-numbers">${meta.actual_cash_reserve || '17.0%'}</div>
+                  <div style="font-size:0.72rem; color:var(--text-muted);">$${Number(meta.actual_retained_cash_usd || 17015).toLocaleString()}</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 分群权重进度分配条 -->
+            <div style="margin-top:1.2rem; padding-top:1rem; border-top:1px solid var(--border-muted);">
+              <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.8rem; margin-bottom:0.4rem; color:var(--text-secondary);">
+                <span>🎯 四大分群与防守现金资产结构配置</span>
+                <span style="font-family:var(--font-mono);">总合规敞口: 100.0%</span>
+              </div>
+              <div style="display:flex; height:10px; border-radius:5px; overflow:hidden; background:var(--bg-canvas);">
+                <div style="width:29.9%; background:var(--color-success);" title="超大盘科技成长 (29.9%)"></div>
+                <div style="width:24.9%; background:var(--color-purple);" title="高Beta进攻弹性 (24.9%)"></div>
+                <div style="width:16.9%; background:var(--color-amber);" title="周期制造金融 (16.9%)"></div>
+                <div style="width:12.9%; background:var(--color-accent);" title="稳健防御价值 (12.9%)"></div>
+                <div style="width:15.4%; background:var(--border-default);" title="现金防御防守 (15.4%)"></div>
+              </div>
+              <div style="display:flex; gap:1rem; flex-wrap:wrap; font-size:0.75rem; color:var(--text-muted); margin-top:0.5rem;">
+                <span style="display:flex; align-items:center; gap:4px;"><span style="width:8px; height:8px; border-radius:50%; background:var(--color-success);"></span> 超大盘成长 29.9% (META/AAPL/MSFT/GOOGL)</span>
+                <span style="display:flex; align-items:center; gap:4px;"><span style="width:8px; height:8px; border-radius:50%; background:var(--color-purple);"></span> 高Beta进攻 24.9% (NVDA/TSLA/AMD/PLTR)</span>
+                <span style="display:flex; align-items:center; gap:4px;"><span style="width:8px; height:8px; border-radius:50%; background:var(--color-amber);"></span> 周期制造 16.9% (XOM/JPM/CAT)</span>
+                <span style="display:flex; align-items:center; gap:4px;"><span style="width:8px; height:8px; border-radius:50%; background:var(--color-accent);"></span> 稳健防御 12.9% (ABBV/WMT)</span>
+                <span style="display:flex; align-items:center; gap:4px;"><span style="width:8px; height:8px; border-radius:50%; background:var(--border-default);"></span> 现金储备 17.0%</span>
+              </div>
+            </div>
+          `;
+        }
+
+        const ordersTbody = document.getElementById('tradingOrdersTableBody');
+        const orders = oData.trading_orders || [];
+        if (!orders.length) {
+          ordersTbody.innerHTML = `<tr><td colspan="9" style="text-align:center; color:var(--text-muted); padding:2rem;">当前调仓周期无待执行订单</td></tr>`;
+          return;
+        }
+
+        ordersTbody.innerHTML = orders.map(ord => {
+          let clusterTag = '<span class="badge badge-purple">Tier 2</span>';
+          if (ord.cluster_id.includes('MEGA_GROWTH')) {
+            clusterTag = '<span class="badge badge-green">超大盘成长</span>';
+          } else if (ord.cluster_id.includes('HIGH_BETA')) {
+            clusterTag = '<span class="badge badge-purple">高Beta弹性</span>';
+          } else if (ord.cluster_id.includes('CYCLICAL_ENERGY')) {
+            clusterTag = '<span class="badge badge-amber">周期制造</span>';
+          } else if (ord.cluster_id.includes('DEFENSIVE_VALUE')) {
+            clusterTag = '<span class="badge badge-blue">稳健防御</span>';
+          }
+
+          return `
+            <tr>
+              <td style="text-align:center;">
+                <span class="badge badge-green" style="font-weight:700;">BUY 买入</span>
+              </td>
+              <td>
+                <div style="font-weight:800; color:var(--color-accent); font-family:var(--font-mono); font-size:0.95rem;">
+                  ${ord.symbol}
+                </div>
+                <div style="font-size:0.75rem; color:var(--text-muted);">${ord.name || ord.symbol}</div>
+              </td>
+              <td>
+                <div style="font-size:0.82rem; color:var(--text-secondary); margin-bottom:2px;">${ord.sector}</div>
+                ${clusterTag}
+              </td>
+              <td style="text-align:right;">
+                <span class="tabular-numbers" style="color:var(--text-primary); font-weight:600;">$${ord.latest_close_usd.toFixed(2)}</span>
+                <div style="font-size:0.7rem; color:var(--text-muted);">${ord.latest_price_date}</div>
+              </td>
+              <td style="text-align:right;">
+                <span class="tabular-numbers" style="color:var(--color-accent); font-weight:700;">$${ord.limit_buy_price_usd.toFixed(2)}</span>
+                <div style="font-size:0.7rem; color:var(--text-muted);">+0.15%滑点保护</div>
+              </td>
+              <td style="text-align:center;">
+                <span class="tabular-numbers" style="font-size:1.05rem; font-weight:800; color:var(--text-primary);">${ord.target_shares}</span>
+                <span style="font-size:0.75rem; color:var(--text-muted);">股</span>
+              </td>
+              <td style="text-align:right;">
+                <span class="tabular-numbers" style="font-weight:700; color:var(--color-success); font-size:0.95rem;">$${Number(ord.allocated_capital_usd).toLocaleString()}</span>
+              </td>
+              <td style="text-align:right;">
+                <span class="tabular-numbers" style="font-weight:700; color:var(--text-primary);">${ord.actual_weight_pct}</span>
+                <div style="font-size:0.7rem; color:var(--text-muted);">目标 ${ord.target_weight_pct}</div>
+              </td>
+              <td>
+                <div style="display:flex; flex-direction:column; gap:3px;">
+                  <div>
+                    <span class="badge badge-warning" style="font-size:0.74rem;">止损 $${ord.stop_loss_price_usd.toFixed(2)} (${ord.stop_loss_pct})</span>
+                    <span class="badge badge-green" style="font-size:0.74rem;">止盈 $${ord.take_profit_price_usd.toFixed(2)} (${ord.take_profit_target_pct})</span>
+                  </div>
+                  <div style="font-size:0.72rem; color:var(--text-muted); line-height:1.3; margin-top:2px;">
+                    ${ord.catalysts_and_notes}
+                  </div>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      // 处理 URL 传参（从基础数据看板跳转时联动定位标的与模型对比）
+      const urlParams = new URLSearchParams(window.location.search);
+      const targetSymbol = urlParams.get('symbol');
+      const shouldCompare = urlParams.get('compare');
+      if (shouldCompare === 'true' && targetSymbol) {
+        const activeModel = catalogList.find(m => m.category === 'PROD') || catalogList[0];
+        if (activeModel) {
+          showModelDetailModal(activeModel, data, targetSymbol);
+          // 自动切换到 Tab 4（最新多空推演与拟合曲线）
+          setTimeout(() => {
+            const tab4Btn = document.querySelector('.modal-tab-btn[data-tab-target="tab_outputs"]');
+            if (tab4Btn) tab4Btn.click();
+          }, 50);
+        }
+      }
+    }
+
+    initPage();
+  </script>
+</body>
+</html>

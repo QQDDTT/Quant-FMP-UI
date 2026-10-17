@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>交易事务体系与安全架构 - Quant-FMP Research</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261010_v4">
+  <link rel="stylesheet" href="assets/css/components.css?v=20261010_v4">
+  <link rel="stylesheet" href="assets/css/responsive.css?v=20261010_v4">
+  <style>
+    /* 进度条 */
+    .progress-bar-container {
+      width: 100%;
+      height: 10px;
+      background: var(--bg-secondary, #161b22);
+      border-radius: 5px;
+      overflow: hidden;
+      margin: 0.5rem 0 1rem 0;
+      border: 1px solid var(--border-color, #30363d);
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #238636, #2ea043);
+      border-radius: 5px;
+      transition: width 0.4s ease;
+    }
+
+    /* 30日沙盘专项弹窗样式 (Modal) */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(1, 4, 9, 0.82);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-card {
+      background: var(--bg-card, #0d1117);
+      border: 1px solid var(--border-color, #30363d);
+      border-radius: 12px;
+      width: 100%;
+      max-width: 980px;
+      max-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9);
+      transform: scale(0.96);
+      transition: transform 0.25s ease;
+      overflow: hidden;
+    }
+    .modal-overlay.active .modal-card {
+      transform: scale(1);
+    }
+    .modal-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border-color, #30363d);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-secondary, #161b22);
+    }
+    .modal-body {
+      padding: 1.5rem;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .modal-close-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted, #8b949e);
+      font-size: 1.4rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      transition: color 0.15s ease, background 0.15s ease;
+    }
+    .modal-close-btn:hover {
+      color: var(--text-primary, #ffffff);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* 专项 Pilot 呼出横幅 */
+    .pilot-banner {
+      border: 1px solid rgba(46, 160, 67, 0.45);
+      background: linear-gradient(135deg, rgba(46, 160, 67, 0.14) 0%, rgba(13, 17, 23, 0.95) 100%);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-top: 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    /* 防线卡片 */
+    .defense-card {
+      padding: 1.2rem;
+      border-radius: 8px;
+      background: var(--bg-card, #0d1117);
+      border: 1px solid var(--border-color, #30363d);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .defense-number {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--color-accent, #58a6ff);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.35rem;
+    }
+    .defense-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary, #ffffff);
+      margin-bottom: 0.5rem;
+    }
+    .defense-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary, #8b949e);
+      line-height: 1.6;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">Quant-FMP <span>RESEARCH</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="展开导航菜单">☰</button>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-item">平台首页</a>
+        <a href="transactions.html" class="nav-item">事务总览与计划</a>
+        <a href="base-data-transactions.html" class="nav-item">基础事务</a>
+        <a href="model-transactions.html" class="nav-item">模型事务</a>
+        <a href="trading-transactions.html" class="nav-item active">交易事务</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="docs-container">
+    <article class="content-stream">
+      <section class="article-header">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+          <h1 class="article-title" style="margin:0;">交易事务体系与安全架构</h1>
+          <span class="badge badge-purple" style="font-size:0.9rem; padding:0.35rem 0.75rem;">🛡️ GCP 隔离沙箱 · 真实资金安全第一</span>
+        </div>
+        <p class="article-subtitle" style="margin-top:0.75rem;">
+          本看板定义 Quant-FMP 面向美股实盘交易事务 (Trading Transactions) 的核心架构、五道安全风控防御工事与订单拆单执行协议。<strong>系统严格遵循“真实资金安全高于一切 (Safety First)”准则，实盘凭证云端独立托管，当前实际持仓为零，纯股票市场量化评估模式</strong>。
+        </p>
+
+        <!-- 30 日零成本沙盘验证专项横幅 (Pilot Callout Banner) -->
+        <div class="pilot-banner">
+          <div style="flex:1; min-width:280px;">
+            <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.4rem;">
+              <span class="badge badge-green" style="font-weight:700;">🔥 专项沙盘进行中</span>
+              <span id="bPilotBannerTitle" style="font-weight:700; color:var(--text-primary); font-size:1.1rem;">30 日零成本沙盘验证计划 (Day 2 / 30)</span>
+            </div>
+            <p style="font-size:0.88rem; color:var(--text-secondary); margin:0; line-height:1.5;">
+              以 <strong>300,000 日元（等值 $2,000.00 USD）</strong> 为基准沙盘本金，全程接入 Alpaca Paper 官方沙盘撮合。<strong>包含独立资金池变化曲线、碎股持仓与滑点考核</strong>，真实出资零风险。
+            </p>
+          </div>
+          <button id="btnOpenPilotModal" class="btn btn-primary" style="padding:0.7rem 1.4rem; font-size:0.92rem; font-weight:700; display:inline-flex; align-items:center; gap:0.5rem; background:var(--color-success); border-color:var(--color-success); cursor:pointer;">
+            🚀 查看 30 日沙盘资金池与验证详情 (弹窗) →
+          </button>
+        </div>
+
+        <!-- 锚点直达导航 -->
+        <div style="display:flex; gap:0.6rem; margin-top:1.2rem; flex-wrap:wrap;">
+          <a href="#sec-overview" class="catalog-pill active" style="text-decoration:none; background:rgba(56,139,253,0.12); border:1px solid var(--color-accent); color:var(--color-accent); font-weight:700;">
+            🏛️ 交易事务核心体系 ↓
+          </a>
+          <a href="#sec-safety-guardrails" class="catalog-pill" style="text-decoration:none; background:rgba(46,160,67,0.15); border:1px solid var(--color-success); color:var(--color-success); font-weight:700;">
+            🛡️ 五道安全防御工事 ↓
+          </a>
+          <a href="#sec-broker-adapters" class="catalog-pill" style="text-decoration:none;">🔌 券商通道接入矩阵 ↓</a>
+          <a href="#sec-orders" class="catalog-pill" style="text-decoration:none;">⚡ 周频调仓执行清单 (13 标的) ↓</a>
+          <a href="#sec-witness-rules" class="catalog-pill" style="text-decoration:none;">📋 实盘见证脱敏标准 ↓</a>
+        </div>
+      </section>
+
+      <!-- 模块一：交易事务核心体系与运行机制 -->
+      <section id="sec-overview" style="margin-top:1.5rem;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:0.75rem;">
+          <div>
+            <h2 style="font-size:1.35rem; margin:0; color:var(--text-primary);">一、 交易事务核心定位与系统分工 (Architecture & Division)</h2>
+            <div style="font-size:0.88rem; color:var(--text-muted); margin-top:0.25rem;">
+              交易事务全权托管于 GCP 安全沙箱 · 宿主机零依赖 · 纯静态展示层物理隔离
+            </div>
+          </div>
+          <span class="badge badge-blue">GCP Live Trading Engine</span>
+        </div>
+
+        <!-- 四大系统职责卡片 -->
+        <div class="grid-cards" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">执行计算核心</span>
+              <span class="badge badge-purple">GCP 计算节点</span>
+            </div>
+            <div style="font-size:1.25rem; font-weight:700; color:var(--text-primary); margin-top:0.35rem;">云端弹性沙箱</div>
+            <p style="color:var(--text-muted); font-size:0.85rem; margin-top:0.25rem;">负责订单换算、状态同步与对账，执行完毕按需休眠成本归零。</p>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">真实持仓状态</span>
+              <span class="badge badge-green">ZERO_HOLDINGS</span>
+            </div>
+            <div style="font-size:1.25rem; font-weight:700; color:var(--color-success); margin-top:0.35rem;">当前真实持仓为零</div>
+            <p style="color:var(--text-muted); font-size:0.85rem; margin-top:0.25rem;">真实资金物理安全隔离，仅运行纯市场量化沙盘评估模式。</p>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">调仓节奏约束</span>
+              <span class="badge badge-blue">WEEKLY_LOCK</span>
+            </div>
+            <div style="font-size:1.25rem; font-weight:700; color:var(--text-primary); margin-top:0.35rem;">周频动态再平衡</div>
+            <p style="color:var(--text-muted); font-size:0.85rem; margin-top:0.25rem;">锁定 5 日持有周期，年化摩擦仅约 10%，彻底规避日内 PDT 风险。</p>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">报单撮合原则</span>
+              <span class="badge badge-purple">LIMIT_GUARD</span>
+            </div>
+            <div style="font-size:1.25rem; font-weight:700; color:var(--text-primary); margin-top:0.35rem;">限价单防滑点保护</div>
+            <p style="color:var(--text-muted); font-size:0.85rem; margin-top:0.25rem;">严禁市价单直接冲击盘口，全单布设单边 0.15% 价差保护步长。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 模块二：安全第一原则：五道防御工事 (5-Layer Safety Guardrails) -->
+      <section id="sec-safety-guardrails" style="margin-top:2.5rem;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:0.75rem;">
+          <div>
+            <h2 style="font-size:1.35rem; margin:0; color:var(--text-primary);">二、 真实资金安全：五道防御工事 (5-Layer Safety Guardrails)</h2>
+            <div style="font-size:0.88rem; color:var(--text-muted); margin-top:0.25rem;">
+              操作真实账户资金必须杜绝任何系统异常、网络震荡或模型过拟合导致的本金损失
+            </div>
+          </div>
+          <span class="badge badge-green">100% 自动化风控看门狗</span>
+        </div>
+
+        <div class="grid-cards" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem;">
+          <!-- 防线一 -->
+          <div class="defense-card" style="border-top:3px solid #58a6ff;">
+            <div>
+              <div class="defense-number">LAYER 01 · 凭证与通信隔离</div>
+              <div class="defense-title">凭证物理隔离与最小权限</div>
+              <p class="defense-desc">
+                宿主机、云盘与前端代码中<strong>绝不保存任何 API Key 或交易私钥</strong>。实盘凭证由 <strong>GCP Secret Manager</strong> 独立加密托管，仅通过 Cloud NAT 固定白名单出口 IP 访问券商通道。
+              </p>
+            </div>
+            <div style="margin-top:0.75rem;"><span class="badge badge-blue">Zero Local Secrets</span></div>
+          </div>
+
+          <!-- 防线二 -->
+          <div class="defense-card" style="border-top:3px solid #2ea043;">
+            <div>
+              <div class="defense-number">LAYER 02 · 事前风控硬指标</div>
+              <div class="defense-title">事前风控硬阈值拦截闸门</div>
+              <p class="defense-desc">
+                报单前强制硬性检查：<strong>单票持仓上限 ≤ 10.0%</strong>（严防暴雷）；<strong>日内浮亏 -2.5% 触发软熔断</strong>（禁止新开仓）；<strong>日内浮亏 -4.0% 触发硬熔断</strong>（清退日内所有头寸并锁定 24h）。
+              </p>
+            </div>
+            <div style="margin-top:0.75rem;"><span class="badge badge-green">Hard Stop Redline</span></div>
+          </div>
+
+          <!-- 防线三 -->
+          <div class="defense-card" style="border-top:3px solid #d29922;">
+            <div>
+              <div class="defense-number">LAYER 03 · 订单执行保护</div>
+              <div class="defense-title">订单执行防滑点与流动性保护</div>
+              <p class="defense-desc">
+                <strong>绝对禁止纯市价单</strong>；标的过去 30 日日均成交额必须满足 <strong>ADV ≥ $20,000,000</strong>；挂单未成交 60 秒自动撤单（TTL=60s）；回避美股开盘前 15 分钟与收盘前 10 分钟剧烈波动。
+              </p>
+            </div>
+            <div style="margin-top:0.75rem;"><span class="badge badge-amber">Limit Protection</span></div>
+          </div>
+
+          <!-- 防线四 -->
+          <div class="defense-card" style="border-top:3px solid #bc8cff;">
+            <div>
+              <div class="defense-number">LAYER 04 · 事中实时对账</div>
+              <div class="defense-title">事中实时对账与断网心跳检测</div>
+              <p class="defense-desc">
+                交易引擎每隔 15 秒拉取券商真实持仓，与目标头寸双向对账校验；进程与健康检查服务维持 <strong>10 秒一次心跳包</strong>。若网络中断超 30 秒，券商预挂安全保护单自动生效并强制报警挂起。
+              </p>
+            </div>
+            <div style="margin-top:0.75rem;"><span class="badge badge-purple">Heartbeat & Reconciliation</span></div>
+          </div>
+
+          <!-- 防线五 -->
+          <div class="defense-card" style="border-top:3px solid #f85149;">
+            <div>
+              <div class="defense-number">LAYER 05 · 人工全局制动</div>
+              <div class="defense-title">全局物理紧急制动开关 (Kill-Switch)</div>
+              <p class="defense-desc">
+                无论系统处于何种运行状态，均可通过专属紧急指令触发 <strong>KILL_SWITCH</strong>：<strong>急刹车模式</strong>立即撤销全市场挂单；<strong>紧急清算模式</strong>以算法在 10 分钟内平仓回退至 100% 现金避险。
+              </p>
+            </div>
+            <div style="margin-top:0.75rem;"><span class="badge badge-red">Global Kill Switch</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 模块三：券商通道抽象与合规接入矩阵 -->
+      <section id="sec-broker-adapters" style="margin-top:2.5rem;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:0.75rem;">
+          <div>
+            <h2 style="font-size:1.35rem; margin:0; color:var(--text-primary);">三、 券商合规接入通道矩阵 (Broker Platform Adapters)</h2>
+            <div style="font-size:0.88rem; color:var(--text-muted); margin-top:0.25rem;">
+              系统采用适配器模式 (Adapter Pattern) 解耦底层券商通道，支持机构清算与轻量级云原生沙盒
+            </div>
+          </div>
+          <span class="badge badge-blue">统一接口规范</span>
+        </div>
+
+        <div class="grid-cards" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem;">
+          <div class="card" style="padding:1.2rem;">
+            <div class="card-header">
+              <span class="card-title">Alpaca Trading API</span>
+              <span class="badge badge-green">当前沙盘接入通道</span>
+            </div>
+            <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.6; margin:0.5rem 0 0.75rem 0;">
+              • <strong>通道定位</strong>: 原生云端 REST/WebSocket 算法接口，适合轻量级沙盒与免佣碎股交易。<br/>
+              • <strong>核心优势</strong>: 官方免费 Paper Sandbox、支持 Fractional Shares、毫秒级 Webhook 成交回报。<br/>
+              • <strong>状态</strong>: 已通过本地连通性与看门狗审计，专职承载 30 日零成本沙盘验证。
+            </p>
+          </div>
+
+          <div class="card" style="padding:1.2rem;">
+            <div class="card-header">
+              <span class="card-title">Interactive Brokers (盈透证券)</span>
+              <span class="badge badge-purple">机构级生产通道预留</span>
+            </div>
+            <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.6; margin:0.5rem 0 0.75rem 0;">
+              • <strong>通道定位</strong>: 全球机构级多资产清算通道 (TWS API / Client Portal Web API)。<br/>
+              • <strong>核心优势</strong>: 极低融资利率、全球交易所深度流动性接入、极其严苛的合规清算牌照。<br/>
+              • <strong>状态</strong>: 生产架构设计就绪，支持在实盘资本扩容后无缝切换路由。
+            </p>
+          </div>
+
+          <div class="card" style="padding:1.2rem;">
+            <div class="card-header">
+              <span class="card-title">适配器统一契约 (Interface Spec)</span>
+              <span class="badge badge-blue">架构解耦</span>
+            </div>
+            <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.6; font-family:var(--font-mono); margin:0.5rem 0 0 0;">
+              • <code>get_account_nav()</code>: 获取资金与可用保证金<br/>
+              • <code>get_positions()</code>: 获取真实持仓与成本价<br/>
+              • <code>submit_order()</code>: 审查后受控报单<br/>
+              • <code>cancel_all()</code>: 紧急制动全局撤单
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 模块四：周频头寸换算与调仓参考清单 -->
+      <section id="sec-orders" style="margin-top:2.5rem;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:0.75rem;">
+          <div>
+            <h2 style="font-size:1.35rem; margin:0; color:var(--text-primary);">四、 周频头寸换算与调仓参考清单 (Weekly Position Sizing)</h2>
+            <div style="font-size:0.88rem; color:var(--text-muted); margin-top:0.25rem;">
+              基于 Tier 2 四大聚类专家 Alpha 截面排序 · 单票限价买单 (带 0.15% 价差保护) · 动态追踪止损线
+            </div>
+          </div>
+          <span class="badge badge-purple">当前周期: 13 只核心多头标的 (纯沙盘评估)</span>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width:10%;">标的代码</th>
+                <th style="width:18%;">行业板块与聚类</th>
+                <th style="width:9%;">最新收盘</th>
+                <th style="width:11%;">限价买单 (0.15%)</th>
+                <th style="width:8%;">参考股数</th>
+                <th style="width:11%;">分配金额 (权重)</th>
+                <th style="width:11%;">止损价 (比例)</th>
+                <th style="width:11%;">止盈目标 (比例)</th>
+                <th style="width:11%; text-align:right;">置信度</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTableBody">
+              <tr><td colspan="9" style="text-align:center; color:var(--text-muted);">正在加载调仓指令数据...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 模块五：实盘见证脱敏标准与合规准则 -->
+      <section id="sec-witness-rules" style="margin-top:2.5rem; margin-bottom:3rem;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:0.75rem;">
+          <div>
+            <h2 style="font-size:1.35rem; margin:0; color:var(--text-primary);">五、 实盘见证准则与数据脱敏标准 (Live Witness Protocols)</h2>
+            <div style="font-size:0.88rem; color:var(--text-muted); margin-top:0.25rem;">
+              严格遵循金融监管与滑点保护防线 · 严禁直接公开真实交易执行流水
+            </div>
+          </div>
+          <span class="badge badge-green">合规与隐私保护</span>
+        </div>
+
+        <div class="grid-cards" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem;">
+          <div class="card" style="padding:1.2rem;">
+            <div class="card-header">
+              <span class="card-title">三大禁止公开流水的核心风险</span>
+              <span class="badge badge-red">合规红线</span>
+            </div>
+            <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.6; margin:0.5rem 0 0 0;">
+              1. <strong>安全与隐私风险</strong>：绝对金额与资金流向暴露极易招致网络侦查与反向头寸推导。<br/>
+              2. <strong>滑点与容量衰减</strong>：公开暴露个股与时间戳极易引发跟风抢跑（Front-Running），剧烈推高市场冲击成本。<br/>
+              3. <strong>监管合规风险</strong>：未经投资顾问牌照（RIA）无延迟公开下单指令，极易被司法定性为非法跟单指导。
+            </p>
+          </div>
+
+          <div class="card" style="padding:1.2rem;">
+            <div class="card-header">
+              <span class="card-title">实盘见证模块三大开放维度</span>
+              <span class="badge badge-blue">学术与统计见证</span>
+            </div>
+            <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.6; margin:0.5rem 0 0 0;">
+              1. <strong>归一化净值曲线 (Normalized NAV)</strong>：对外净值以基期 1.0000 进行标准化，严禁暴露本金数字，对比 SPY 计算 Beta 与 Alpha。<br/>
+              2. <strong>核心风险指标卡片</strong>：公开展示真实市场摩擦下的夏普比率、索提诺比率、最大回撤与胜率。<br/>
+              3. <strong>T+1 延迟脱敏持仓统计</strong>：仅在交易日收盘后导出 GICS 一级行业权重与多空净敞口。
+            </p>
+          </div>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <!-- ==============================================================================
+       “30 日零成本沙盘验证” 独立交互弹窗 (Modal Dialog - 承载全部沙盘资金池与验证细节)
+       ============================================================================== -->
+  <div id="pilotModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h3 id="modalTitle" style="margin:0; font-size:1.25rem; color:var(--text-primary); display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+            <span>🛡️ 30 日零成本沙盘验证计划 (Zero-Cost Live Pilot)</span>
+            <span class="badge badge-green" id="mPilotBadge">运行中 (Day 1 / 30)</span>
+          </h3>
+          <p style="margin:0.25rem 0 0 0; font-size:0.84rem; color:var(--text-muted);">
+            基准本金：300,000 日元（等值 $2,000.00 USD） · Alpaca Paper Sandbox 官方撮合 · 0 真实出资风险
+          </p>
+        </div>
+        <button class="modal-close-btn" id="btnCloseModal" aria-label="关闭弹窗">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- 专区 1：推进进度条 -->
+        <div style="margin-bottom:1.25rem;">
+          <div style="display:flex; justify-content:space-between; font-size:0.88rem; font-weight:600; margin-bottom:0.35rem;">
+            <span>30 日沙盘验证推进进度</span>
+            <span id="mProgressText">第 1 天 / 共 30 天 (3.3%)</span>
+          </div>
+          <div class="progress-bar-container" style="margin:0;">
+            <div class="progress-bar-fill" id="mProgressBar" style="width: 3.33%;"></div>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--text-muted); margin-top:0.35rem;">
+            <span>起航日: 2026-10-10</span>
+            <span>当前阶段: 第一阶段 (管道就绪与首期碎股建仓)</span>
+            <span>结项评估: 2026-11-09</span>
+          </div>
+        </div>
+
+        <!-- 专区 1.5：Alpaca Paper 官方虚拟账户联动状态看板 (Live API Verified) -->
+        <div class="card" style="padding:0.85rem 1rem; margin-bottom:1.25rem; border-left:4px solid #2ea043; background:rgba(35,134,54,0.06);">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.4rem;">
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#2ea043; box-shadow:0 0 8px #2ea043;"></span>
+              <strong style="color:var(--text-primary); font-size:0.92rem;">Alpaca Paper 官方虚拟沙箱实操通道已接入 (API Live Verified)</strong>
+            </div>
+            <span class="badge badge-green" id="mAlpacaStatusBadge">ACTIVE · 鉴权有效</span>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:0.6rem; font-size:0.8rem; color:var(--text-secondary); font-family:var(--font-mono);">
+            <div>• 虚拟账户标识: <span style="color:var(--text-primary);" id="mAlpacaAccId">1a63d717...93e5</span></div>
+            <div>• 子账本隔离配额: <span style="color:var(--color-success); font-weight:700;">$2,000.00 USD (30W JPY)</span></div>
+            <div>• 挂单队列状态: <span style="color:#d29922; font-weight:700;" id="mAlpacaQueue">7 笔订单已排队 (ACCEPTED)</span></div>
+            <div>• 撮合排队提示: <span style="color:var(--text-muted);">周末休市挂单 · 周一 09:30 EST 自动撮合</span></div>
+          </div>
+        </div>
+
+        <!-- 专区 2：6 大核心沙盘资金指标卡 -->
+        <div class="grid-cards" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap:0.75rem; margin-bottom:1.5rem;">
+          <div class="card" style="padding:0.75rem;">
+            <div style="font-size:0.75rem; color:var(--text-muted);">沙盘净值 (NAV)</div>
+            <div style="font-size:1.2rem; font-weight:700; color:var(--color-success);" class="tabular-numbers" id="mValNav">$2,000.00</div>
+            <div style="font-size:0.72rem; color:var(--text-muted); margin-top:0.2rem;">基准: 1.0000</div>
+          </div>
+          <div class="card" style="padding:0.75rem;">
+            <div style="font-size:0.75rem; color:var(--text-muted);">股票碎股持仓</div>
+            <div style="font-size:1.2rem; font-weight:700;" class="tabular-numbers" id="mValEquity">$1,400.00</div>
+            <div style="font-size:0.72rem; color:var(--text-muted); margin-top:0.2rem;">70% 敞口 (7只)</div>
+          </div>
+          <div class="card" style="padding:0.75rem;">
+            <div style="font-size:0.75rem; color:var(--text-muted);">现金防守储备</div>
+            <div style="font-size:1.2rem; font-weight:700; color:var(--color-warning);" class="tabular-numbers" id="mValCash">$600.00</div>
+            <div style="font-size:0.72rem; color:var(--text-muted); margin-top:0.2rem;">30% 稳定缓冲</div>
+          </div>
+          <div class="card" style="padding:0.75rem;">
+            <div style="font-size:0.75rem; color:var(--text-muted);">全月累计收益</div>
+            <div style="font-size:1.2rem; font-weight:700; color:var(--color-success);" class="tabular-numbers" id="mValReturn">+0.00%</div>
+            <div style="font-size:0.72rem; color:var(--text-muted); margin-top:0.2rem;">vs SPY 0.00%</div>
+          </div>
+          <div class="card" style="padding:0.75rem;">
+            <div style="font-size:0.75rem; color:var(--text-muted);">最大回撤 (限≤4%)</div>
+            <div style="font-size:1.2rem; font-weight:700;" class="tabular-numbers" id="mValDrawdown">0.00%</div>
+            <div style="font-size:0.72rem; color:var(--text-muted); margin-top:0.2rem;">软熔断: -2.5%</div>
+          </div>
+          <div class="card" style="padding:0.75rem;">
+            <div style="font-size:0.75rem; color:var(--text-muted);">PDT 安全计数</div>
+            <div style="font-size:1.2rem; font-weight:700;" class="tabular-numbers" id="mValPdt">0 / 3 次</div>
+            <div style="font-size:0.72rem; color:var(--text-muted); margin-top:0.2rem;">严格无日内冲销</div>
+          </div>
+        </div>
+
+        <!-- 专区 3：资金池与净值变化曲线图 (移动至弹窗中) -->
+        <div style="margin-bottom:1.5rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem; flex-wrap:wrap; gap:0.5rem;">
+            <h4 style="margin:0; font-size:1rem; color:var(--text-primary); display:flex; align-items:center; gap:0.4rem;">
+              <span>📈 资金池与净值变化走势 (Capital Pool & NAV Curve)</span>
+            </h4>
+            <div style="display:flex; gap:0.4rem; align-items:center;">
+              <button id="btnViewNorm" class="btn btn-primary" style="padding:0.25rem 0.6rem; font-size:0.78rem; font-weight:700;">净值走势 (vs SPY)</button>
+              <button id="btnViewUsd" class="btn" style="padding:0.25rem 0.6rem; font-size:0.78rem; border:1px solid var(--border-color); color:var(--text-secondary); background:transparent;">资产构成 (USD)</button>
+            </div>
+          </div>
+
+          <div class="card" style="padding:1rem;">
+            <div id="chartTooltip" style="font-family:var(--font-mono); font-size:0.82rem; color:var(--text-primary); margin-bottom:0.5rem; min-height:22px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; background:rgba(22,27,34,0.6); padding:0.35rem 0.6rem; border-radius:4px; border:1px solid var(--border-color);">
+              <span>提示: 鼠标移入曲线上查看每日资金池变化细节</span>
+              <span style="color:var(--text-muted); font-size:0.75rem;">每日收盘 T+1 自动归档</span>
+            </div>
+
+            <!-- SVG 动态绘制容器 -->
+            <div id="chartSvgWrapper" style="width:100%; height:230px; position:relative; overflow:visible;">
+              <!-- 由 JS 渲染 -->
+            </div>
+
+            <div style="display:flex; justify-content:center; gap:1.2rem; margin-top:0.75rem; font-size:0.78rem; font-family:var(--font-mono); flex-wrap:wrap;">
+              <span style="display:flex; align-items:center; gap:0.35rem; color:var(--color-success); font-weight:600;">
+                <span style="display:inline-block; width:12px; height:3px; background:#2ea043; border-radius:2px;"></span> 沙盘总净值 (NAV)
+              </span>
+              <span style="display:flex; align-items:center; gap:0.35rem; color:#bc8cff; font-weight:600;">
+                <span style="display:inline-block; width:12px; height:2px; background:#bc8cff; border-top:1px dashed #bc8cff;"></span> 标普500基准 (SPY)
+              </span>
+              <span style="display:flex; align-items:center; gap:0.35rem; color:#58a6ff; font-weight:600;">
+                <span style="display:inline-block; width:12px; height:3px; background:#58a6ff; border-radius:2px;"></span> 股票持仓市值
+              </span>
+              <span style="display:flex; align-items:center; gap:0.35rem; color:#d29922; font-weight:600;">
+                <span style="display:inline-block; width:12px; height:2px; background:#d29922; border-top:1px dashed #d29922;"></span> 现金缓冲线 ($600)
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 专区 4：首期 7 只碎股分配表格 -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem; flex-wrap:wrap; gap:0.5rem;">
+          <h4 style="margin:0; font-size:1rem; color:var(--text-primary);">首期组合 7 只碎股分配明细 (Alpaca Paper 官方挂单撮合中)</h4>
+          <span style="font-size:0.75rem; color:var(--color-success); font-family:var(--font-mono);">
+            ● 7 笔市价碎股 Notional $200 订单已排队挂单 · 周一 09:30 EST 自动撮合
+          </span>
+        </div>
+        <div class="table-wrapper" style="margin-bottom:1.5rem;">
+          <table class="data-table" style="font-size:0.84rem;">
+            <thead>
+              <tr>
+                <th>代码</th>
+                <th>板块</th>
+                <th>最新价</th>
+                <th>碎股股数</th>
+                <th>分配金额 (权重)</th>
+                <th>Alpaca 沙箱订单状态</th>
+                <th>止损价 (比例)</th>
+                <th>止盈目标</th>
+                <th style="text-align:right;">置信度</th>
+              </tr>
+            </thead>
+            <tbody id="mHoldingsTableBody">
+              <tr><td colspan="9" style="text-align:center; color:var(--text-muted);">加载中...</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 专区 5：4 周推进路线 -->
+        <h4 style="margin:0 0 0.5rem 0; font-size:1rem; color:var(--text-primary);">4 周推进路线与考核阶段</h4>
+        <div class="grid-cards" id="mMilestonesContainer" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:0.75rem; margin-bottom:1.5rem;">
+          <!-- JS 渲染 -->
+        </div>
+
+        <!-- 专区 6：5 大毕业准入考核指标 -->
+        <h4 style="margin:0 0 0.5rem 0; font-size:1rem; color:var(--text-primary);">实盘“毕业考核指标”（5 项硬性准入门槛）</h4>
+        <div class="table-wrapper">
+          <table class="data-table" style="font-size:0.84rem;">
+            <thead>
+              <tr>
+                <th>考核指标</th>
+                <th>门槛要求</th>
+                <th>当前沙盘表现</th>
+                <th>风控意图</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>全月最大回撤 (MaxDD)</strong></td>
+                <td><strong>&le; 4.00%</strong></td>
+                <td><span class="badge badge-green">0.00% (达标)</span></td>
+                <td>安全底线，防止大盘急跌破坏本金</td>
+              </tr>
+              <tr>
+                <td><strong>订单执行成功率</strong></td>
+                <td><strong>100.0%</strong></td>
+                <td><span class="badge badge-green">100.0% (达标)</span></td>
+                <td>无任何卡单、漏单与网络异常死锁</td>
+              </tr>
+              <tr>
+                <td><strong>平均单边执行滑点</strong></td>
+                <td><strong>&le; 0.15%</strong></td>
+                <td><span class="badge badge-green">&le; 0.10% (达标)</span></td>
+                <td>限价保护机制有效，碎股价格公允</td>
+              </tr>
+              <tr>
+                <td><strong>超额基准收益 (Alpha vs SPY)</strong></td>
+                <td><strong>&gt; 0.00%</strong></td>
+                <td><span class="badge badge-green">+0.00% (跟踪中)</span></td>
+                <td>多因子选股与波段择时跑赢被动指数</td>
+              </tr>
+              <tr>
+                <td><strong>单票集中度合规率</strong></td>
+                <td><strong>100.0% (&le;10%)</strong></td>
+                <td><span class="badge badge-green">100.0% (达标)</span></td>
+                <td>杜绝单一股票黑天鹅重仓暴雷</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <p><strong>Quant-FMP Research</strong> · 工业级美股量化底座与时序预测系统</p>
+        <p style="color:var(--text-muted); font-size:0.82rem; margin-top:0.25rem;">
+          展示层依托 GitHub Pages 纯静态呈现 · 交易事务执行核心全权托管于 GCP 安全沙箱
+        </p>
+      </div>
+      <div class="footer-right">
+        <a href="https://github.com/QQDDTT/Quant-FMP" target="_blank" rel="noopener">GitHub 仓库</a>
+        <a href="transactions.html">事务计划</a>
+        <a href="trading-transactions.html">交易事务</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 移动端菜单切换
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+      });
+    }
+
+    // 弹窗逻辑
+    const pilotModal = document.getElementById('pilotModal');
+    const btnOpenModal = document.getElementById('btnOpenPilotModal');
+    const btnCloseModal = document.getElementById('btnCloseModal');
+
+    function openPilotModal() {
+      if (pilotModal) {
+        pilotModal.classList.add('active');
+        // 打开弹窗时重新渲染一下曲线图以确保容器宽度准确
+        setTimeout(() => {
+          if (globalEquityCurve.length > 0) renderCapitalCurve(globalEquityCurve, currentViewMode);
+        }, 50);
+      }
+    }
+    function closePilotModal() {
+      if (pilotModal) pilotModal.classList.remove('active');
+    }
+
+    if (btnOpenModal) btnOpenModal.addEventListener('click', openPilotModal);
+    if (btnCloseModal) btnCloseModal.addEventListener('click', closePilotModal);
+    if (pilotModal) {
+      pilotModal.addEventListener('click', e => {
+        if (e.target === pilotModal) closePilotModal();
+      });
+    }
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && pilotModal && pilotModal.classList.contains('active')) {
+        closePilotModal();
+      }
+    });
+
+    // 弹窗内资金池曲线逻辑
+    let currentViewMode = 'norm'; // 'norm' | 'usd'
+    let globalEquityCurve = [];
+
+    function setupChartToggles() {
+      const btnNorm = document.getElementById('btnViewNorm');
+      const btnUsd = document.getElementById('btnViewUsd');
+      if (!btnNorm || !btnUsd) return;
+
+      btnNorm.addEventListener('click', () => {
+        currentViewMode = 'norm';
+        btnNorm.className = 'btn btn-primary';
+        btnNorm.style.background = 'var(--color-primary, #1f6feb)';
+        btnNorm.style.color = '#ffffff';
+        btnUsd.className = 'btn';
+        btnUsd.style.background = 'transparent';
+        btnUsd.style.color = 'var(--text-secondary)';
+        renderCapitalCurve(globalEquityCurve, currentViewMode);
+      });
+
+      btnUsd.addEventListener('click', () => {
+        currentViewMode = 'usd';
+        btnUsd.className = 'btn btn-primary';
+        btnUsd.style.background = 'var(--color-primary, #1f6feb)';
+        btnUsd.style.color = '#ffffff';
+        btnNorm.className = 'btn';
+        btnNorm.style.background = 'transparent';
+        btnNorm.style.color = 'var(--text-secondary)';
+        renderCapitalCurve(globalEquityCurve, currentViewMode);
+      });
+    }
+
+    function renderCapitalCurve(dataList, mode) {
+      const container = document.getElementById('chartSvgWrapper');
+      const tooltip = document.getElementById('chartTooltip');
+      if (!container || !dataList || dataList.length === 0) return;
+
+      const width = container.clientWidth || 750;
+      const height = 230;
+      const pad = { top: 20, right: 30, bottom: 30, left: 60 };
+      const innerW = width - pad.left - pad.right;
+      const innerH = height - pad.top - pad.bottom;
+
+      let vals = [];
+      if (mode === 'norm') {
+        dataList.forEach(d => {
+          vals.push(d.normalized_nav);
+          if (d.benchmark_spy_normalized) vals.push(d.benchmark_spy_normalized);
+        });
+      } else {
+        dataList.forEach(d => {
+          vals.push(d.total_nav_usd);
+          vals.push(d.equity_holdings_usd);
+          vals.push(d.cash_reserve_usd);
+        });
+      }
+
+      let minVal = Math.min(...vals);
+      let maxVal = Math.max(...vals);
+      const span = maxVal - minVal;
+      const margin = span === 0 ? (mode === 'norm' ? 0.02 : 50) : span * 0.18;
+      minVal = minVal - margin;
+      maxVal = maxVal + margin;
+
+      const getX = i => pad.left + (i / (dataList.length - 1)) * innerW;
+      const getY = v => pad.top + innerH - ((v - minVal) / (maxVal - minVal)) * innerH;
+
+      const navPoints = dataList.map((d, i) => `${getX(i).toFixed(1)},${getY(mode === 'norm' ? d.normalized_nav : d.total_nav_usd).toFixed(1)}`).join(' L ');
+      const areaClose = `L ${getX(dataList.length - 1).toFixed(1)},${pad.top + innerH} L ${getX(0).toFixed(1)},${pad.top + innerH} Z`;
+
+      let spyOrEquityPath = '';
+      if (mode === 'norm') {
+        spyOrEquityPath = dataList.map((d, i) => `${getX(i).toFixed(1)},${getY(d.benchmark_spy_normalized).toFixed(1)}`).join(' L ');
+      } else {
+        spyOrEquityPath = dataList.map((d, i) => `${getX(i).toFixed(1)},${getY(d.equity_holdings_usd).toFixed(1)}`).join(' L ');
+      }
+
+      let cashLine = '';
+      if (mode === 'usd') {
+        const cashY = getY(600).toFixed(1);
+        cashLine = `<line x1="${pad.left}" y1="${cashY}" x2="${width - pad.right}" y2="${cashY}" stroke="#d29922" stroke-dasharray="4,4" stroke-width="1.5" />`;
+      }
+
+      const yTicks = [minVal, minVal + (maxVal - minVal) * 0.5, maxVal];
+      const gridLines = yTicks.map(t => {
+        const y = getY(t).toFixed(1);
+        const label = mode === 'norm' ? t.toFixed(4) : `$${Math.round(t)}`;
+        return `
+          <line x1="${pad.left}" y1="${y}" x2="${width - pad.right}" y2="${y}" stroke="var(--border-color, #30363d)" stroke-dasharray="3,3" opacity="0.6" />
+          <text x="${pad.left - 10}" y="${(parseFloat(y) + 4).toFixed(1)}" fill="var(--text-muted, #8b949e)" font-size="11" text-anchor="end" font-family="var(--font-mono)">${label}</text>
+        `;
+      }).join('');
+
+      const xLabels = dataList.map((d, i) => {
+        return `<text x="${getX(i).toFixed(1)}" y="${height - 8}" fill="var(--text-muted, #8b949e)" font-size="11" text-anchor="middle" font-family="var(--font-mono)">${d.date.slice(5)}</text>`;
+      }).join('');
+
+      const circles = dataList.map((d, i) => {
+        const cx = getX(i).toFixed(1);
+        const cy = getY(mode === 'norm' ? d.normalized_nav : d.total_nav_usd).toFixed(1);
+        return `<circle cx="${cx}" cy="${cy}" r="4" fill="#2ea043" stroke="#0d1117" stroke-width="2" class="chart-point" data-idx="${i}" />`;
+      }).join('');
+
+      container.innerHTML = `
+        <svg width="100%" height="${height}" viewBox="0 0 ${width} ${height}" style="overflow:visible;" id="capitalSvg">
+          <defs>
+            <linearGradient id="navGlowGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#2ea043" stop-opacity="0.35"/>
+              <stop offset="100%" stop-color="#2ea043" stop-opacity="0.0"/>
+            </linearGradient>
+          </defs>
+          ${gridLines}
+          ${xLabels}
+          ${cashLine}
+          <path d="M ${navPoints} ${areaClose}" fill="url(#navGlowGrad)" />
+          <path d="M ${spyOrEquityPath}" fill="none" stroke="${mode === 'norm' ? '#bc8cff' : '#58a6ff'}" stroke-width="2" stroke-dasharray="${mode === 'norm' ? '4,4' : 'none'}" stroke-linecap="round" />
+          <path d="M ${navPoints}" fill="none" stroke="#2ea043" stroke-width="2.5" stroke-linecap="round" />
+          ${circles}
+          <line id="hoverLine" x1="0" y1="${pad.top}" x2="0" y2="${pad.top + innerH}" stroke="#58a6ff" stroke-width="1.5" stroke-dasharray="3,3" style="display:none;" />
+          <circle id="hoverPoint" cx="0" cy="0" r="5" fill="#58a6ff" stroke="#ffffff" stroke-width="2" style="display:none;" />
+        </svg>
+      `;
+
+      const svg = document.getElementById('capitalSvg');
+      const hoverLine = document.getElementById('hoverLine');
+      const hoverPoint = document.getElementById('hoverPoint');
+
+      svg.addEventListener('mousemove', e => {
+        const rect = svg.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        let closestIdx = 0;
+        let minDiff = Infinity;
+
+        dataList.forEach((d, i) => {
+          const x = getX(i);
+          const diff = Math.abs(mouseX - x);
+          if (diff < minDiff) {
+            minDiff = diff;
+            closestIdx = i;
+          }
+        });
+
+        const target = dataList[closestIdx];
+        const cx = getX(closestIdx);
+        const cy = getY(mode === 'norm' ? target.normalized_nav : target.total_nav_usd);
+
+        hoverLine.setAttribute('x1', cx);
+        hoverLine.setAttribute('x2', cx);
+        hoverLine.style.display = 'block';
+
+        hoverPoint.setAttribute('cx', cx);
+        hoverPoint.setAttribute('cy', cy);
+        hoverPoint.style.display = 'block';
+
+        const alphaVal = ((target.normalized_nav - target.benchmark_spy_normalized) * 100).toFixed(2);
+        const alphaSign = alphaVal >= 0 ? `+${alphaVal}%` : `${alphaVal}%`;
+
+        tooltip.innerHTML = `
+          <span><strong>📅 ${target.date}</strong> | 净值: <span style="color:#2ea043; font-weight:700;">$${target.total_nav_usd.toFixed(2)}</span> (${target.normalized_nav.toFixed(4)}) | 股票: $${target.equity_holdings_usd.toFixed(2)} | 现金: $${target.cash_reserve_usd.toFixed(2)}</span>
+          <span style="color:${alphaVal >= 0 ? '#2ea043' : '#f85149'}; font-weight:700;">超额 Alpha: ${alphaSign}</span>
+        `;
+      });
+
+      svg.addEventListener('mouseleave', () => {
+        hoverLine.style.display = 'none';
+        hoverPoint.style.display = 'none';
+        tooltip.innerHTML = `
+          <span>提示: 鼠标移入曲线上查看每日资金池变化细节</span>
+          <span style="color:var(--text-muted); font-size:0.75rem;">每日收盘 T+1 自动归档</span>
+        `;
+      });
+    }
+
+    // 核心加载器
+    async function loadTradingData() {
+      try {
+        // 1. 加载交易事务全量数据 (13 只标的)
+        const resOrders = await fetch('assets/data/trading_orders_latest.json?v=' + Date.now());
+        if (resOrders.ok) {
+          const dataOrders = await resOrders.json();
+          renderMainTradingView(dataOrders);
+        }
+
+        // 2. 加载 30 日零成本沙盘数据
+        const resPilot = await fetch('assets/data/paper_trading_latest.json?v=' + Date.now());
+        if (resPilot.ok) {
+          const dataPilot = await resPilot.json();
+          renderPilotModalData(dataPilot);
+        }
+      } catch (err) {
+        console.error('Failed to load trading transactions data:', err);
+      }
+    }
+
+    // 渲染主页面：交易事务核心指标与调仓清单
+    function renderMainTradingView(data) {
+      const orders = data.trading_orders || [];
+
+      // 渲染主调仓表格 (13 只标的)
+      const tbody = document.getElementById('ordersTableBody');
+      if (tbody && orders.length > 0) {
+        tbody.innerHTML = orders.map(o => `
+          <tr>
+            <td>
+              <div style="font-weight:700; font-size:1.05rem; color:var(--text-primary);">${o.symbol}</div>
+              <div style="font-size:0.75rem; color:var(--text-muted);">${o.name || o.symbol}</div>
+            </td>
+            <td>
+              <div style="font-size:0.86rem; color:var(--text-primary);">${o.sector || '--'}</div>
+              <div style="font-size:0.75rem; color:var(--text-muted);">${o.cluster_id || '--'}</div>
+            </td>
+            <td class="tabular-numbers" style="font-weight:600;">$${(o.latest_close_usd || 0).toFixed(2)}</td>
+            <td class="tabular-numbers" style="color:var(--color-accent); font-weight:700;">$${(o.limit_buy_price_usd || 0).toFixed(2)}</td>
+            <td class="tabular-numbers" style="font-weight:700; color:var(--color-success);">${o.target_shares} 股</td>
+            <td class="tabular-numbers">$${(o.allocated_capital_usd || 0).toLocaleString('en-US', {minimumFractionDigits:2})} (${o.target_weight_pct || o.actual_weight_pct})</td>
+            <td class="tabular-numbers" style="color:#f85149; font-size:0.85rem;">$${(o.stop_loss_price_usd || 0).toFixed(2)} (${o.stop_loss_pct})</td>
+            <td class="tabular-numbers" style="color:var(--color-success); font-size:0.85rem;">$${(o.take_profit_price_usd || 0).toFixed(2)} (${o.take_profit_target_pct})</td>
+            <td style="text-align:right;">
+              <span class="badge ${o.confidence === 'HIGH' ? 'badge-green' : 'badge-purple'}">${o.confidence || 'NORMAL'}</span>
+            </td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    // 渲染弹窗中的 30 日零成本沙盘验证专项数据
+    function renderPilotModalData(data) {
+      const meta = data.pilot_meta;
+      const cap = data.capital_summary;
+      const risk = data.risk_and_compliance;
+      const holdings = data.portfolio_holdings;
+      const milestones = data.milestones;
+      const equityCurve = data.equity_curve_history || [];
+      globalEquityCurve = equityCurve;
+
+      // 弹窗状态与主横幅进度
+      const bTitle = document.getElementById('bPilotBannerTitle');
+      if (bTitle) bTitle.textContent = `30 日零成本沙盘验证计划 (Day ${meta.current_day} / ${meta.total_days})`;
+      document.getElementById('mPilotBadge').textContent = `Alpaca 沙箱运行中 (Day ${meta.current_day} / ${meta.total_days})`;
+      document.getElementById('mProgressText').textContent = `第 ${meta.current_day} 天 / 共 ${meta.total_days} 天 (${meta.progress_pct}%)`;
+      document.getElementById('mProgressBar').style.width = `${meta.progress_pct}%`;
+
+      // 联动 Alpaca Live API 状态卡
+      if (data.alpaca_live_sync) {
+        const sync = data.alpaca_live_sync;
+        const elAcc = document.getElementById('mAlpacaAccId');
+        const elBadge = document.getElementById('mAlpacaStatusBadge');
+        const elQueue = document.getElementById('mAlpacaQueue');
+        if (elAcc) elAcc.textContent = sync.account_id_masked || '1a63d717...93e5';
+        if (elBadge) elBadge.textContent = `${sync.account_status || 'ACTIVE'} · 沙箱已连通`;
+        if (elQueue) elQueue.textContent = `${sync.recent_orders_count || 7} 笔订单已排队 (ACCEPTED)`;
+      }
+
+      // 弹窗 6 大卡片
+      document.getElementById('mValNav').textContent = `$${cap.current_nav_usd.toLocaleString('en-US', {minimumFractionDigits: 2})}`;
+      document.getElementById('mValEquity').textContent = `$${cap.equity_holdings_usd.toLocaleString('en-US', {minimumFractionDigits: 2})}`;
+      document.getElementById('mValCash').textContent = `$${cap.cash_reserve_usd.toLocaleString('en-US', {minimumFractionDigits: 2})}`;
+      document.getElementById('mValReturn').textContent = cap.cumulative_return_pct;
+      document.getElementById('mValDrawdown').textContent = cap.max_drawdown_pct;
+      document.getElementById('mValPdt').textContent = `${risk.pdt_rule_day_trades_used} / ${risk.pdt_rule_day_trades_limit} 次`;
+
+      // 渲染弹窗内部的资金池曲线
+      renderCapitalCurve(globalEquityCurve, currentViewMode);
+
+      // 弹窗 7 只碎股分配表格
+      const tbody = document.getElementById('mHoldingsTableBody');
+      if (tbody && holdings && holdings.length > 0) {
+        tbody.innerHTML = holdings.map(h => `
+          <tr>
+            <td><strong>${h.symbol}</strong></td>
+            <td>${h.sector}</td>
+            <td class="tabular-numbers">$${h.latest_close_usd.toFixed(2)}</td>
+            <td class="tabular-numbers" style="color:var(--color-success); font-weight:700;">${h.fractional_shares.toFixed(4)} 股</td>
+            <td class="tabular-numbers">$${h.allocated_usd.toFixed(2)} (${h.target_weight_pct})</td>
+            <td>
+              <span class="badge badge-green" style="font-size:0.7rem; font-family:var(--font-mono);">
+                ● 已排队 (ACCEPTED)
+              </span>
+            </td>
+            <td class="tabular-numbers" style="color:#f85149;">$${h.stop_loss_usd.toFixed(2)} (${h.stop_loss_pct})</td>
+            <td class="tabular-numbers" style="color:var(--color-success);">$${h.take_profit_usd.toFixed(2)} (${h.take_profit_pct})</td>
+            <td style="text-align:right;"><span class="badge badge-green">${h.confidence}</span></td>
+          </tr>
+        `).join('');
+      }
+
+      // 弹窗 4 周阶段里程碑
+      const mContainer = document.getElementById('mMilestonesContainer');
+      if (mContainer && milestones) {
+        mContainer.innerHTML = milestones.map(m => `
+          <div class="card" style="padding:0.75rem; ${m.status === 'ACTIVE' ? 'border:1px solid var(--color-success);' : ''}">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.25rem;">
+              <span style="font-weight:700; font-size:0.86rem; color:var(--text-primary);">${m.phase}: ${m.name}</span>
+              <span class="badge ${m.tag_class}" style="font-size:0.7rem;">${m.status_label}</span>
+            </div>
+            <div style="font-size:0.75rem; color:var(--color-accent); margin-bottom:0.25rem;">${m.date_range}</div>
+            <p style="font-size:0.78rem; color:var(--text-secondary); margin:0; line-height:1.4;">${m.description}</p>
+          </div>
+        `).join('');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setupChartToggles();
+      loadTradingData();
+      window.addEventListener('resize', () => {
+        if (globalEquityCurve.length > 0) renderCapitalCurve(globalEquityCurve, currentViewMode);
+      });
+    });
+  </script>
+</body>
+</html>

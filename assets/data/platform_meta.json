@@ -1,0 +1,159 @@
+{
+    "system_name":  "Quant-FMP Research",
+    "version":  "v3.2.0",
+    "last_synced_at":  "2026-10-10T13:40:00Z",
+    "status":  "OPERATIONAL",
+    "hero":  {
+                 "title":  "Quant-FMP: 美股全市场数据资产与时序预测平台",
+                 "subtitle":  "基于 FMP 权威源的工业级美股量化底座。系统依托 GCP 云端弹性算力全权承担数据工程、模型训练与推理推演，通过 GitHub Pages 长期提供极简、纯静态只读的学术与量化研究展示看板。"
+             },
+    "milestones":  [
+                       {
+                           "date":  "2026-10-10",
+                           "title":  "30 日零成本沙盘验证计划 (Zero-Cost Pilot) 全面启动上线",
+                           "category":  "交易事务",
+                           "tag_class":  "badge-green",
+                           "summary":  "严格奉行真实资金安全第一铁律，以 30W 日元 ($2,000.00 USD) 为基准沙盘本金启动 30 天无风险模拟演练：配置 30% 现金缓冲 ($600) + 70% 碎股多头 ($1,400，精选 META/MSFT/NVDA/AMZN/PLTR/CAT/JPM 7 只核心标的)；严格锁定单票上限 10% 与 0 次日内 PDT 回转；新开辟『交易事务』独立看板页面，全程 1:1 镜像验证周频碎股调仓与执行滑点。"
+                       },
+                       {
+                           "date":  "2026-10-08",
+                           "title":  "实盘周频头寸换算与交易调仓清单引擎正式投产上线",
+                           "category":  "交易事务",
+                           "tag_class":  "badge-blue",
+                           "summary":  "严格遵循真实资金安全第一红线，构建周频头寸换算与实盘订单引擎：联动 Tier 1 宏观 85% 敞口与 Tier 2 聚类专家 Alpha，对 12 只核心多头标的 (TSLA/NVDA/META/MSFT/AAPL/AMD/PLTR/XOM/JPM/CAT/ABBV/WMT) 换算限价建仓股数，防守留存 17.0% 现金储备；全部标的布设 2.5%~5.0% 动态追踪止损线与滑点拦截保护，订单清单正式归档。"
+                       },
+                       {
+                           "date":  "2026-10-08",
+                           "title":  "三级金字塔 Tier 2 四大聚类专家矩阵在 GCP 完成工业级拟合与全矩阵投产",
+                           "category":  "模型训练",
+                           "tag_class":  "badge-green",
+                           "summary":  "在 GCP 弹性算力集群 (e2-standard-4) 批量完成高Beta弹性、稳健防御、周期制造、超大盘成长四大聚类专家模型拟合：汇聚全美 71 只核心标的 14.1 万根样本，5 折 Purged & Embargoed 时序交叉验证全线通过生产准入门槛（周期制造专家 Rank IC 达 +0.119、Sharpe 1.51；超大盘成长专家胜率 53.34%）；全部 Model Bundle 归档至 models/，GCP 算力成本彻底归零。"
+                       },
+                       {
+                           "date":  "2026-10-08",
+                           "title":  "前向周频多空预测排行榜正式发布并实现事实新闻动态调参推演",
+                           "category":  "模型预测",
+                           "tag_class":  "badge-purple",
+                           "summary":  "模型预测事务正式落地：联动 Tier 1 宏观总控生产模型输出 85.0% 权益敞口开关，结合 Tier 2 四大分群专家对 71 只标的输出未来 5 交易日超额 Alpha，引入微观事实新闻冲击动态调参（TSLA 预期催化 +0.08、NVDA 算力芯片爆发 +0.06），多空前向排行榜正式切片归档。"
+                       },
+                       {
+                           "date":  "2026-10-08",
+                           "title":  "Tier 1 宏观总控专家模型在 GCP 完成 16 年全时序训练并正式投产",
+                           "category":  "模型训练",
+                           "tag_class":  "badge-green",
+                           "summary":  "在 GCP 弹性算力集群 (e2-standard-4) 完成 SPY 16.0 年跨周期时序 (4,011 根样本) 与 21 维因果量价及宏观利差特征的 5 折 Purged & Embargoed 时序交叉验证，牛熊体制识别胜率达 59.14%，顺利通过生产准入门槛并完成自包含 Model Bundle 归档，专职全账户 0%~100% 动态风险敞口总控开关，执行完毕自动关机成本归零。"
+                       },
+                       {
+                           "date":  "2026-10-08",
+                           "title":  "全周期公司行为（Corporate Actions）数据库正式实装上线",
+                           "category":  "新维度数据",
+                           "tag_class":  "badge-green",
+                           "summary":  "为全库 71 只标的建立上市以来全量历史现金分红数据库（涵盖 62 只标的，如 JNJ 227期、KO 226期、PEP 218期等）与历史拆股数据库（涵盖 61 只标的，如 DIS 15次、GE 12次、NVDA 6次等），彻底补齐除权息与股本扩张特征闭环。"
+                       },
+                       {
+                           "date":  "2026-10-08",
+                           "title":  "全库 59 只核心标的历史日K深度扩充至 16.7 年，总日K样本突破 246,575 根",
+                           "category":  "数据工程",
+                           "tag_class":  "badge-purple",
+                           "summary":  "单日成功回填 128,949 根历史日K线，将全库 59 只核心标的时序由近 5 年片段跨越式扩充至 2010 年至今（整整 16.7 年全时序覆盖），全库日K总样本暴增 110% 突破至 246,575 根，五维质量门禁 100/100 审计通过。"
+                       },
+                       {
+                           "date":  "2026-10-07",
+                           "title":  "全面废弃个股专属模型，选股事务全面收敛至 Tier 2 聚类专家矩阵",
+                           "category":  "架构跃迁",
+                           "tag_class":  "badge-purple",
+                           "summary":  "基于大样本统计学与实盘截面排序（Rank IC）原则，彻底废弃并清理单股票专属选股模型（NVDA/AAPL/MSFT/TSLA），确立 Tier 1 专职 SPY 宏观总控开关，微观选股 100% 依托 Tier 2 聚类专家矩阵。"
+                       },
+                       {
+                           "date":  "2026-10-06",
+                           "title":  "数据工程第一阶段（86维立体特征衍生）与微观画像聚类全线跑通",
+                           "category":  "数据工程",
+                           "tag_class":  "badge-purple",
+                           "summary":  "全库 64 只核心标的、16 年全时序（108,715 根日K）全量特征衍生完毕，融入美债 10Y-2Y 倒挂利差与 3M 基准利率；成功生成未来 5 日持有期 Target (RET5D)；生成 64 标的微观画像表并完成 Tier 2 聚类专家自动分配。"
+                       },
+                       {
+                           "date":  "2026-10-06",
+                           "title":  "标的专用模型精炼治理与三级金字塔架构全面收敛",
+                           "category":  "架构演进",
+                           "tag_class":  "badge-purple",
+                           "summary":  "归档清理个股单票早期短数据未收敛权重，个股选股全面升维并入 Tier 2 聚类专家矩阵，Tier 1 唯一收敛为 SPY 大盘宏观总控与风险敞口开关，彻底消除单票样本饥渴与截面排序缺失缺陷。"
+                       },
+                       {
+                           "date":  "2026-10-06",
+                           "title":  "基础数据五大维度质量门禁 100 分通过与 GCP 算力自动化闭环",
+                           "category":  "质量门禁",
+                           "tag_class":  "badge-green",
+                           "summary":  "建立数据质量门禁规范，64 标的 10.8 万根日K与 63 份财报 SEC AcceptedDate 防未来函数 100 分通过；双 Key 托管 GCP Secret Manager，实现云端自动抓取入湖与停机成本归零，零手机热点流量消耗。"
+                       },
+                       {
+                           "date":  "2026-10-05",
+                           "title":  "三大核心事务工作流 V3.0 标准化升级与标普 500 增量回补",
+                           "category":  "架构跃迁",
+                           "tag_class":  "badge-purple",
+                           "summary":  "重构三大工作流体系：基础数据事务规范 8 大核心数据资产、API 看门狗与 3D 回补矩阵；模型训练事务统一至三级金字塔专家模型体系、自包含 Bundle 与弹性成本归零机制；模型预测事务实现多专家矩阵推演与新闻事实动态修正。"
+                       },
+                       {
+                           "date":  "2026-10-05",
+                           "title":  "数据湖核心日K线规模突破 61,400+ 根 (涵盖 ADBE、ABBV 等 26 只核心资产)",
+                           "category":  "基础数据",
+                           "tag_class":  "badge-green",
+                           "summary":  "依托双 Key 额度池完成标普 500 权重龙头标的深度回补，新增注入 Adobe (ADBE) 与 AbbVie (ABBV) 全量日度K线与季度财报，数据湖已归档 61,487 根日K线与 25 份深度财报资产。"
+                       },
+                       {
+                           "date":  "2026-10-02",
+                           "title":  "确立全美股三级金字塔与自适应分群专家矩阵体系 (Tiered Pyramid \u0026 Cluster Experts)",
+                           "category":  "架构跃迁",
+                           "tag_class":  "badge-purple",
+                           "summary":  "为解决面向全美 8,450+ 股票与一股一模型 42,250 次训练拟合爆炸及小票样本匮乏矛盾，确立三级金字塔架构：Tier 3 全市场硬过滤与通用粗排、Tier 2 微观画像 5 维无监督分群专家矩阵、Tier 1 宏观总控开关，模型总数精简为 6~8 个，全市场 100% 覆盖。"
+                       },
+                       {
+                           "date":  "2026-10-01",
+                           "title":  "双 Key 配额池与全美全量历史数据采集计划升级 (500 次/天)",
+                           "category":  "基础数据",
+                           "tag_class":  "badge-purple",
+                           "summary":  "接入第二组 FMP 权威 API Key，配额提升至 500 次/天。确立每日美东盘后批量拉取全美全市场当天最新详细日K与增量财报（仅耗 15~35 次），结余 465+ 次额度（\u003e93%）全额投入回填全美 8,450+ 存续与退市标的全部历史数据。"
+                       },
+                       {
+                           "date":  "2026-10-01",
+                           "title":  "确立多标的专家化模型训练计划矩阵 (PLAN-20261001-MULTI-TARGET)",
+                           "category":  "模型演进",
+                           "tag_class":  "badge-green",
+                           "summary":  "判定老版混杂大锅饭模型无法满足实盘交易指导要求，正式退役。确立基于统一86维立体特征底座（含产业链传导与行业相对强弱），为 NVDA、AAPL、MSFT、TSLA、SPY 等核心标的独立拟合专家模型并排期上线。"
+                       },
+                       {
+                           "date":  "2026-09-29",
+                           "title":  "首期深度混合时序预测模型训练方案锁定 (Plan 01)",
+                           "category":  "模型蓝图",
+                           "tag_class":  "badge-blue",
+                           "summary":  "以 Phase 1 高完整度数据库为基石，确立 2026-09-30 01:00 UTC 触发 LightGBM + 双向 LSTM 自注意力双核模型训练，采用 Purged CV 5 折时序早停。"
+                       },
+                       {
+                           "date":  "2026-09-29",
+                           "title":  "确立额度瀑布流 (Quota Waterfall) 基础数据事务规范",
+                           "category":  "基础数据",
+                           "tag_class":  "badge-purple",
+                           "summary":  "重构基础数据采集优先级：每日优先保障最新现势数据（Priority 1），执行实时新闻舆情抓取（Priority 2），剩余额度全额投入历史回填（Priority 3），严格遵循主要股票优先与近端优先双重排序。"
+                       },
+                       {
+                           "date":  "2026-09-29",
+                           "title":  "核心标的基础数据初始化启动",
+                           "category":  "基础数据",
+                           "tag_class":  "badge-blue",
+                           "summary":  "启动核心美股资产池（涵盖 SPY、QQQ、科技巨头等）公司资料、日K线与财务指标基础数据入库。"
+                       },
+                       {
+                           "date":  "2026-09-28",
+                           "title":  "架构分工确立与博客式 UI 规范落盘",
+                           "category":  "架构演进",
+                           "tag_class":  "badge-blue",
+                           "summary":  "重构系统四层职责分工（Surface Pro 9 纯编辑、Google Drive 存储、GCP 计算数据库、GitHub Pages 纯静态展示），确立零构建方案 A 与四大博客式页面。"
+                       },
+                       {
+                           "date":  "2026-09-28",
+                           "title":  "引入聚类自适应采样与事实新闻动态调参策略",
+                           "category":  "模型规范",
+                           "tag_class":  "badge-green",
+                           "summary":  "确立宏观状态与微观画像聚类均衡提取切片标准，设计新闻冲击量化评估与黑天鹅熔断规范，已规范入库标准工作流。"
+                       }
+                   ]
+}
