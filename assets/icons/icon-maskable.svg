@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGradMask" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#161B22"/>
+      <stop offset="100%" stop-color="#090D12"/>
+    </linearGradient>
+    <linearGradient id="blueGradMask" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#79C0FF"/>
+      <stop offset="100%" stop-color="#388BFD"/>
+    </linearGradient>
+    <linearGradient id="alphaGradMask" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#388BFD"/>
+      <stop offset="50%" stop-color="#BC8CFF"/>
+      <stop offset="100%" stop-color="#3FB950"/>
+    </linearGradient>
+    <filter id="glowMask" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- 满铺背景 (供系统 Maskable 自适应裁切) -->
+  <rect x="0" y="0" width="512" height="512" fill="url(#bgGradMask)"/>
+
+  <!-- 安全区域点阵 (缩放至 80% 安全区) -->
+  <circle cx="170" cy="170" r="5" fill="#30363D" opacity="0.6"/>
+  <circle cx="256" cy="170" r="5" fill="#30363D" opacity="0.6"/>
+  <circle cx="342" cy="170" r="5" fill="#30363D" opacity="0.6"/>
+  <circle cx="170" cy="256" r="5" fill="#30363D" opacity="0.6"/>
+  <circle cx="342" cy="256" r="5" fill="#30363D" opacity="0.6"/>
+  <circle cx="170" cy="342" r="5" fill="#30363D" opacity="0.6"/>
+  <circle cx="256" cy="342" r="5" fill="#30363D" opacity="0.6"/>
+
+  <!-- 量化核心 "Q" 环体 (位于安全区中心) -->
+  <circle cx="256" cy="250" r="115" fill="none" stroke="url(#blueGradMask)" stroke-width="22" opacity="0.95"/>
+
+  <!-- Alpha 上行量化脉冲折线 -->
+  <path d="M 160 298 L 222 232 L 276 270 L 354 165" 
+        fill="none" 
+        stroke="url(#alphaGradMask)" 
+        stroke-width="18" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"
+        filter="url(#glowMask)"/>
+
+  <!-- 折线关键数据锚点 -->
+  <circle cx="222" cy="232" r="11" fill="#58A6FF"/>
+  <circle cx="276" cy="270" r="11" fill="#BC8CFF"/>
+  <circle cx="354" cy="165" r="15" fill="#3FB950" filter="url(#glowMask)"/>
+
+  <!-- "Q" 的斜出尾巴 (动量箭头) -->
+  <path d="M 310 310 L 368 368" 
+        fill="none" 
+        stroke="url(#blueGradMask)" 
+        stroke-width="24" 
+        stroke-linecap="round"/>
+</svg>

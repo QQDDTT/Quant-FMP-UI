@@ -1,0 +1,32 @@
+﻿{
+    "pipeline_version":  "v1.0.0-86dim-tiered-ps1",
+    "generated_at":  "2026-10-07T22:45:50Z",
+    "target_variable":  "target_ret_5d (未来5交易日持有期收益率)",
+    "classification_target":  "target_dir_5d (1=正收益, 0=负收益)",
+    "features_count":  14,
+    "feature_groups":  {
+                           "momentum_and_trend":  [
+                                                      "momentum_3d",
+                                                      "momentum_5d",
+                                                      "momentum_10d",
+                                                      "momentum_20d",
+                                                      "momentum_60d",
+                                                      "ma_bias_20d"
+                                                  ],
+                           "volatility_and_extremes":  [
+                                                           "volatility_20d",
+                                                           "parkinson_vol_20d",
+                                                           "amplitude_ratio"
+                                                       ],
+                           "microstructure_and_volume":  [
+                                                             "typical_price_bias",
+                                                             "vol_ratio_5d"
+                                                         ],
+                           "macro_term_structure":  [
+                                                        "macro_yield_10y_2y",
+                                                        "macro_rf_rate_3m",
+                                                        "macro_inversion_flag"
+                                                    ]
+                       },
+    "time_window_guarantee":  "严格采用右偏置闭区间 [t-W, t]，无居中窗口，彻底消除未来函数泄露"
+}

@@ -1,0 +1,391 @@
+﻿{
+    "pilot_meta":  {
+                       "plan_name":  "30-Day Zero-Cost Live Pilot (30日零成本沙盘验证计划)",
+                       "version":  "v1.0.0",
+                       "status":  "ACTIVE_RUNNING",
+                       "start_date":  "2026-10-10",
+                       "target_end_date":  "2026-11-09",
+                       "current_day":  14,
+                       "total_days":  30,
+                       "progress_pct":  46.67,
+                       "current_phase":  "STAGE_1_INITIAL_SETUP_AND_FRACTIONAL_TESTING",
+                       "current_phase_name":  "第一阶段：首期组合碎股建仓验误",
+                       "broker_environment":  "Alpaca Paper Trading (Live Connected: 1a63d717...93e5)",
+                       "benchmark_symbol":  "SPY",
+                       "rebalance_frequency":  "WEEKLY (周一开盘 09:35 EST 动态再平衡)",
+                       "last_updated_utc":  "2026-10-23T12:29:39Z"
+                   },
+    "capital_summary":  {
+                            "initial_capital_jpy":  300000,
+                            "jpy_usd_exchange_rate":  150.0,
+                            "initial_capital_usd":  2000.00,
+                            "current_nav_usd":  1926.23,
+                            "current_nav_normalized":  0.9631,
+                            "cash_reserve_usd":  769.05,
+                            "cash_reserve_pct":  "39.93%",
+                            "equity_holdings_usd":  1157.17,
+                            "equity_holdings_pct":  "60.07%",
+                            "unrealized_pnl_usd":  -42.77,
+                            "cumulative_return_pct":  "-3.69%",
+                            "benchmark_return_pct":  "-1.82%",
+                            "alpha_vs_spy_pct":  "-1.87%",
+                            "max_drawdown_pct":  "-3.69%",
+                            "max_drawdown_limit_pct":  "-4.00%",
+                            "realized_pnl_usd":  -31.01
+                        },
+    "equity_curve_history":  [
+                                 {
+                                     "date":  "2026-10-05",
+                                     "total_nav_usd":  1980.50,
+                                     "equity_holdings_usd":  1380.50,
+                                     "cash_reserve_usd":  600.00,
+                                     "normalized_nav":  0.9903,
+                                     "benchmark_spy_normalized":  0.9920,
+                                     "daily_return_pct":  "-0.25%"
+                                 },
+                                 {
+                                     "date":  "2026-10-06",
+                                     "total_nav_usd":  1988.20,
+                                     "equity_holdings_usd":  1388.20,
+                                     "cash_reserve_usd":  600.00,
+                                     "normalized_nav":  0.9941,
+                                     "benchmark_spy_normalized":  0.9945,
+                                     "daily_return_pct":  "+0.39%"
+                                 },
+                                 {
+                                     "date":  "2026-10-07",
+                                     "total_nav_usd":  1994.60,
+                                     "equity_holdings_usd":  1394.60,
+                                     "cash_reserve_usd":  600.00,
+                                     "normalized_nav":  0.9973,
+                                     "benchmark_spy_normalized":  0.9960,
+                                     "daily_return_pct":  "+0.32%"
+                                 },
+                                 {
+                                     "date":  "2026-10-08",
+                                     "total_nav_usd":  2005.10,
+                                     "equity_holdings_usd":  1405.10,
+                                     "cash_reserve_usd":  600.00,
+                                     "normalized_nav":  1.0026,
+                                     "benchmark_spy_normalized":  0.9985,
+                                     "daily_return_pct":  "+0.53%"
+                                 },
+                                 {
+                                     "date":  "2026-10-09",
+                                     "total_nav_usd":  2018.40,
+                                     "equity_holdings_usd":  1418.40,
+                                     "cash_reserve_usd":  600.00,
+                                     "normalized_nav":  1.0092,
+                                     "benchmark_spy_normalized":  1.0040,
+                                     "daily_return_pct":  "+0.66%"
+                                 },
+                                 {
+                                     "date":  "2026-10-10",
+                                     "total_nav_usd":  2000.00,
+                                     "equity_holdings_usd":  1400.00,
+                                     "cash_reserve_usd":  600.00,
+                                     "normalized_nav":  1.0000,
+                                     "benchmark_spy_normalized":  1.0000,
+                                     "daily_return_pct":  "0.00%"
+                                 },
+                                 {
+                                     "date":  "2026-10-11",
+                                     "total_nav_usd":  2000,
+                                     "equity_holdings_usd":  1400,
+                                     "cash_reserve_usd":  600,
+                                     "normalized_nav":  1,
+                                     "benchmark_spy_normalized":  1,
+                                     "daily_return_pct":  "0.00%"
+                                 },
+                                 {
+                                     "date":  "2026-10-12",
+                                     "total_nav_usd":  2000,
+                                     "equity_holdings_usd":  1400,
+                                     "cash_reserve_usd":  600,
+                                     "normalized_nav":  1,
+                                     "benchmark_spy_normalized":  1,
+                                     "daily_return_pct":  "0.00%"
+                                 },
+                                 {
+                                     "date":  "2026-10-13",
+                                     "total_nav_usd":  2000,
+                                     "equity_holdings_usd":  1400,
+                                     "cash_reserve_usd":  600,
+                                     "normalized_nav":  1,
+                                     "benchmark_spy_normalized":  1,
+                                     "daily_return_pct":  "0.00%"
+                                 },
+                                 {
+                                     "date":  "2026-10-14",
+                                     "total_nav_usd":  2000,
+                                     "equity_holdings_usd":  1400,
+                                     "cash_reserve_usd":  600,
+                                     "normalized_nav":  1,
+                                     "benchmark_spy_normalized":  1,
+                                     "daily_return_pct":  "0.00%"
+                                 },
+                                 {
+                                     "date":  "2026-10-15",
+                                     "total_nav_usd":  2000,
+                                     "equity_holdings_usd":  1400,
+                                     "cash_reserve_usd":  600,
+                                     "normalized_nav":  1,
+                                     "benchmark_spy_normalized":  1,
+                                     "daily_return_pct":  "0.00%"
+                                 },
+                                 {
+                                     "date":  "2026-10-16",
+                                     "total_nav_usd":  2000,
+                                     "equity_holdings_usd":  1400,
+                                     "cash_reserve_usd":  600,
+                                     "normalized_nav":  1,
+                                     "benchmark_spy_normalized":  1,
+                                     "daily_return_pct":  "0.00%"
+                                 },
+                                 {
+                                     "date":  "2026-10-19",
+                                     "total_nav_usd":  2000,
+                                     "equity_holdings_usd":  1400,
+                                     "cash_reserve_usd":  600,
+                                     "normalized_nav":  1,
+                                     "benchmark_spy_normalized":  1,
+                                     "daily_return_pct":  "0.00%"
+                                 },
+                                 {
+                                     "date":  "2026-10-20",
+                                     "total_nav_usd":  2000,
+                                     "equity_holdings_usd":  1400,
+                                     "cash_reserve_usd":  600,
+                                     "normalized_nav":  1,
+                                     "benchmark_spy_normalized":  1,
+                                     "daily_return_pct":  "0.00%"
+                                 },
+                                 {
+                                     "date":  "2026-10-21",
+                                     "total_nav_usd":  1956.85,
+                                     "equity_holdings_usd":  983.78,
+                                     "cash_reserve_usd":  973.07,
+                                     "normalized_nav":  0.9784,
+                                     "benchmark_spy_normalized":  0.9884,
+                                     "daily_return_pct":  "-2.16%"
+                                 },
+                                 {
+                                     "date":  "2026-10-22",
+                                     "total_nav_usd":  1938.87,
+                                     "equity_holdings_usd":  1169.82,
+                                     "cash_reserve_usd":  769.05,
+                                     "normalized_nav":  0.9694,
+                                     "benchmark_spy_normalized":  0.9936,
+                                     "daily_return_pct":  "-0.92%"
+                                 },
+                                 {
+                                     "date":  "2026-10-23",
+                                     "total_nav_usd":  1926.23,
+                                     "equity_holdings_usd":  1157.17,
+                                     "cash_reserve_usd":  769.05,
+                                     "normalized_nav":  0.9631,
+                                     "benchmark_spy_normalized":  0.9818,
+                                     "daily_return_pct":  "-0.65%"
+                                 }
+                             ],
+    "risk_and_compliance":  {
+                                "safety_first_status":  "COMPLIANT",
+                                "single_stock_max_cap_pct":  "10.0%",
+                                "single_stock_max_usd":  200.00,
+                                "actual_max_single_stock_usd":  201.45,
+                                "pdt_rule_day_trades_used":  0,
+                                "pdt_rule_day_trades_limit":  3,
+                                "pdt_status":  "SAFE (零日内回转，严格隔离 PDT 风险)",
+                                "frictional_drag_estimate_pct":  "0.15%",
+                                "soft_circuit_breaker_threshold":  "-2.5%",
+                                "hard_circuit_breaker_threshold":  "-4.0%"
+                            },
+    "milestones":  [
+                       {
+                           "phase":  "Phase 0",
+                           "name":  "沙盘凭证与资金基准就绪",
+                           "date_range":  "Day 1 ~ Day 2 (10/10 ~ 10/12)",
+                           "status":  "COMPLETED",
+                           "status_label":  "已完成",
+                           "tag_class":  "badge-green",
+                           "description":  "Alpaca 客服工单 #371417 重置 MFA 绑定，生成 Paper API 密钥并接入本地 看门狗；锁定 $2,000.00 沙盘额度。"
+                       },
+                       {
+                           "phase":  "Phase 1",
+                           "name":  "首期组合碎股建仓与执行精度测试",
+                           "date_range":  "Day 3 ~ Day 9 (10/13 ~ 10/19)",
+                           "status":  "ACTIVE",
+                           "status_label":  "执行中",
+                           "tag_class":  "badge-green",
+                           "description":  "首期组合 7 只标的碎股建仓（每只严格 $200 USD，占比 10%），测试限价单防滑点保护与碎股结算机制。"
+                       },
+                       {
+                           "phase":  "Phase 2",
+                           "name":  "首轮周度自动调仓与滑点测算",
+                           "date_range":  "Day 10 ~ Day 16 (10/20 ~ 10/26)",
+                           "status":  "PENDING",
+                           "status_label":  "待触发",
+                           "tag_class":  "badge-purple",
+                           "description":  "执行首次全自动周频再平衡，对比预测收益与真实成交均价，核算执行滑点（目标 ≤ 0.15%）。"
+                       },
+                       {
+                           "phase":  "Phase 3",
+                           "name":  "风控看门狗与异常行情压力测试",
+                           "date_range":  "Day 17 ~ Day 23 (10/27 ~ 11/02)",
+                           "status":  "PENDING",
+                           "status_label":  "待触发",
+                           "tag_class":  "badge-purple",
+                           "description":  "模拟日内浮亏 2.5% 软熔断阻断买单、模拟单票 10% 集中度被动减仓、演练网络异常与 API 429 限流重试。"
+                       },
+                       {
+                           "phase":  "Phase 4",
+                           "name":  "月度绩效归因与实盘毕业准入评估",
+                           "date_range":  "Day 24 ~ Day 30 (11/03 ~ 11/09)",
+                           "status":  "PENDING",
+                           "status_label":  "待触发",
+                           "tag_class":  "badge-purple",
+                           "description":  "输出 30 天复合净值曲线、Sharpe、Sortino 与最大回撤归因，出具实盘准入综合体检报告。"
+                       }
+                   ],
+    "portfolio_holdings":  [
+                               {
+                                   "symbol":  "META",
+                                   "name":  "Meta Platforms Inc",
+                                   "sector":  "Communication Services / Open AI",
+                                   "cluster_id":  "CLUSTER_MEGA_GROWTH",
+                                   "action":  "BUY (WEEKLY_REBALANCE)",
+                                   "order_type":  "LIMIT (Spread Guard 0.15%)",
+                                   "target_weight_pct":  "9.2%",
+                                   "allocated_usd":  176.84,
+                                   "latest_close_usd":  643.81,
+                                   "limit_price_usd":  728.1,
+                                   "fractional_shares":  0.2747,
+                                   "stop_loss_usd":  706.26,
+                                   "stop_loss_pct":  "-3.0%",
+                                   "take_profit_usd":  769.31,
+                                   "take_profit_pct":  "+5.66%",
+                                   "confidence":  "HIGH",
+                                   "catalysts":  "开源 Llama 4 模型生态加速与广告投产比攀升 (+0.05 动量)",
+                                   "market_value_usd":  176.836536,
+                                   "avg_entry_price_usd":  728.1,
+                                   "unrealized_pnl_usd":  -23.15,
+                                   "unrealized_pnl_pct":  "-11.58%",
+                                   "alpaca_order_id":  "a7d6900a-de88-4c07-ae56-1ba2133bdea6",
+                                   "alpaca_order_status":  "FILLED",
+                                   "execution_slippage_pct":  "N/A"
+                               },
+                               {
+                                   "symbol":  "MSFT",
+                                   "name":  "Microsoft Corporation",
+                                   "sector":  "Enterprise Cloud and AI Infrastructure",
+                                   "cluster_id":  "CLUSTER_MEGA_GROWTH",
+                                   "action":  "BUY (WEEKLY_REBALANCE)",
+                                   "order_type":  "LIMIT (Spread Guard 0.15%)",
+                                   "target_weight_pct":  "10%",
+                                   "allocated_usd":  192.9,
+                                   "latest_close_usd":  518.3,
+                                   "limit_price_usd":  537.34,
+                                   "fractional_shares":  0.3722,
+                                   "stop_loss_usd":  521.22,
+                                   "stop_loss_pct":  "-3.0%",
+                                   "take_profit_usd":  570.12,
+                                   "take_profit_pct":  "+6.10%",
+                                   "confidence":  "HIGH",
+                                   "catalysts":  "Azure AI 工作负载企业渗透率突破 65%，云业务确定性强",
+                                   "market_value_usd":  192.903593,
+                                   "avg_entry_price_usd":  537.34,
+                                   "unrealized_pnl_usd":  -7.09,
+                                   "unrealized_pnl_pct":  "-3.54%",
+                                   "alpaca_order_id":  "52207680-996c-4999-9c5e-e50e57613c3a",
+                                   "alpaca_order_status":  "FILLED",
+                                   "execution_slippage_pct":  "N/A"
+                               },
+                               {
+                                   "symbol":  "NVDA",
+                                   "name":  "NVIDIA Corporation",
+                                   "sector":  "Semiconductors \u0026 Accelerated Compute",
+                                   "cluster_id":  "CLUSTER_HIGH_BETA",
+                                   "action":  "BUY (WEEKLY_REBALANCE)",
+                                   "order_type":  "LIMIT (Spread Guard 0.15%)",
+                                   "target_weight_pct":  "9.6%",
+                                   "allocated_usd":  185.72,
+                                   "latest_close_usd":  212.43,
+                                   "limit_price_usd":  228.75,
+                                   "fractional_shares":  0.8743,
+                                   "stop_loss_usd":  219.6,
+                                   "stop_loss_pct":  "-4.0%",
+                                   "take_profit_usd":  249.34,
+                                   "take_profit_pct":  "+9.00%",
+                                   "confidence":  "HIGH",
+                                   "catalysts":  "Blackwell 架构晶圆出货爬坡，超大规模云厂商资本开支追加",
+                                   "market_value_usd":  185.721861,
+                                   "avg_entry_price_usd":  228.75,
+                                   "unrealized_pnl_usd":  -14.27,
+                                   "unrealized_pnl_pct":  "-7.13%",
+                                   "alpaca_order_id":  "7c567fad-d921-4471-8963-cfecfa4eda50",
+                                   "alpaca_order_status":  "FILLED",
+                                   "execution_slippage_pct":  "N/A"
+                               }
+                           ],
+    "profit_lock_guard":  {
+                              "evaluated_at_utc":  "2026-10-16T17:08:32Z",
+                              "guard_status":  "ACTIVE_TRACKING",
+                              "target_monthly_return_pct":  2,
+                              "defense_halt_limit_pct":  -1.5,
+                              "current_return_pct":  0,
+                              "recommendation":  "NORMAL_HORIZON: Portfolio moving within healthy tolerance zone (-1.5% ~ +2%). Continue standard weekly rebalancing.",
+                              "strategy_mode":  "MONTHLY_ABSOLUTE_RETURN_HEDGED"
+                          },
+    "alpaca_live_sync":  {
+                             "account_id_masked":  "1a63d717...93e5",
+                             "account_status":  "ACTIVE",
+                             "paper_trading_mode":  true,
+                             "live_api_connected":  true,
+                             "sub_ledger_isolated_usd":  2000,
+                             "actual_positions_count":  6,
+                             "recent_orders_count":  20,
+                             "last_sync_time_utc":  "2026-10-23T12:29:39Z"
+                         },
+    "closed_positions":  [
+                             {
+                                 "symbol":  "CAT",
+                                 "qty":  0.250482202,
+                                 "entry_price_usd":  798.42,
+                                 "exit_price_usd":  730.23,
+                                 "realized_pnl_usd":  -17.08,
+                                 "realized_pnl_pct":  "-8.54%",
+                                 "closed_at_utc":  "2026-10-21T15:03:05.913385Z",
+                                 "reason":  "HARD_STOP_LOSS_EXIT"
+                             },
+                             {
+                                 "symbol":  "PLTR",
+                                 "qty":  0.956889952,
+                                 "entry_price_usd":  209,
+                                 "exit_price_usd":  198.658,
+                                 "realized_pnl_usd":  -9.9,
+                                 "realized_pnl_pct":  "-4.95%",
+                                 "closed_at_utc":  "2026-10-21T15:03:06.168415Z",
+                                 "reason":  "HARD_STOP_LOSS_EXIT"
+                             },
+                             {
+                                 "symbol":  "AMZN",
+                                 "qty":  0.761866666,
+                                 "entry_price_usd":  262.5,
+                                 "exit_price_usd":  258.27,
+                                 "realized_pnl_usd":  -3.22,
+                                 "realized_pnl_pct":  "-1.61%",
+                                 "closed_at_utc":  "2026-10-22T13:30:01.916415Z",
+                                 "reason":  "HARD_STOP_LOSS_EXIT"
+                             },
+                             {
+                                 "symbol":  "JPM",
+                                 "qty":  0.598145655,
+                                 "entry_price_usd":  334.35,
+                                 "exit_price_usd":  333,
+                                 "realized_pnl_usd":  -0.81,
+                                 "realized_pnl_pct":  "-0.4%",
+                                 "closed_at_utc":  "2026-10-22T13:30:01.689667Z",
+                                 "reason":  "HARD_STOP_LOSS_EXIT"
+                             }
+                         ]
+}

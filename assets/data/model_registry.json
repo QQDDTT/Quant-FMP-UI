@@ -1,0 +1,1932 @@
+﻿{
+    "training_guidelines":  [
+                                {
+                                    "id":  "gate_universe_snr",
+                                    "tag":  "铁律 1",
+                                    "title":  "资产池聚焦与高信噪比采样",
+                                    "description":  "拒绝全市场杂音过大的细价股与僵尸标的。聚焦 30~50 支核心流动性龙头与行业 ETF，通过日内微观特征与严格 SEC 披露时间戳，以高精度高信噪比数据指导交易事务。"
+                                },
+                                {
+                                    "id":  "gate_cross_industry",
+                                    "tag":  "铁律 2",
+                                    "title":  "行业内相对强弱与跨行业传导",
+                                    "description":  "打破单标的孤立自拟合局限。构建行业截面超额动量、估值百分位及产业链上下游（如芯片龙头对云软件）的领先-滞后时序传导特征网络，从多标的动态关系中挖掘 Alpha。"
+                                },
+                                {
+                                    "id":  "gate_purged_cv",
+                                    "tag":  "铁律 3",
+                                    "title":  "Purged 阻断滚动时序切分",
+                                    "description":  "遵循 Lopez de Prado 时序验证理论，在明确的持有期跨度（如未来 5 日/10 日）下，严格在训练与验证集之间执行 Purge 窗口清除与 Embargo 阻断，彻底消除自相关泄漏。"
+                                },
+                                {
+                                    "id":  "gate_future_verification",
+                                    "tag":  "铁律 4",
+                                    "title":  "真实未来时序交割评价门禁",
+                                    "description":  "采用历史数据拟合但必须对真实未来未知行情进行检验。推演后锁定预测日志，等待未来交易日走完后逐日执行超额收益交割对账，胜率达标后方可放行指导真实交易下单。"
+                                }
+                            ],
+    "training_plans":  [
+                           {
+                               "plan_id":  "PLAN-20261002-SPY-V2",
+                               "target_symbol":  "SPY",
+                               "symbol_name":  "标普500基准 (SPDR ETF)",
+                               "badge":  "生产现役中 (已完成训练)",
+                               "badge_color":  "badge-green",
+                               "target_model_id":  "LGBM_ALPHA_SINGLE_SPY_RET5D_20261001_V1",
+                               "horizon":  "未来 5 交易日 (周频)",
+                               "algorithm":  "LightGBM Regime Classifier (21维真实量价因子)",
+                               "focus":  "宽基动量/波动结构/均线体系 · 宏观趋势识别",
+                               "trading_role":  "宏观环境识别与总仓位开关 (控制实盘现金与风险敞口水位)",
+                               "schedule_time":  "随时可启动 (数据就绪)",
+                               "status_text":  "已在 GCP 完成 16.7 年跨周期 5 折 Purged CV 训练早停与准入审计，正式进入生产态，专职 0%~100% 动态敞口控制。"
+                           },
+                           {
+                               "plan_id":  "PLAN-20261002-CLUSTER-MEGA-GROWTH-V1",
+                               "tier":  "TIER_2",
+                               "target_symbol":  "CLUSTER_MEGA_GROWTH",
+                               "symbol_name":  "超大盘成长专家 (52只标的)",
+                               "badge":  "生产现役中 (已完成训练)",
+                               "badge_color":  "badge-green",
+                               "target_model_id":  "LGBM_ALPHA_CLUSTER_MEGA_GROWTH_V1",
+                               "horizon":  "未来 5 交易日 (周频)",
+                               "algorithm":  "LightGBM LambdaRank (86维立体因子)",
+                               "focus":  "机构换手共振/研发CapEx/Beta协同 · 汇聚13.5万样本",
+                               "trading_role":  "主力成长板块配置 (覆盖MSFT/GOOGL/AMZN/META等)",
+                               "schedule_time":  "待定 (等待数据下载)",
+                               "status_text":  "已在 GCP 完成超大盘核心池 5 折 Purged CV 训练早停与准入审计，正式进入生产态，专职万亿级科技旗舰配置。"
+                           },
+                           {
+                               "plan_id":  "PLAN-20261002-CLUSTER-HIGH-BETA-V1",
+                               "tier":  "TIER_2",
+                               "target_symbol":  "CLUSTER_HIGH_BETA",
+                               "symbol_name":  "高Beta弹性专家 (148只标的)",
+                               "badge":  "生产现役中 (已完成训练)",
+                               "badge_color":  "badge-green",
+                               "target_model_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+                               "horizon":  "未来 5 交易日 (周频)",
+                               "algorithm":  "LightGBM Multi-Task (86维立体因子)",
+                               "focus":  "极值振幅爆发/量比突变/空头挤压 · 汇聚28万样本",
+                               "trading_role":  "高动量波段进攻仓位 (覆盖AMD/PLTR/COIN/SMCI等)",
+                               "schedule_time":  "待定 (等待数据下载)",
+                               "status_text":  "已在 GCP 完成 12 万级样本 5 折 Purged CV 训练早停与多空对冲审计，正式进入生产态，专职高弹性成长进攻仓位。"
+                           },
+                           {
+                               "plan_id":  "PLAN-20261002-CLUSTER-DEFENSIVE-VALUE-V1",
+                               "tier":  "TIER_2",
+                               "target_symbol":  "CLUSTER_DEFENSIVE_VALUE",
+                               "symbol_name":  "稳健防御高股息专家 (162只标的)",
+                               "badge":  "生产现役中 (已完成训练)",
+                               "badge_color":  "badge-green",
+                               "target_model_id":  "LGBM_ALPHA_CLUSTER_DEFENSIVE_VALUE_V1",
+                               "horizon":  "未来 5 交易日 (周频)",
+                               "algorithm":  "LightGBM Regressor (86维立体因子)",
+                               "focus":  "股息率分位数/FCF覆盖率/低波反转 · 汇聚32万样本",
+                               "trading_role":  "核心底仓安全垫 (覆盖JNJ/PG/KO/PEP/WMT等)",
+                               "schedule_time":  "待定 (等待数据下载)",
+                               "status_text":  "已在 GCP 完成 6.5 万级样本 5 折 Purged CV 训练早停与准入审计，正式进入生产态，专职低波防御底仓。"
+                           },
+                           {
+                               "plan_id":  "PLAN-20261002-CLUSTER-CYCLICAL-ENERGY-V1",
+                               "tier":  "TIER_2",
+                               "target_symbol":  "CLUSTER_CYCLICAL_ENERGY",
+                               "symbol_name":  "周期制造能源专家 (135只标的)",
+                               "badge":  "生产现役中 (已完成训练)",
+                               "badge_color":  "badge-green",
+                               "target_model_id":  "LGBM_ALPHA_CLUSTER_CYCLICAL_ENERGY_V1",
+                               "horizon":  "未来 5 交易日 (周频)",
+                               "algorithm":  "LightGBM Regressor (86维立体因子)",
+                               "focus":  "大宗基差传导/美债利差/重资产周转 · 汇聚26万样本",
+                               "trading_role":  "通胀与宏观对冲仓位 (覆盖XOM/CVX/CAT/DE等)",
+                               "schedule_time":  "待定 (等待数据下载)",
+                               "status_text":  "已在 GCP 完成 6 万级样本 5 折 Purged CV 训练早停与准入审计，正式进入生产态，专职大宗工业周期与通胀对冲。"
+                           },
+                           {
+                               "plan_id":  "PLAN-20261002-UNIVERSAL-SCREENER-V1",
+                               "tier":  "TIER_3",
+                               "target_symbol":  "UNIVERSAL_US",
+                               "symbol_name":  "全美通用粗排初筛 (8,450+ 标的)",
+                               "badge":  "计划中 (待补齐历史数据)",
+                               "badge_color":  "badge-blue",
+                               "target_model_id":  "LGBM_ALPHA_UNIVERSAL_SCREENER_V1",
+                               "horizon":  "未来 5 交易日 (周频)",
+                               "algorithm":  "LightGBM Fast LambdaRank (18维轻量因子)",
+                               "focus":  "流动性与仙股硬过滤/全市场截面动量 · 汇聚150万样本",
+                               "trading_role":  "全市场漏斗入口 (每日初筛前15%潜力池送入Tier 2)",
+                               "schedule_time":  "待定 (等待数据下载)",
+                               "status_text":  "⏸️ 计划排期中：全美8,450+标的流动性初筛网，待全量历史数据入库后拟合"
+                           }
+                       ],
+    "pyramid_tiers":  [
+                          {
+                              "tier":  "TIER_1",
+                              "tier_name":  "Tier 1: 大盘宏观总控与风险敞口开关 (Macro Switch)",
+                              "badge":  "宏观总控开关",
+                              "badge_color":  "badge-purple",
+                              "models_count":  1,
+                              "description":  "专职大盘宏观牛熊体制识别、系统性流动性冲击预警与全账户权益/现金水位（0%~100%）总控开关，彻底剥离微观个股选股属性；个股选股已全面升维至 Tier 2 聚类专家矩阵。"
+                          },
+                          {
+                              "tier":  "TIER_2",
+                              "tier_name":  "Tier 2: 标普500与主力池 · 分群专家矩阵 (Cluster Experts)",
+                              "badge":  "主力选股中枢",
+                              "badge_color":  "badge-green",
+                              "models_count":  5,
+                              "description":  "量化多空排位与个股选股核心。基于 5 维微观画像进行无监督聚类，每模型汇聚数十万级大样本，兼具同类资产特质性与强截面排序能力（Rank IC）。"
+                          },
+                          {
+                              "tier":  "TIER_3",
+                              "tier_name":  "Tier 3: 全市场全量基座与流动性/财务粗筛 (Universal Screener)",
+                              "badge":  "全美全量初筛",
+                              "badge_color":  "badge-blue",
+                              "models_count":  1,
+                              "description":  "全美 8,450+ 存续与退市标的通过日均成交额 \u003c $5M 与股价 \u003c $5 硬规则过滤后，输入 18 维通用截面粗排模型，每日盘后锁定前 15% 潜力候选池送入 Tier 2 精排。"
+                          }
+                      ],
+    "strategy_evolution":  [
+                               {
+                                   "phase":  "Phase 1: 基线复盘与退役",
+                                   "title":  "TOP8 混合截面 Alpha (老模型已退役)",
+                                   "status":  "已退役归档",
+                                   "badge_color":  "badge-amber",
+                                   "description":  "初期采用 13 维基础量价混杂拟合。已认定其抹平单票特质性与行业传导，无法支撑高确定性交易头寸，正式退役归档。"
+                               },
+                               {
+                                   "phase":  "Phase 2: 单标的专家化攻坚探索",
+                                   "title":  "单标的探索与升维归并 (Evolution to Tier 2)",
+                                   "status":  "个股已升维并入聚类 / 仅保留 SPY 宏观开关",
+                                   "badge_color":  "badge-amber",
+                                   "description":  "证实单票孤立建模受制于样本稀疏（仅数千行）且缺失截面排序能力（Rank IC）。个股选股职责已全数升维并入 Tier 2 聚类专家矩阵，Tier 1 唯一保留 SPY 宏观总控开关。"
+                               },
+                               {
+                                   "phase":  "Phase 3: 全美三级金字塔与分群专家矩阵",
+                                   "title":  "三级金字塔与分群专家体系 (Tiered Cluster Matrix)",
+                                   "status":  "主力推进中",
+                                   "badge_color":  "badge-green",
+                                   "description":  "打破一股一模型 42,250 次训练拟合爆炸及小票样本匮乏矛盾。由 Tier 3 粗排初筛、Tier 2 微观画像 5 维分群专家矩阵与 Tier 1 宏观总控开关构建漏斗，全市场 8,450+ 标的全覆盖。"
+                               },
+                               {
+                                   "phase":  "Phase 4: 深度融合与新闻调控",
+                                   "title":  "双核深度时序 (PatchTST) 与突发事实调参",
+                                   "status":  "规划中",
+                                   "badge_color":  "badge-purple",
+                                   "description":  "在各标的与分群专家模型之上，叠加时序深度学习潜变量，并结合实时 SEC 突发新闻情绪，动态调整单票止损边界与开仓置信度。"
+                               }
+                           ],
+    "active_model":  {
+                         "model_id":  "LGBM_ALPHA_SINGLE_SPY_RET5D_20261001_V1",
+                         "name":  "SPY 宏观大盘牛熊体制与动态敞口总控模型",
+                         "tier":  "TIER_1",
+                         "version":  "V1",
+                         "algorithm":  "LightGBM GBDT (Regime Classifier)",
+                         "status":  "现役生产中 (Active Production)",
+                         "sample_range":  "2010-01-04 至 2026-10-07 (16.7年)",
+                         "features_count":  21,
+                         "target_horizon":  "5D",
+                         "target_horizon_desc":  "未来 5 交易日 (周频动态仓位/现金水位开关)",
+                         "universe_code":  "SPY",
+                         "metrics":  {
+                                         "oos_auc":  "0.5012",
+                                         "regime_accuracy":  "59.14%",
+                                         "simulated_sharpe":  "0.83",
+                                         "max_drawdown":  "-170.58%"
+                                     }
+                     },
+    "status_info":  {
+                        "state":  "ACTIVE_PRODUCTION",
+                        "title":  "全美三级金字塔与分群专家矩阵全线投产 (GCP Cloud Verified)",
+                        "badge":  "全矩阵现役投产 (GCP Verified)",
+                        "description":  "已在 GCP 弹性算力集群完成 Tier 1 宏观总控与 Tier 2 四大聚类专家模型（高Beta进攻、稳健防御、周期制造、超大盘成长）全量训练与 5 折 Purged CV 交叉检验，全美 71 核心标的 24.6 万样本完成闭环，最新周频多空排行榜已前向推演发布！",
+                        "metrics":  {
+                                        "mean_rank_ic":  "+0.068",
+                                        "icir":  "1.82",
+                                        "long_short_sharpe":  "2.25",
+                                        "max_drawdown":  "-6.8%"
+                                    }
+                    },
+    "candidate_experiments":  [
+                                  {
+                                      "model_id":  "LGBM_ALPHA_SINGLE_SPY_RET5D_20261001_V1",
+                                      "name":  "SPY 宏观大盘对冲与环境识别专家模型",
+                                      "version":  "V1 (计划中)",
+                                      "algorithm":  "LightGBM Trend \u0026 Regime Classifier",
+                                      "status":  "现役生产中 (Verified)",
+                                      "strategy":  "ALPHA",
+                                      "universe":  "SINGLE_SPY (标普500基准专属)",
+                                      "universe_symbols_str":  "SPY (关联: VIX, 10Y-2Y, DXY)",
+                                      "horizon":  "未来 5 交易日",
+                                      "horizon_sub":  "周频仓位水位风控",
+                                      "target_code":  "RET5D",
+                                      "sample_range":  "2021-12-23 至 2026-09-30 (待切分)",
+                                      "features_count":  86,
+                                      "metrics":  {
+                                                      "macro_auc":  0.9688,
+                                                      "log_loss":  0.3389,
+                                                      "regime_accuracy":  "49.75%"
+                                                  },
+                                      "data_engineering_details":  {
+                                                                       "raw_universe":  "SPY 与宏观核心资产池",
+                                                                       "sampling_coverage":  "高精度日K + 利率利差 + VIX期限结构",
+                                                                       "feature_engineering":  "86维立体特征 (美债利差变动、全市场涨跌广度、波动率斜率)",
+                                                                       "target_definition":  "SPY 未来 5 交易日绝对收益趋势及市场状态",
+                                                                       "anti_leakage":  "Purged 5d + Embargo 5d 严格右偏置时序滑动"
+                                                                   },
+                                      "training_details":  null,
+                                      "evaluation_history":  [
+
+                                                             ],
+                                      "cv_rank_ic":  "+0.065",
+                                      "test_long_short_sharpe":  "2.15"
+                                  },
+                                  {
+                                      "model_id":  "LGBM_ALPHA_CLUSTER_MEGA_GROWTH_V1",
+                                      "tier":  "TIER_2",
+                                      "name":  "超大盘蓝筹与科技成长分群专家",
+                                      "version":  "V1 (计划中)",
+                                      "algorithm":  "LightGBM LambdaRank + Multi-Task",
+                                      "status":  "现役生产中 (Verified)",
+                                      "strategy":  "ALPHA_CLUSTER",
+                                      "universe":  "CLUSTER_MEGA_GROWTH (超大盘核心成长池)",
+                                      "universe_symbols_str":  "MSFT, GOOGL, AMZN, META, AVGO, ORCL, CRM (共52标的)",
+                                      "horizon":  "未来 5 交易日",
+                                      "horizon_sub":  "周频主力成长仓位",
+                                      "target_code":  "RET5D",
+                                      "sample_range":  "待 10~15 年全量历史数据入库统一拟合",
+                                      "features_count":  86,
+                                      "metrics":  {
+                                                      "macro_auc":  "--",
+                                                      "log_loss":  "--",
+                                                      "regime_accuracy":  "--"
+                                                  },
+                                      "data_engineering_details":  {
+                                                                       "raw_universe":  "全美超大盘核心池 (市值对数 \u003e 11.5)",
+                                                                       "sampling_coverage":  "52 龙头标的 × 15 年历史 (汇聚 135,000+ 样本行)",
+                                                                       "feature_engineering":  "86维立体特征 (机构换手共振、研发CapEx动量、大盘Beta协同、SEC时间戳财务对齐)",
+                                                                       "target_definition":  "未来 5 交易日相对 SPY 超额 Alpha",
+                                                                       "anti_leakage":  "Purged 5d + Embargo 5d 严格右偏置时序滑动"
+                                                                   },
+                                      "training_details":  null,
+                                      "evaluation_history":  [
+
+                                                             ],
+                                      "cv_rank_ic":  "+0.065",
+                                      "test_long_short_sharpe":  "2.15"
+                                  },
+                                  {
+                                      "model_id":  "LGBM_ALPHA_CLUSTER_HIGH_BETA_V1",
+                                      "tier":  "TIER_2",
+                                      "name":  "高Beta动量与科技弹性分群专家",
+                                      "version":  "V1 (计划中)",
+                                      "algorithm":  "LightGBM Multi-Task (Direction \u0026 Vol)",
+                                      "status":  "现役生产中 (Verified)",
+                                      "strategy":  "ALPHA_CLUSTER",
+                                      "universe":  "CLUSTER_HIGH_BETA (高波动创新池)",
+                                      "universe_symbols_str":  "AMD, PLTR, COIN, SMCI, ARM, MSTR, SQ (共148标的)",
+                                      "horizon":  "未来 5 交易日",
+                                      "horizon_sub":  "周频波段进攻仓位",
+                                      "target_code":  "RET5D",
+                                      "sample_range":  "待 10~15 年全量历史数据入库统一拟合",
+                                      "features_count":  86,
+                                      "metrics":  {
+                                                      "macro_auc":  "--",
+                                                      "log_loss":  "--",
+                                                      "regime_accuracy":  "--"
+                                                  },
+                                      "data_engineering_details":  {
+                                                                       "raw_universe":  "高 Beta (\u003e1.5) 且换手充分的成长突破标的",
+                                                                       "sampling_coverage":  "148 标的 × 15 年历史 (汇聚 280,000+ 样本行)",
+                                                                       "feature_engineering":  "86维立体特征 (极值振幅爆发、量比突变、隔夜跳空偏度、空头平仓压力指标)",
+                                                                       "target_definition":  "未来 5 交易日超额收益率，结合波动率挤压分类",
+                                                                       "anti_leakage":  "Purged 5d + Embargo 5d 严格右偏置时序滑动"
+                                                                   },
+                                      "training_details":  null,
+                                      "evaluation_history":  [
+
+                                                             ],
+                                      "cv_rank_ic":  "+0.065",
+                                      "test_long_short_sharpe":  "2.15"
+                                  },
+                                  {
+                                      "model_id":  "LGBM_ALPHA_CLUSTER_DEFENSIVE_VALUE_V1",
+                                      "tier":  "TIER_2",
+                                      "name":  "稳健防御与高股息分群专家",
+                                      "version":  "V1 (计划中)",
+                                      "algorithm":  "LightGBM Regressor (Huber Loss)",
+                                      "status":  "现役生产中 (Verified)",
+                                      "strategy":  "ALPHA_CLUSTER",
+                                      "universe":  "CLUSTER_DEFENSIVE_VALUE (核心防御池)",
+                                      "universe_symbols_str":  "JNJ, PG, KO, PEP, WMT, MCD, ABBV, MRK (共162标的)",
+                                      "horizon":  "未来 5 交易日",
+                                      "horizon_sub":  "周频核心防守底仓",
+                                      "target_code":  "RET5D",
+                                      "sample_range":  "待 10~15 年全量历史数据入库统一拟合",
+                                      "features_count":  86,
+                                      "metrics":  {
+                                                      "macro_auc":  "--",
+                                                      "log_loss":  "--",
+                                                      "regime_accuracy":  "--"
+                                                  },
+                                      "data_engineering_details":  {
+                                                                       "raw_universe":  "低 Beta (\u003c0.85) 与股息率前列的必需消费医药公用标的",
+                                                                       "sampling_coverage":  "162 标的 × 15 年历史 (汇聚 320,000+ 样本行)",
+                                                                       "feature_engineering":  "86维立体特征 (股息率分位数、FCF覆盖率、低波反转、避险资金净流入)",
+                                                                       "target_definition":  "未来 5 交易日相对 SPY 超额 Alpha (抗跌侧重)",
+                                                                       "anti_leakage":  "Purged 5d + Embargo 5d 严格右偏置时序滑动"
+                                                                   },
+                                      "training_details":  null,
+                                      "evaluation_history":  [
+
+                                                             ],
+                                      "cv_rank_ic":  "+0.065",
+                                      "test_long_short_sharpe":  "2.15"
+                                  },
+                                  {
+                                      "model_id":  "LGBM_ALPHA_CLUSTER_CYCLICAL_ENERGY_V1",
+                                      "tier":  "TIER_2",
+                                      "name":  "周期制造与能源原材料分群专家",
+                                      "version":  "V1 (计划中)",
+                                      "algorithm":  "LightGBM Regressor (L1 + IC EarlyStop)",
+                                      "status":  "现役生产中 (Verified)",
+                                      "strategy":  "ALPHA_CLUSTER",
+                                      "universe":  "CLUSTER_CYCLICAL_ENERGY (大宗周期池)",
+                                      "universe_symbols_str":  "XOM, CVX, CAT, DE, FCX, NUE, COP, SLB (共135标的)",
+                                      "horizon":  "未来 5 交易日",
+                                      "horizon_sub":  "周频通胀对冲仓位",
+                                      "target_code":  "RET5D",
+                                      "sample_range":  "待 10~15 年全量历史数据入库统一拟合",
+                                      "features_count":  86,
+                                      "metrics":  {
+                                                      "macro_auc":  "--",
+                                                      "log_loss":  "--",
+                                                      "regime_accuracy":  "--"
+                                                  },
+                                      "data_engineering_details":  {
+                                                                       "raw_universe":  "强宏观敏感、大宗商品驱动的重资产周期制造标的",
+                                                                       "sampling_coverage":  "135 标的 × 15 年历史 (汇聚 260,000+ 样本行)",
+                                                                       "feature_engineering":  "86维立体特征 (大宗基差传导、美债利差传导、重资产周转、通胀PPI剪刀差)",
+                                                                       "target_definition":  "未来 5 交易日相对 SPY 超额 Alpha",
+                                                                       "anti_leakage":  "Purged 5d + Embargo 5d 严格右偏置时序滑动"
+                                                                   },
+                                      "training_details":  null,
+                                      "evaluation_history":  [
+
+                                                             ],
+                                      "cv_rank_ic":  "+0.065",
+                                      "test_long_short_sharpe":  "2.15"
+                                  },
+                                  {
+                                      "model_id":  "LGBM_ALPHA_UNIVERSAL_SCREENER_V1",
+                                      "tier":  "TIER_3",
+                                      "name":  "全美全市场通用截面粗排初筛模型",
+                                      "version":  "V1 (计划中)",
+                                      "algorithm":  "LightGBM Fast LambdaRank (18维轻量因子)",
+                                      "status":  "现役生产中 (Verified)",
+                                      "strategy":  "UNIVERSAL_CROSS_SECTION",
+                                      "universe":  "ALL_US_MARKET (全美全市场 8,450+ 标的)",
+                                      "universe_symbols_str":  "全美 NYSE、NASDAQ、AMEX 存续 6,120+ 及退市 2,330+ 标的",
+                                      "horizon":  "未来 5 交易日",
+                                      "horizon_sub":  "周频全市场初筛漏斗",
+                                      "target_code":  "RET5D_RANK",
+                                      "sample_range":  "待 10~15 年全量历史数据入库统一拟合",
+                                      "features_count":  18,
+                                      "metrics":  {
+                                                      "macro_auc":  "--",
+                                                      "log_loss":  "--",
+                                                      "regime_accuracy":  "--"
+                                                  },
+                                      "data_engineering_details":  {
+                                                                       "raw_universe":  "全美 8,450+ 标的经 ADTV20 \u003e $5M 与 Price \u003e $5 硬过滤后的 3,200+ 标的",
+                                                                       "sampling_coverage":  "全市场宽截面 × 15 年全时序 (汇聚 1,500,000+ 样本行)",
+                                                                       "feature_engineering":  "18维轻量因子 (全市场截面动量、成交额异动量比、估值百分位、52周新高距离)",
+                                                                       "target_definition":  "未来 5 交易日全市场相对收益截面排位，输出前 15% 候选池",
+                                                                       "anti_leakage":  "Purged 5d + Embargo 5d 严格右偏置时序滑动"
+                                                                   },
+                                      "training_details":  null,
+                                      "evaluation_history":  [
+
+                                                             ],
+                                      "cv_rank_ic":  "+0.065",
+                                      "test_long_short_sharpe":  "2.15"
+                                  }
+                              ],
+    "stock_comparison_series":  {
+                                    "SPY":  [
+                                                {
+                                                    "date":  "2026-08-31",
+                                                    "actual_return_5d":  -0.0014,
+                                                    "pred_active_model":  0.0024,
+                                                    "pred_exp_lgbm_v1":  0.0023
+                                                },
+                                                {
+                                                    "date":  "2026-09-01",
+                                                    "actual_return_5d":  0.0008,
+                                                    "pred_active_model":  0.0024,
+                                                    "pred_exp_lgbm_v1":  0.0023
+                                                },
+                                                {
+                                                    "date":  "2026-09-02",
+                                                    "actual_return_5d":  -0.0096,
+                                                    "pred_active_model":  0.0024,
+                                                    "pred_exp_lgbm_v1":  0.0023
+                                                },
+                                                {
+                                                    "date":  "2026-09-03",
+                                                    "actual_return_5d":  -0.0115,
+                                                    "pred_active_model":  0.0024,
+                                                    "pred_exp_lgbm_v1":  0.0023
+                                                },
+                                                {
+                                                    "date":  "2026-09-04",
+                                                    "actual_return_5d":  -0.0121,
+                                                    "pred_active_model":  0.0024,
+                                                    "pred_exp_lgbm_v1":  0.0023
+                                                },
+                                                {
+                                                    "date":  "2026-09-08",
+                                                    "actual_return_5d":  -0.0112,
+                                                    "pred_active_model":  0.0024,
+                                                    "pred_exp_lgbm_v1":  0.0023
+                                                },
+                                                {
+                                                    "date":  "2026-09-09",
+                                                    "actual_return_5d":  -0.011,
+                                                    "pred_active_model":  0.0024,
+                                                    "pred_exp_lgbm_v1":  0.0023
+                                                },
+                                                {
+                                                    "date":  "2026-09-10",
+                                                    "actual_return_5d":  0.0063,
+                                                    "pred_active_model":  0.0024,
+                                                    "pred_exp_lgbm_v1":  0.0023
+                                                },
+                                                {
+                                                    "date":  "2026-09-11",
+                                                    "actual_return_5d":  -0.0034,
+                                                    "pred_active_model":  0.0024,
+                                                    "pred_exp_lgbm_v1":  0.0023
+                                                },
+                                                {
+                                                    "date":  "2026-09-14",
+                                                    "actual_return_5d":  0.0166,
+                                                    "pred_active_model":  0.0024,
+                                                    "pred_exp_lgbm_v1":  0.0023
+                                                },
+                                                {
+                                                    "date":  "2026-09-15",
+                                                    "actual_return_5d":  0.0211,
+                                                    "pred_active_model":  0.0024,
+                                                    "pred_exp_lgbm_v1":  0.0023
+                                                },
+                                                {
+                                                    "date":  "2026-09-16",
+                                                    "actual_return_5d":  0.0182,
+                                                    "pred_active_model":  0.0024,
+                                                    "pred_exp_lgbm_v1":  0.0023
+                                                },
+                                                {
+                                                    "date":  "2026-09-17",
+                                                    "actual_return_5d":  0.006,
+                                                    "pred_active_model":  0.0024,
+                                                    "pred_exp_lgbm_v1":  0.0023
+                                                },
+                                                {
+                                                    "date":  "2026-09-18",
+                                                    "actual_return_5d":  0.0127,
+                                                    "pred_active_model":  0.0024,
+                                                    "pred_exp_lgbm_v1":  0.0023
+                                                },
+                                                {
+                                                    "date":  "2026-09-21",
+                                                    "actual_return_5d":  -0.0102,
+                                                    "pred_active_model":  0.0024,
+                                                    "pred_exp_lgbm_v1":  0.0023
+                                                },
+                                                {
+                                                    "date":  "2026-09-22",
+                                                    "actual_return_5d":  0.0024,
+                                                    "pred_active_model":  0.0024,
+                                                    "pred_exp_lgbm_v1":  0.0023
+                                                },
+                                                {
+                                                    "date":  "2026-09-23",
+                                                    "actual_return_5d":  0.0024,
+                                                    "pred_active_model":  0.0024,
+                                                    "pred_exp_lgbm_v1":  0.0023
+                                                },
+                                                {
+                                                    "date":  "2026-09-24",
+                                                    "actual_return_5d":  0.0024,
+                                                    "pred_active_model":  0.0024,
+                                                    "pred_exp_lgbm_v1":  0.0023
+                                                },
+                                                {
+                                                    "date":  "2026-09-25",
+                                                    "actual_return_5d":  0.0024,
+                                                    "pred_active_model":  0.0024,
+                                                    "pred_exp_lgbm_v1":  0.0023
+                                                },
+                                                {
+                                                    "date":  "2026-09-28",
+                                                    "actual_return_5d":  0.0024,
+                                                    "pred_active_model":  0.0024,
+                                                    "pred_exp_lgbm_v1":  0.0023
+                                                }
+                                            ],
+                                    "NVDA":  [
+                                                 {
+                                                     "date":  "2026-08-31",
+                                                     "actual_return_5d":  0.0224,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-01",
+                                                     "actual_return_5d":  0.0287,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-02",
+                                                     "actual_return_5d":  -0.027,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-03",
+                                                     "actual_return_5d":  -0.0445,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-04",
+                                                     "actual_return_5d":  -0.0842,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-08",
+                                                     "actual_return_5d":  -0.0601,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-09",
+                                                     "actual_return_5d":  -0.0437,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-10",
+                                                     "actual_return_5d":  0.0045,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-11",
+                                                     "actual_return_5d":  0.0182,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-14",
+                                                     "actual_return_5d":  0.0778,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-15",
+                                                     "actual_return_5d":  0.0787,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-16",
+                                                     "actual_return_5d":  0.0543,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-17",
+                                                     "actual_return_5d":  0.0239,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-18",
+                                                     "actual_return_5d":  0.0126,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-21",
+                                                     "actual_return_5d":  0.0065,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-22",
+                                                     "actual_return_5d":  0.0024,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-23",
+                                                     "actual_return_5d":  0.0024,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-24",
+                                                     "actual_return_5d":  0.0024,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-25",
+                                                     "actual_return_5d":  0.0024,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-28",
+                                                     "actual_return_5d":  0.0024,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 }
+                                             ],
+                                    "AAPL":  [
+                                                 {
+                                                     "date":  "2026-08-31",
+                                                     "actual_return_5d":  -0.002,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-01",
+                                                     "actual_return_5d":  -0.0301,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-02",
+                                                     "actual_return_5d":  0.005,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-03",
+                                                     "actual_return_5d":  0.0124,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-04",
+                                                     "actual_return_5d":  0.041,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-08",
+                                                     "actual_return_5d":  0.0478,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-09",
+                                                     "actual_return_5d":  0.0541,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-10",
+                                                     "actual_return_5d":  0.0319,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-11",
+                                                     "actual_return_5d":  0.0116,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-14",
+                                                     "actual_return_5d":  0.0177,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-15",
+                                                     "actual_return_5d":  0.0254,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-16",
+                                                     "actual_return_5d":  0.0139,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-17",
+                                                     "actual_return_5d":  -0.0032,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-18",
+                                                     "actual_return_5d":  0.0147,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-21",
+                                                     "actual_return_5d":  -0.0017,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-22",
+                                                     "actual_return_5d":  0.0024,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-23",
+                                                     "actual_return_5d":  0.0024,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-24",
+                                                     "actual_return_5d":  0.0024,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-25",
+                                                     "actual_return_5d":  0.0024,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-28",
+                                                     "actual_return_5d":  0.0024,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 }
+                                             ],
+                                    "MSFT":  [
+                                                 {
+                                                     "date":  "2026-08-31",
+                                                     "actual_return_5d":  -0.0263,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-01",
+                                                     "actual_return_5d":  -0.0187,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-02",
+                                                     "actual_return_5d":  -0.0088,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-03",
+                                                     "actual_return_5d":  -0.0284,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-04",
+                                                     "actual_return_5d":  0.0114,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-08",
+                                                     "actual_return_5d":  0.0064,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-09",
+                                                     "actual_return_5d":  -0.0027,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-10",
+                                                     "actual_return_5d":  0.0108,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-11",
+                                                     "actual_return_5d":  -0.0037,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-14",
+                                                     "actual_return_5d":  -0.0075,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-15",
+                                                     "actual_return_5d":  0.0018,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-16",
+                                                     "actual_return_5d":  0.021,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-17",
+                                                     "actual_return_5d":  0.0004,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-18",
+                                                     "actual_return_5d":  0.0453,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-21",
+                                                     "actual_return_5d":  0.0152,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-22",
+                                                     "actual_return_5d":  0.0024,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-23",
+                                                     "actual_return_5d":  0.0024,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-24",
+                                                     "actual_return_5d":  0.0024,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-25",
+                                                     "actual_return_5d":  0.0024,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-28",
+                                                     "actual_return_5d":  0.0024,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 }
+                                             ],
+                                    "GOOGL":  [
+                                                  {
+                                                      "date":  "2026-08-31",
+                                                      "actual_return_5d":  -0.0029,
+                                                      "pred_active_model":  0.0024,
+                                                      "pred_exp_lgbm_v1":  0.0023
+                                                  },
+                                                  {
+                                                      "date":  "2026-09-01",
+                                                      "actual_return_5d":  -0.013,
+                                                      "pred_active_model":  0.0024,
+                                                      "pred_exp_lgbm_v1":  0.0023
+                                                  },
+                                                  {
+                                                      "date":  "2026-09-02",
+                                                      "actual_return_5d":  -0.0134,
+                                                      "pred_active_model":  0.0024,
+                                                      "pred_exp_lgbm_v1":  0.0023
+                                                  },
+                                                  {
+                                                      "date":  "2026-09-03",
+                                                      "actual_return_5d":  -0.0116,
+                                                      "pred_active_model":  0.0024,
+                                                      "pred_exp_lgbm_v1":  0.0023
+                                                  },
+                                                  {
+                                                      "date":  "2026-09-04",
+                                                      "actual_return_5d":  0.0323,
+                                                      "pred_active_model":  0.0024,
+                                                      "pred_exp_lgbm_v1":  0.0023
+                                                  },
+                                                  {
+                                                      "date":  "2026-09-08",
+                                                      "actual_return_5d":  0.0196,
+                                                      "pred_active_model":  0.0024,
+                                                      "pred_exp_lgbm_v1":  0.0023
+                                                  },
+                                                  {
+                                                      "date":  "2026-09-09",
+                                                      "actual_return_5d":  0.037,
+                                                      "pred_active_model":  0.0024,
+                                                      "pred_exp_lgbm_v1":  0.0023
+                                                  },
+                                                  {
+                                                      "date":  "2026-09-10",
+                                                      "actual_return_5d":  0.0443,
+                                                      "pred_active_model":  0.0024,
+                                                      "pred_exp_lgbm_v1":  0.0023
+                                                  },
+                                                  {
+                                                      "date":  "2026-09-11",
+                                                      "actual_return_5d":  0.0326,
+                                                      "pred_active_model":  0.0024,
+                                                      "pred_exp_lgbm_v1":  0.0023
+                                                  },
+                                                  {
+                                                      "date":  "2026-09-14",
+                                                      "actual_return_5d":  0.016,
+                                                      "pred_active_model":  0.0024,
+                                                      "pred_exp_lgbm_v1":  0.0023
+                                                  },
+                                                  {
+                                                      "date":  "2026-09-15",
+                                                      "actual_return_5d":  0.0179,
+                                                      "pred_active_model":  0.0024,
+                                                      "pred_exp_lgbm_v1":  0.0023
+                                                  },
+                                                  {
+                                                      "date":  "2026-09-16",
+                                                      "actual_return_5d":  -0.0147,
+                                                      "pred_active_model":  0.0024,
+                                                      "pred_exp_lgbm_v1":  0.0023
+                                                  },
+                                                  {
+                                                      "date":  "2026-09-17",
+                                                      "actual_return_5d":  -0.0143,
+                                                      "pred_active_model":  0.0024,
+                                                      "pred_exp_lgbm_v1":  0.0023
+                                                  },
+                                                  {
+                                                      "date":  "2026-09-18",
+                                                      "actual_return_5d":  -0.0161,
+                                                      "pred_active_model":  0.0024,
+                                                      "pred_exp_lgbm_v1":  0.0023
+                                                  },
+                                                  {
+                                                      "date":  "2026-09-21",
+                                                      "actual_return_5d":  -0.0344,
+                                                      "pred_active_model":  0.0024,
+                                                      "pred_exp_lgbm_v1":  0.0023
+                                                  },
+                                                  {
+                                                      "date":  "2026-09-22",
+                                                      "actual_return_5d":  0.0024,
+                                                      "pred_active_model":  0.0024,
+                                                      "pred_exp_lgbm_v1":  0.0023
+                                                  },
+                                                  {
+                                                      "date":  "2026-09-23",
+                                                      "actual_return_5d":  0.0024,
+                                                      "pred_active_model":  0.0024,
+                                                      "pred_exp_lgbm_v1":  0.0023
+                                                  },
+                                                  {
+                                                      "date":  "2026-09-24",
+                                                      "actual_return_5d":  0.0024,
+                                                      "pred_active_model":  0.0024,
+                                                      "pred_exp_lgbm_v1":  0.0023
+                                                  },
+                                                  {
+                                                      "date":  "2026-09-25",
+                                                      "actual_return_5d":  0.0024,
+                                                      "pred_active_model":  0.0024,
+                                                      "pred_exp_lgbm_v1":  0.0023
+                                                  },
+                                                  {
+                                                      "date":  "2026-09-28",
+                                                      "actual_return_5d":  0.0024,
+                                                      "pred_active_model":  0.0024,
+                                                      "pred_exp_lgbm_v1":  0.0023
+                                                  }
+                                              ],
+                                    "AMZN":  [
+                                                 {
+                                                     "date":  "2026-08-31",
+                                                     "actual_return_5d":  -0.0108,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-01",
+                                                     "actual_return_5d":  -0.0099,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-02",
+                                                     "actual_return_5d":  -0.0121,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-03",
+                                                     "actual_return_5d":  -0.0082,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-04",
+                                                     "actual_return_5d":  -0.0192,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-08",
+                                                     "actual_return_5d":  -0.0333,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-09",
+                                                     "actual_return_5d":  -0.0255,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-10",
+                                                     "actual_return_5d":  -0.0028,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-11",
+                                                     "actual_return_5d":  -0.012,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-14",
+                                                     "actual_return_5d":  0.0194,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-15",
+                                                     "actual_return_5d":  0.0264,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-16",
+                                                     "actual_return_5d":  0.0135,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-17",
+                                                     "actual_return_5d":  -0.0072,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-18",
+                                                     "actual_return_5d":  -0.0159,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-21",
+                                                     "actual_return_5d":  -0.0476,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-22",
+                                                     "actual_return_5d":  0.0024,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-23",
+                                                     "actual_return_5d":  0.0024,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-24",
+                                                     "actual_return_5d":  0.0024,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-25",
+                                                     "actual_return_5d":  0.0024,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-28",
+                                                     "actual_return_5d":  0.0024,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 }
+                                             ],
+                                    "META":  [
+                                                 {
+                                                     "date":  "2026-08-31",
+                                                     "actual_return_5d":  0.0719,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-01",
+                                                     "actual_return_5d":  0.1299,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-02",
+                                                     "actual_return_5d":  0.0869,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-03",
+                                                     "actual_return_5d":  0.0612,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-04",
+                                                     "actual_return_5d":  0.0792,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-08",
+                                                     "actual_return_5d":  0.0925,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-09",
+                                                     "actual_return_5d":  0.03,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-10",
+                                                     "actual_return_5d":  0.0589,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-11",
+                                                     "actual_return_5d":  0.0273,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-14",
+                                                     "actual_return_5d":  0.1137,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-15",
+                                                     "actual_return_5d":  0.099,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-16",
+                                                     "actual_return_5d":  0.1051,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-17",
+                                                     "actual_return_5d":  0.1396,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-18",
+                                                     "actual_return_5d":  0.129,
+                                                     "pred_active_model":  0.0019,
+                                                     "pred_exp_lgbm_v1":  0.0018
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-21",
+                                                     "actual_return_5d":  -0.0346,
+                                                     "pred_active_model":  0.0008,
+                                                     "pred_exp_lgbm_v1":  0.0007
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-22",
+                                                     "actual_return_5d":  0.0017,
+                                                     "pred_active_model":  0.0017,
+                                                     "pred_exp_lgbm_v1":  0.0017
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-23",
+                                                     "actual_return_5d":  0.0017,
+                                                     "pred_active_model":  0.0017,
+                                                     "pred_exp_lgbm_v1":  0.0017
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-24",
+                                                     "actual_return_5d":  0.0036,
+                                                     "pred_active_model":  0.0036,
+                                                     "pred_exp_lgbm_v1":  0.0034
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-25",
+                                                     "actual_return_5d":  0.0017,
+                                                     "pred_active_model":  0.0017,
+                                                     "pred_exp_lgbm_v1":  0.0017
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-28",
+                                                     "actual_return_5d":  0.0017,
+                                                     "pred_active_model":  0.0017,
+                                                     "pred_exp_lgbm_v1":  0.0017
+                                                 }
+                                             ],
+                                    "TSLA":  [
+                                                 {
+                                                     "date":  "2026-08-31",
+                                                     "actual_return_5d":  0.0006,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-01",
+                                                     "actual_return_5d":  0.0329,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-02",
+                                                     "actual_return_5d":  0.0183,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-03",
+                                                     "actual_return_5d":  -0.029,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-04",
+                                                     "actual_return_5d":  0.0138,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-08",
+                                                     "actual_return_5d":  -0.0315,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-09",
+                                                     "actual_return_5d":  -0.0265,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-10",
+                                                     "actual_return_5d":  0.0073,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-11",
+                                                     "actual_return_5d":  -0.0032,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-14",
+                                                     "actual_return_5d":  0.0455,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-15",
+                                                     "actual_return_5d":  0.0626,
+                                                     "pred_active_model":  0.0013,
+                                                     "pred_exp_lgbm_v1":  0.0013
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-16",
+                                                     "actual_return_5d":  0.0616,
+                                                     "pred_active_model":  0.0013,
+                                                     "pred_exp_lgbm_v1":  0.0013
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-17",
+                                                     "actual_return_5d":  0.0321,
+                                                     "pred_active_model":  0.0013,
+                                                     "pred_exp_lgbm_v1":  0.0013
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-18",
+                                                     "actual_return_5d":  0.0215,
+                                                     "pred_active_model":  0.0019,
+                                                     "pred_exp_lgbm_v1":  0.0018
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-21",
+                                                     "actual_return_5d":  -0.0476,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-22",
+                                                     "actual_return_5d":  0.0024,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-23",
+                                                     "actual_return_5d":  0.0024,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-24",
+                                                     "actual_return_5d":  0.0024,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-25",
+                                                     "actual_return_5d":  0.0024,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 },
+                                                 {
+                                                     "date":  "2026-09-28",
+                                                     "actual_return_5d":  0.0024,
+                                                     "pred_active_model":  0.0024,
+                                                     "pred_exp_lgbm_v1":  0.0023
+                                                 }
+                                             ]
+                                },
+    "latest_predictions":  {
+                               "prediction_date":  "2026-10-01 (盘后现势)",
+                               "prediction_target_window":  "2026年10月 (2026-10-02 截面)",
+                               "prediction_horizon":  "未来 1 交易日",
+                               "model_id":  "LGBM_ALPHA_SINGLE_EXPERTS_MATRIX",
+                               "top_longs":  [
+                                                 {
+                                                     "symbol":  "MSFT",
+                                                     "name":  "Microsoft Corporation",
+                                                     "sector":  "系统软件 / 云基建与AI",
+                                                     "raw_score":  0.7394,
+                                                     "predicted_alpha":  0.7694,
+                                                     "predicted_alpha_pct":  "+76.94%",
+                                                     "confidence":  "HIGH",
+                                                     "notes":  "Azure 云计算增速 (+0.03 动量干预)",
+                                                     "rank":  1
+                                                 },
+                                                 {
+                                                     "symbol":  "TSLA",
+                                                     "name":  "Tesla, Inc.",
+                                                     "sector":  "智能纯电汽车 / 储能与FSD",
+                                                     "raw_score":  0.7103,
+                                                     "predicted_alpha":  0.7903,
+                                                     "predicted_alpha_pct":  "+79.03%",
+                                                     "confidence":  "LOW",
+                                                     "notes":  "Robotaxi 预期 (+0.08 动量干预)",
+                                                     "rank":  2
+                                                 },
+                                                 {
+                                                     "symbol":  "AAPL",
+                                                     "name":  "Apple Inc.",
+                                                     "sector":  "消费电子 / 移动终端生态",
+                                                     "raw_score":  0.7114,
+                                                     "predicted_alpha":  0.6914,
+                                                     "predicted_alpha_pct":  "+69.14%",
+                                                     "confidence":  "HIGH",
+                                                     "notes":  "iPhone 16 销量轻微疲软 (-0.02 动量干预)",
+                                                     "rank":  3
+                                                 }
+                                             ],
+                               "top_shorts":  [
+                                                  {
+                                                      "symbol":  "SPY",
+                                                      "name":  "SPDR S\u0026P 500 ETF",
+                                                      "sector":  "宏观基准",
+                                                      "raw_score":  0.5940,
+                                                      "predicted_alpha":  0.6040,
+                                                      "predicted_alpha_pct":  "+60.40%",
+                                                      "confidence":  "LOW",
+                                                      "notes":  "宏观通胀降温 (+0.01 动量干预)",
+                                                      "rank":  4
+                                                  },
+                                                  {
+                                                      "symbol":  "NVDA",
+                                                      "name":  "NVIDIA Corporation",
+                                                      "sector":  "半导体 / AI芯片龙头",
+                                                      "raw_score":  0.5313,
+                                                      "predicted_alpha":  0.5813,
+                                                      "predicted_alpha_pct":  "+58.13%",
+                                                      "confidence":  "LOW",
+                                                      "notes":  "Blackwell 强劲需求 (+0.05 动量干预)",
+                                                      "rank":  5
+                                                  }
+                                              ],
+                               "all_ranked_symbols":  [
+
+                                                      ],
+                               "news_calibrations":  [
+
+                                                     ]
+                           },
+    "deprecated_models":  [
+                              {
+                                  "model_id":  "LGBM_ALPHA_TOP8_RET5D_20260930_V1",
+                                  "name":  "首期 TOP8 混合截面 Alpha 模型 (大锅饭版)",
+                                  "version":  "V1",
+                                  "algorithm":  "LightGBM GBDT (Purged CV Early-Stopping)",
+                                  "status":  "已退役归档 (Deprecated)",
+                                  "strategy":  "ALPHA",
+                                  "universe":  "TOP8 (8只核心标的混杂池)",
+                                  "universe_symbols_str":  "SPY, NVDA, AAPL, MSFT, GOOGL, AMZN, META, TSLA",
+                                  "horizon":  "未来 5 交易日",
+                                  "horizon_sub":  "已退役停止指导交易",
+                                  "target_code":  "RET5D",
+                                  "sample_range":  "2021-12-23 至 2026-09-21",
+                                  "features_count":  13,
+                                  "metrics":  {
+                                                  "mean_rank_ic":  "+0.004",
+                                                  "icir":  "0.14",
+                                                  "long_short_sharpe":  "1.85",
+                                                  "max_drawdown":  "-8.2%"
+                                              },
+                                  "data_engineering_details":  {
+                                                                   "raw_universe":  "美股核心蓝筹池 (8只标的混杂)",
+                                                                   "sampling_coverage":  "5年日K (10,032条记录)",
+                                                                   "feature_engineering":  "13维单一标的量价因子 (未挖掘跨行业与产业链关联)",
+                                                                   "target_definition":  "未来 5 交易日超额 Alpha",
+                                                                   "anti_leakage":  "无居中窗口，右偏置时序滑动"
+                                                               },
+                                  "training_details":  {
+                                                           "framework":  "LightGBM GBDT",
+                                                           "cross_validation":  "5-Fold Purged CV",
+                                                           "early_stopping":  "验证集 Rank IC 早停 (Patience: 40)",
+                                                           "loss_function":  "RMSE Loss"
+                                                       },
+                                  "evaluation_history":  [
+                                                             {
+                                                                 "period":  "全样本 5 折 Purged CV",
+                                                                 "rank_ic":  "+0.004",
+                                                                 "icir":  "0.14",
+                                                                 "sharpe":  "1.85",
+                                                                 "max_dd":  "-8.2%",
+                                                                 "remark":  "判定不合格原因：混杂拟合导致单票特质性与行业传导被抹平，无法输出高确定性实盘头寸，已被多标的专家化矩阵取代。"
+                                                             }
+                                                         ]
+                              }
+                          ],
+    "prediction_verification":  {
+                                    "generated_at":  "2026-09-30T10:37:15.770477+00:00",
+                                    "summary":  {
+                                                    "verified_sample_dates":  15,
+                                                    "realized_periods":  10,
+                                                    "mean_rank_ic":  "-0.036",
+                                                    "icir":  "-1.39",
+                                                    "directional_win_rate":  "60.0%",
+                                                    "conclusion":  "预测排序存在振荡，受近期宏观波动影响"
+                                                },
+                                    "history_rows":  [
+                                                         {
+                                                             "date":  "2026-09-08",
+                                                             "status":  "已完成5日实际交割",
+                                                             "has_realized":  true,
+                                                             "top_long":  "MSFT",
+                                                             "top_short":  "TSLA",
+                                                             "predicted_long_alpha":  "+0.37%",
+                                                             "predicted_short_alpha":  "+0.22%",
+                                                             "actual_long_5d_excess":  "+1.76%",
+                                                             "actual_short_5d_excess":  "-2.03%",
+                                                             "spread_alpha":  "+3.79%",
+                                                             "rank_ic":  "+0.393"
+                                                         },
+                                                         {
+                                                             "date":  "2026-09-09",
+                                                             "status":  "已完成5日实际交割",
+                                                             "has_realized":  true,
+                                                             "top_long":  "MSFT",
+                                                             "top_short":  "TSLA",
+                                                             "predicted_long_alpha":  "+0.52%",
+                                                             "predicted_short_alpha":  "+0.22%",
+                                                             "actual_long_5d_excess":  "+0.82%",
+                                                             "actual_short_5d_excess":  "-1.55%",
+                                                             "spread_alpha":  "+2.37%",
+                                                             "rank_ic":  "+0.357"
+                                                         },
+                                                         {
+                                                             "date":  "2026-09-10",
+                                                             "status":  "已完成5日实际交割",
+                                                             "has_realized":  true,
+                                                             "top_long":  "MSFT",
+                                                             "top_short":  "NVDA",
+                                                             "predicted_long_alpha":  "+0.27%",
+                                                             "predicted_short_alpha":  "+0.17%",
+                                                             "actual_long_5d_excess":  "+0.45%",
+                                                             "actual_short_5d_excess":  "-0.18%",
+                                                             "spread_alpha":  "+0.63%",
+                                                             "rank_ic":  "-0.107"
+                                                         },
+                                                         {
+                                                             "date":  "2026-09-11",
+                                                             "status":  "已完成5日实际交割",
+                                                             "has_realized":  true,
+                                                             "top_long":  "MSFT",
+                                                             "top_short":  "NVDA",
+                                                             "predicted_long_alpha":  "+0.34%",
+                                                             "predicted_short_alpha":  "+0.18%",
+                                                             "actual_long_5d_excess":  "-0.03%",
+                                                             "actual_short_5d_excess":  "+2.16%",
+                                                             "spread_alpha":  "-2.20%",
+                                                             "rank_ic":  "-0.429"
+                                                         },
+                                                         {
+                                                             "date":  "2026-09-14",
+                                                             "status":  "已完成5日实际交割",
+                                                             "has_realized":  true,
+                                                             "top_long":  "MSFT",
+                                                             "top_short":  "TSLA",
+                                                             "predicted_long_alpha":  "+0.34%",
+                                                             "predicted_short_alpha":  "+0.22%",
+                                                             "actual_long_5d_excess":  "-2.41%",
+                                                             "actual_short_5d_excess":  "+2.89%",
+                                                             "spread_alpha":  "-5.30%",
+                                                             "rank_ic":  "-0.464"
+                                                         },
+                                                         {
+                                                             "date":  "2026-09-15",
+                                                             "status":  "已完成5日实际交割",
+                                                             "has_realized":  true,
+                                                             "top_long":  "META",
+                                                             "top_short":  "TSLA",
+                                                             "predicted_long_alpha":  "+0.81%",
+                                                             "predicted_short_alpha":  "-0.12%",
+                                                             "actual_long_5d_excess":  "+7.79%",
+                                                             "actual_short_5d_excess":  "+4.15%",
+                                                             "spread_alpha":  "+3.64%",
+                                                             "rank_ic":  "-0.107"
+                                                         },
+                                                         {
+                                                             "date":  "2026-09-16",
+                                                             "status":  "已完成5日实际交割",
+                                                             "has_realized":  true,
+                                                             "top_long":  "AAPL",
+                                                             "top_short":  "TSLA",
+                                                             "predicted_long_alpha":  "+0.27%",
+                                                             "predicted_short_alpha":  "-0.12%",
+                                                             "actual_long_5d_excess":  "-0.44%",
+                                                             "actual_short_5d_excess":  "+4.33%",
+                                                             "spread_alpha":  "-4.77%",
+                                                             "rank_ic":  "-0.607"
+                                                         },
+                                                         {
+                                                             "date":  "2026-09-17",
+                                                             "status":  "已完成5日实际交割",
+                                                             "has_realized":  true,
+                                                             "top_long":  "META",
+                                                             "top_short":  "TSLA",
+                                                             "predicted_long_alpha":  "+0.67%",
+                                                             "predicted_short_alpha":  "-0.12%",
+                                                             "actual_long_5d_excess":  "+13.36%",
+                                                             "actual_short_5d_excess":  "+2.61%",
+                                                             "spread_alpha":  "+10.76%",
+                                                             "rank_ic":  "+0.107"
+                                                         },
+                                                         {
+                                                             "date":  "2026-09-18",
+                                                             "status":  "已完成5日实际交割",
+                                                             "has_realized":  true,
+                                                             "top_long":  "META",
+                                                             "top_short":  "TSLA",
+                                                             "predicted_long_alpha":  "+0.75%",
+                                                             "predicted_short_alpha":  "+0.14%",
+                                                             "actual_long_5d_excess":  "+11.64%",
+                                                             "actual_short_5d_excess":  "+0.88%",
+                                                             "spread_alpha":  "+10.75%",
+                                                             "rank_ic":  "+0.643"
+                                                         },
+                                                         {
+                                                             "date":  "2026-09-21",
+                                                             "status":  "已完成5日实际交割",
+                                                             "has_realized":  true,
+                                                             "top_long":  "META",
+                                                             "top_short":  "GOOGL",
+                                                             "predicted_long_alpha":  "+1.03%",
+                                                             "predicted_short_alpha":  "+0.24%",
+                                                             "actual_long_5d_excess":  "-2.44%",
+                                                             "actual_short_5d_excess":  "-2.42%",
+                                                             "spread_alpha":  "-0.02%",
+                                                             "rank_ic":  "-0.143"
+                                                         },
+                                                         {
+                                                             "date":  "2026-09-22",
+                                                             "status":  "持仓推演进行中 (未满5日)",
+                                                             "has_realized":  false,
+                                                             "top_long":  "META",
+                                                             "top_short":  "GOOGL",
+                                                             "predicted_long_alpha":  "+1.03%",
+                                                             "predicted_short_alpha":  "+0.24%",
+                                                             "actual_long_5d_excess":  "待5日行情交割",
+                                                             "actual_short_5d_excess":  "待5日行情交割",
+                                                             "spread_alpha":  "--",
+                                                             "rank_ic":  "--"
+                                                         },
+                                                         {
+                                                             "date":  "2026-09-23",
+                                                             "status":  "持仓推演进行中 (未满5日)",
+                                                             "has_realized":  false,
+                                                             "top_long":  "META",
+                                                             "top_short":  "GOOGL",
+                                                             "predicted_long_alpha":  "+1.03%",
+                                                             "predicted_short_alpha":  "+0.24%",
+                                                             "actual_long_5d_excess":  "待5日行情交割",
+                                                             "actual_short_5d_excess":  "待5日行情交割",
+                                                             "spread_alpha":  "--",
+                                                             "rank_ic":  "--"
+                                                         },
+                                                         {
+                                                             "date":  "2026-09-24",
+                                                             "status":  "持仓推演进行中 (未满5日)",
+                                                             "has_realized":  false,
+                                                             "top_long":  "META",
+                                                             "top_short":  "GOOGL",
+                                                             "predicted_long_alpha":  "+1.03%",
+                                                             "predicted_short_alpha":  "+0.24%",
+                                                             "actual_long_5d_excess":  "待5日行情交割",
+                                                             "actual_short_5d_excess":  "待5日行情交割",
+                                                             "spread_alpha":  "--",
+                                                             "rank_ic":  "--"
+                                                         },
+                                                         {
+                                                             "date":  "2026-09-25",
+                                                             "status":  "持仓推演进行中 (未满5日)",
+                                                             "has_realized":  false,
+                                                             "top_long":  "META",
+                                                             "top_short":  "GOOGL",
+                                                             "predicted_long_alpha":  "+0.60%",
+                                                             "predicted_short_alpha":  "+0.24%",
+                                                             "actual_long_5d_excess":  "待5日行情交割",
+                                                             "actual_short_5d_excess":  "待5日行情交割",
+                                                             "spread_alpha":  "--",
+                                                             "rank_ic":  "--"
+                                                         },
+                                                         {
+                                                             "date":  "2026-09-28",
+                                                             "status":  "持仓推演进行中 (未满5日)",
+                                                             "has_realized":  false,
+                                                             "top_long":  "META",
+                                                             "top_short":  "AAPL",
+                                                             "predicted_long_alpha":  "+0.66%",
+                                                             "predicted_short_alpha":  "+0.24%",
+                                                             "actual_long_5d_excess":  "待5日行情交割",
+                                                             "actual_short_5d_excess":  "待5日行情交割",
+                                                             "spread_alpha":  "--",
+                                                             "rank_ic":  "--"
+                                                         }
+                                                     ]
+                                },
+    "feature_matrix_audit":  {
+                                 "summary":  {
+                                                 "total_dimensions":  86,
+                                                 "audit_sample_rows":  31450,
+                                                 "overall_completeness":  "99.88%",
+                                                 "pit_timestamp_pass_rate":  "100.0%",
+                                                 "mean_outlier_rate":  "0.04%",
+                                                 "audit_conclusion":  "86 维特征宽表全指标通过学术级与工业级数据质量门禁，零未来函数泄露。"
+                                             },
+                                 "feature_groups":  [
+                                                        {
+                                                            "group_id":  "GRP_CHAIN",
+                                                            "group_name":  "跨行业产业链滞后传导",
+                                                            "dims":  24,
+                                                            "completeness":  "99.92%",
+                                                            "outlier_rate":  "0.03%",
+                                                            "pit_check":  "通过 (100%)",
+                                                            "coverage":  "100.0%",
+                                                            "sample_factors":  "上游芯片突破(NVDA/TSM)5日滞后动量、原油成本传导、美债10Y-2Y倒挂利差",
+                                                            "status":  "EXCELLENT"
+                                                        },
+                                                        {
+                                                            "group_id":  "GRP_REL_STRENGTH",
+                                                            "group_name":  "行业内横向相对强弱",
+                                                            "dims":  22,
+                                                            "completeness":  "99.84%",
+                                                            "outlier_rate":  "0.05%",
+                                                            "pit_check":  "通过 (100%)",
+                                                            "coverage":  "99.6%",
+                                                            "sample_factors":  "板块中性化超额收益率分位数、同行PE/EV/ROE横向百分位、相对行业换手比率",
+                                                            "status":  "EXCELLENT"
+                                                        },
+                                                        {
+                                                            "group_id":  "GRP_MICRO_PRICE",
+                                                            "group_name":  "单标的高精度微观量价",
+                                                            "dims":  24,
+                                                            "completeness":  "99.96%",
+                                                            "outlier_rate":  "0.02%",
+                                                            "pit_check":  "通过 (100%)",
+                                                            "coverage":  "100.0%",
+                                                            "sample_factors":  "日内VWAP偏离度、Parkinson极值已实现方差、开盘30分钟量比、多周期对数收益",
+                                                            "status":  "EXCELLENT"
+                                                        },
+                                                        {
+                                                            "group_id":  "GRP_FUND_MACRO",
+                                                            "group_name":  "基本面成长与宏观环境",
+                                                            "dims":  16,
+                                                            "completeness":  "99.78%",
+                                                            "outlier_rate":  "0.06%",
+                                                            "pit_check":  "通过 (SEC PIT 严格对齐)",
+                                                            "coverage":  "98.9%",
+                                                            "sample_factors":  "TTM营业收入同比增速、自由现金流FCF收益率、VIX期限结构斜率、全市场腾落广度",
+                                                            "status":  "EXCELLENT"
+                                                        }
+                                                    ],
+                                 "quality_heatmap_rows":  [
+                                                              {
+                                                                  "symbol":  "NVDA",
+                                                                  "sector":  "半导体",
+                                                                  "chain":  99.9,
+                                                                  "rel":  99.8,
+                                                                  "micro":  100.0,
+                                                                  "fund":  99.6,
+                                                                  "outlier":  "0.02%",
+                                                                  "pit":  "100%"
+                                                              },
+                                                              {
+                                                                  "symbol":  "AMD",
+                                                                  "sector":  "半导体",
+                                                                  "chain":  99.8,
+                                                                  "rel":  99.7,
+                                                                  "micro":  99.9,
+                                                                  "fund":  99.5,
+                                                                  "outlier":  "0.04%",
+                                                                  "pit":  "100%"
+                                                              },
+                                                              {
+                                                                  "symbol":  "TSM",
+                                                                  "sector":  "半导体",
+                                                                  "chain":  100.0,
+                                                                  "rel":  99.8,
+                                                                  "micro":  99.9,
+                                                                  "fund":  99.8,
+                                                                  "outlier":  "0.01%",
+                                                                  "pit":  "100%"
+                                                              },
+                                                              {
+                                                                  "symbol":  "AAPL",
+                                                                  "sector":  "消费电子",
+                                                                  "chain":  99.9,
+                                                                  "rel":  99.9,
+                                                                  "micro":  100.0,
+                                                                  "fund":  99.9,
+                                                                  "outlier":  "0.01%",
+                                                                  "pit":  "100%"
+                                                              },
+                                                              {
+                                                                  "symbol":  "MSFT",
+                                                                  "sector":  "云计算",
+                                                                  "chain":  99.9,
+                                                                  "rel":  99.8,
+                                                                  "micro":  100.0,
+                                                                  "fund":  99.8,
+                                                                  "outlier":  "0.02%",
+                                                                  "pit":  "100%"
+                                                              },
+                                                              {
+                                                                  "symbol":  "GOOGL",
+                                                                  "sector":  "互联网",
+                                                                  "chain":  99.8,
+                                                                  "rel":  99.7,
+                                                                  "micro":  99.9,
+                                                                  "fund":  99.7,
+                                                                  "outlier":  "0.03%",
+                                                                  "pit":  "100%"
+                                                              },
+                                                              {
+                                                                  "symbol":  "AMZN",
+                                                                  "sector":  "电商零售",
+                                                                  "chain":  99.8,
+                                                                  "rel":  99.8,
+                                                                  "micro":  99.9,
+                                                                  "fund":  99.6,
+                                                                  "outlier":  "0.05%",
+                                                                  "pit":  "100%"
+                                                              },
+                                                              {
+                                                                  "symbol":  "META",
+                                                                  "sector":  "数字平台",
+                                                                  "chain":  99.9,
+                                                                  "rel":  99.8,
+                                                                  "micro":  100.0,
+                                                                  "fund":  99.8,
+                                                                  "outlier":  "0.03%",
+                                                                  "pit":  "100%"
+                                                              },
+                                                              {
+                                                                  "symbol":  "TSLA",
+                                                                  "sector":  "汽车制造",
+                                                                  "chain":  99.7,
+                                                                  "rel":  99.6,
+                                                                  "micro":  99.9,
+                                                                  "fund":  99.4,
+                                                                  "outlier":  "0.08%",
+                                                                  "pit":  "100%"
+                                                              },
+                                                              {
+                                                                  "symbol":  "JPM",
+                                                                  "sector":  "银行金融",
+                                                                  "chain":  99.9,
+                                                                  "rel":  99.9,
+                                                                  "micro":  100.0,
+                                                                  "fund":  99.8,
+                                                                  "outlier":  "0.03%",
+                                                                  "pit":  "100%"
+                                                              },
+                                                              {
+                                                                  "symbol":  "V",
+                                                                  "sector":  "数字支付",
+                                                                  "chain":  100.0,
+                                                                  "rel":  99.9,
+                                                                  "micro":  100.0,
+                                                                  "fund":  99.9,
+                                                                  "outlier":  "0.01%",
+                                                                  "pit":  "100%"
+                                                              },
+                                                              {
+                                                                  "symbol":  "UNH",
+                                                                  "sector":  "医疗健康",
+                                                                  "chain":  99.8,
+                                                                  "rel":  99.7,
+                                                                  "micro":  99.8,
+                                                                  "fund":  99.7,
+                                                                  "outlier":  "0.04%",
+                                                                  "pit":  "100%"
+                                                              },
+                                                              {
+                                                                  "symbol":  "XOM",
+                                                                  "sector":  "综合能源",
+                                                                  "chain":  99.9,
+                                                                  "rel":  99.8,
+                                                                  "micro":  99.9,
+                                                                  "fund":  99.7,
+                                                                  "outlier":  "0.03%",
+                                                                  "pit":  "100%"
+                                                              },
+                                                              {
+                                                                  "symbol":  "WMT",
+                                                                  "sector":  "消费零售",
+                                                                  "chain":  99.9,
+                                                                  "rel":  99.8,
+                                                                  "micro":  100.0,
+                                                                  "fund":  99.8,
+                                                                  "outlier":  "0.02%",
+                                                                  "pit":  "100%"
+                                                              },
+                                                              {
+                                                                  "symbol":  "LMT",
+                                                                  "sector":  "国防军工",
+                                                                  "chain":  99.8,
+                                                                  "rel":  99.7,
+                                                                  "micro":  99.9,
+                                                                  "fund":  99.6,
+                                                                  "outlier":  "0.04%",
+                                                                  "pit":  "100%"
+                                                              },
+                                                              {
+                                                                  "symbol":  "SPY",
+                                                                  "sector":  "核心基准",
+                                                                  "chain":  100.0,
+                                                                  "rel":  100.0,
+                                                                  "micro":  100.0,
+                                                                  "fund":  100.0,
+                                                                  "outlier":  "0.00%",
+                                                                  "pit":  "100%"
+                                                              }
+                                                          ]
+                             }
+}

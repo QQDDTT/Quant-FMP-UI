@@ -1,0 +1,9 @@
+﻿{
+    "status":  "COMPLETED",
+    "symbols_processed":  71,
+    "total_enriched_samples":  246575,
+    "features_derived_count":  14,
+    "target_horizon_days":  5,
+    "macro_anchor_aligned":  66,
+    "time_elapsed_seconds":  217.85
+}
