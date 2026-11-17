@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+  "name": "Quant-FMP Research - 美股量化研究展示平台",
+  "short_name": "Quant-FMP",
+  "description": "基于 FMP 权威源的工业级美股量化数据底座、三级金字塔模型推演与 30 日零成本沙盘验证平台",
+  "id": "/Quant-FMP-UI/",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#090d12",
+  "theme_color": "#0d1117",
+  "orientation": "any",
+  "lang": "zh-CN",
+  "dir": "ltr",
+  "categories": [
+    "finance",
+    "productivity",
+    "business"
+  ],
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/icons/icon-maskable.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "事务总览与计划",
+      "short_name": "事务总览",
+      "description": "查看 Quant-FMP 基础、模型与交易三大事务全景流水与定时调度",
+      "url": "./transactions.html",
+      "icons": [
+        {
+          "src": "assets/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "三级金字塔模型推演",
+      "short_name": "模型事务",
+      "description": "查看 SPY 宏观总控与四大聚类专家多空排行榜及事后验证",
+      "url": "./model-transactions.html",
+      "icons": [
+        {
+          "src": "assets/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "30日零成本沙盘验证",
+      "short_name": "交易事务",
+      "description": "查看 Alpaca 虚拟交易子账本持仓、碎股撮合流水与 5 大毕业红线体检",
+      "url": "./trading-transactions.html",
+      "icons": [
+        {
+          "src": "assets/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "基础数据湖",
+      "short_name": "基础事务",
+      "description": "查看 24.6 万根跨周期日K大底座与 70 份财报质量门禁",
+      "url": "./base-data-transactions.html",
+      "icons": [
+        {
+          "src": "assets/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "prefer_related_applications": false
+}
