@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 280" width="100%" height="100%">
+  <defs>
+    <linearGradient id="wfBg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0D1117"/>
+      <stop offset="50%" stop-color="#161B22"/>
+      <stop offset="100%" stop-color="#0D1117"/>
+    </linearGradient>
+    <linearGradient id="pipeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#388BFD"/>
+      <stop offset="50%" stop-color="#BC8CFF"/>
+      <stop offset="100%" stop-color="#3FB950"/>
+    </linearGradient>
+  </defs>
+
+  <style>
+    .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 800; fill: #F0F6FC; }
+    .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #8B949E; font-size: 11.5px; }
+    .mono { font-family: "JetBrains Mono", Consolas, monospace; font-size: 11px; }
+    .flow-dash { stroke-dasharray: 8 6; animation: dashMove 1.6s linear infinite; }
+    @keyframes dashMove {
+      to { stroke-dashoffset: -28; }
+    }
+  </style>
+
+  <rect width="1200" height="280" rx="14" fill="url(#wfBg)" stroke="#30363D" stroke-width="2"/>
+  <text x="36" y="38" class="title" font-size="15">QUANT-FMP END-TO-END CAUSAL PIPELINE (ZERO LOOK-AHEAD BIAS &amp; PAPER SANDBOX ISOLATION)</text>
+  <text x="955" y="38" class="mono" fill="#3FB950">● 4-STAGE VERIFIED PIPELINE</text>
+
+  <!-- Connecting Animated Pipes -->
+  <line x1="280" y1="145" x2="335" y2="145" stroke="url(#pipeGrad)" stroke-width="3" class="flow-dash"/>
+  <line x1="575" y1="145" x2="630" y2="145" stroke="url(#pipeGrad)" stroke-width="3" class="flow-dash"/>
+  <line x1="870" y1="145" x2="925" y2="145" stroke="url(#pipeGrad)" stroke-width="3" class="flow-dash"/>
+
+  <!-- Stage 1: FMP Data Lake -->
+  <g transform="translate(36, 62)">
+    <rect width="244" height="176" rx="12" fill="#0D1117" stroke="#388BFD" stroke-width="2"/>
+    <rect x="14" y="14" width="84" height="22" rx="5" fill="#1F2937"/>
+    <text x="24" y="29" class="mono" fill="#79C0FF">STAGE 01</text>
+    <text x="16" y="58" class="title" font-size="15">FMP 权威无偏数据湖</text>
+    <text x="16" y="82" class="sub">• 存续 + 退市标的 (防幸存者偏差)</text>
+    <text x="16" y="102" class="sub">• 259,441+ 日K &amp; 除权息复权</text>
+    <text x="16" y="122" class="sub">• 财务三大表披露日因果对齐</text>
+    <rect x="16" y="138" width="212" height="24" rx="6" fill="#161B22" stroke="#30363D"/>
+    <text x="26" y="154" class="mono" fill="#58A6FF">5-Dim Quality Gate: 99.9%</text>
+  </g>
+
+  <!-- Stage 2: Purged CV & Tiered Pyramid -->
+  <g transform="translate(333, 62)">
+    <rect width="244" height="176" rx="12" fill="#0D1117" stroke="#BC8CFF" stroke-width="2"/>
+    <rect x="14" y="14" width="84" height="22" rx="5" fill="#271E36"/>
+    <text x="24" y="29" class="mono" fill="#D2A8FF">STAGE 02</text>
+    <text x="16" y="58" class="title" font-size="15">Purged CV 三级专家矩阵</text>
+    <text x="16" y="82" class="sub">• 86维量价 + 30维Takens相空间</text>
+    <text x="16" y="102" class="sub">• Tier-1 SPY 总控 + Tier-2 四聚类</text>
+    <text x="16" y="122" class="sub">• GCP Spot 按需训练即刻自毁</text>
+    <rect x="16" y="138" width="212" height="24" rx="6" fill="#161B22" stroke="#30363D"/>
+    <text x="26" y="154" class="mono" fill="#D2A8FF">Local C# LGBM Infer &lt; 50ms</text>
+  </g>
+
+  <!-- Stage 3: Paper Sandbox Guardrails -->
+  <g transform="translate(630, 62)">
+    <rect width="244" height="176" rx="12" fill="#0D1117" stroke="#3FB950" stroke-width="2"/>
+    <rect x="14" y="14" width="84" height="22" rx="5" fill="#122D1F"/>
+    <text x="24" y="29" class="mono" fill="#56D364">STAGE 03</text>
+    <text x="16" y="58" class="title" font-size="15">$2,000 沙盘 7 道硬风控</text>
+    <text x="16" y="82" class="sub">• 实盘 API 致命硬阻断 (PK* Only)</text>
+    <text x="16" y="102" class="sub">• 单票 $200 碎股 + 30% 现金缓冲</text>
+    <text x="16" y="122" class="sub">• +2.0% 锁盈 / -1.5% 防御熔断</text>
+    <rect x="16" y="138" width="212" height="24" rx="6" fill="#161B22" stroke="#30363D"/>
+    <text x="26" y="154" class="mono" fill="#3FB950">Alpaca Paper Sub-Ledger</text>
+  </g>
+
+  <!-- Stage 4: Static PWA Dashboard -->
+  <g transform="translate(925, 62)">
+    <rect width="239" height="176" rx="12" fill="#0D1117" stroke="#F59E0B" stroke-width="2"/>
+    <rect x="14" y="14" width="84" height="22" rx="5" fill="#2E2312"/>
+    <text x="24" y="29" class="mono" fill="#FBBF24">STAGE 04</text>
+    <text x="16" y="58" class="title" font-size="15">零密钥静态 PWA 大盘</text>
+    <text x="16" y="82" class="sub">• 正则安全门禁阻断敏感凭据</text>
+    <text x="16" y="102" class="sub">• Stale-While-Revalidate 秒开</text>
+    <text x="16" y="122" class="sub">• GitHub Pages 独立副仓发布</text>
+    <rect x="16" y="138" width="207" height="24" rx="6" fill="#161B22" stroke="#30363D"/>
+    <text x="26" y="154" class="mono" fill="#FBBF24">fmp.evotensor.dev (MIT)</text>
+  </g>
+</svg>
